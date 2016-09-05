@@ -18,6 +18,9 @@
 		<module>AtherialRunes-game</module>
 
 		<module>AtherialRunes-bootstrap</module>
+		<module>AtherialRunes-discord</module>
+		
+		
 	</modules>
 
     <build>

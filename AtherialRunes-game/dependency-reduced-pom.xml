@@ -39,8 +39,6 @@
               <artifactSet>
                 <includes>
                   <include>org.ini4j:ini4j</include>
-                  <include>org.mongodb:mongo-java-driver</include>
-                  <include>org.mongodb:bson</include>
                   <include>commons-net:commons-net</include>
                   <include>com.esotericsoftware:kryo-shaded</include>
                   <include>com.esotericsoftware:kryonet</include>
