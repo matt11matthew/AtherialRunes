@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>AtherialRunes-parent</artifactId>
+        <groupId>me.matt11matthew.atherialrunes</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>AtherialRunes-discord</artifactId>
+
+
+    <build>
+        <defaultGoal>clean install</defaultGoal>
+        <finalName>AtherialRunesDiscordBot</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>org.ini4j:ini4j</include>
+                                    <include>commons-net:commons-net</include>
+                                    <include>net.lingala.zip4j:zip4j</include>
+                                    <include>me.matt11matthew.atherialrunes:AtherialRunes-common</include>
+
+									<include>ch.qos.logback:logback-classic</include>
+									<include>de.btobastian.javacord:javacord</include>
+                                </includes>
+                            </artifactSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <repositories>
+        <repository>
+            <id>codecrafter47-repo</id>
+            <url>http://nexus.codecrafter47.dyndns.eu/content/repositories/public/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+
+
+
+        <!--Spigot GameAPI-->
+
+
+        <!--Bukkit GameAPI-->
+        <dependency>
+  <groupId>de.btobastian.javacord</groupId>
+  <artifactId>javacord</artifactId>
+  <version>2.0.10</version>
+   <!-- This will use the shaded javacord which contains all required dependencies -->
+
+</dependency>
+
+
+
+<dependency>
+  <groupId>ch.qos.logback</groupId>
+  <artifactId>logback-classic</artifactId>
+  <version>1.0.13</version>
+</dependency>
+
+
+
+        <dependency>
+            <groupId>org.ini4j</groupId>
+            <artifactId>ini4j</artifactId>
+            <version>0.5.4</version>
+        </dependency>
+
+
+
+
+
+
+
+
+    </dependencies>
+
+</project>

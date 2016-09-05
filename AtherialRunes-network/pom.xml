@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>AtherialRunes-network</artifactId>
+
+    
+    <build>
+        <defaultGoal>clean install</defaultGoal>
+        <finalName>Network</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>me.matt11matthew.atherialrunes:AtherialRunes-common</include>
+
+                                </includes>
+                            </artifactSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>me.matt11matthew.atherialrunes.network.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+
+    <parent>
+    	<groupId>me.matt11matthew.atherialrunes</groupId>
+    	<artifactId>AtherialRunes-parent</artifactId>
+    	<version>1.0.0</version>
+    </parent>
+    <dependencies>
+    	<dependency>
+    		<groupId>me.matt11matthew.atherialrunes</groupId>
+    		<artifactId>AtherialRunes-common</artifactId>
+    		<version>1.0.0</version>
+    		<type>jar</type>
+            <scope>compile</scope>
+    	</dependency>
+    	    	<dependency>
+    		<groupId>org.mongodb</groupId>
+    		<artifactId>mongo-java-driver</artifactId>
+    		<version>3.2.2</version>
+    		<type>jar</type>
+            <scope>compile</scope>
+    	</dependency>
+    	 <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryo-shaded</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryonet</artifactId>
+            <version>2.22.0-RC1</version>
+        </dependency>
+    	<dependency>
+    		<groupId>org.mongodb</groupId>
+    		<artifactId>bson</artifactId>
+    		<version>3.2.2</version>
+    		<type>jar</type>
+            <scope>compile</scope>
+    	</dependency>
+    </dependencies>
+</project>
