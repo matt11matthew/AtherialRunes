@@ -223,6 +223,9 @@ public class Main extends JavaPlugin {
 		gp.setLevel(p.getLevel());
 		gp.setSkillPoints(p.getSkillPoints());
 		gp.setVanished(gp.isVanished());
+		gp.setGold(p.getGold());
+		gp.setSilver(p.getSilver());
+		gp.setCopper(p.getCopper());
 		GamePlayer.players.put(UUIDData.getUUID(pname), gp);
 		return gp;
 	}

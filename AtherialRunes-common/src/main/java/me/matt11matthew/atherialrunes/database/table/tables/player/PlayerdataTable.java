@@ -24,6 +24,9 @@ public class PlayerdataTable extends Table {
 				+ "`vanish` varchar(20) NOT NULL,"
 				+ " `exp` INT,"
 				+ " `skillpoints` INT,"
+				+ " `gold` INT,"
+				+ " `silver` INT,"
+				+ " `copper` INT,"
 				+ " `shard` varchar(20) NOT NULL)"
 				+ " ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 	}

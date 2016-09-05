@@ -18,6 +18,9 @@ public class AtherialPlayer {
 	private int exp;
 	private int skillPoints;
 	private boolean vanished;
+	private int gold;
+	private int copper;
+	private int silver;
 	
 	public String getName() {
 		return name;
@@ -123,6 +126,30 @@ public class AtherialPlayer {
 
 	public void setSkillPoints(int skillPoints) {
 		this.skillPoints = skillPoints;
+	}
+
+	public int getGold() {
+		return gold;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+
+	public int getCopper() {
+		return copper;
+	}
+
+	public void setCopper(int copper) {
+		this.copper = copper;
+	}
+
+	public int getSilver() {
+		return silver;
+	}
+
+	public void setSilver(int silver) {
+		this.silver = silver;
 	}
 
 }
