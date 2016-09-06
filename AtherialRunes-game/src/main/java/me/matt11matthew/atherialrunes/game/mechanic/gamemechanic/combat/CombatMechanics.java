@@ -52,11 +52,14 @@ public class CombatMechanics extends ListenerMechanic {
 			public void run() {
 				Bukkit.getServer().getOnlinePlayers().forEach(player -> {
 					GamePlayer gp = Main.getGamePlayer(player.getName());
-					if (gp.getCombatTime() > 0) {
-						gp.setCombatTime((gp.getCombatTime() - 1));
-					} else {
-						gp.msg(MessageType.ACTION, GameConstants.OUT_COMBAT_MESSAGE);
-						return;
+					if (gp.isInCombat()) {
+						if (gp.getCombatTime() > 0) {
+							gp.setCombatTime((gp.getCombatTime() - 1));
+						} else {
+							gp.setCombatTime(-1);
+							gp.msg(MessageType.ACTION, GameConstants.OUT_COMBAT_MESSAGE);
+							return;
+						}
 					}
 				});
 			}

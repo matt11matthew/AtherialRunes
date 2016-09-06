@@ -1,14 +1,13 @@
 package me.matt11matthew.atherialrunes.game.commands;
 
-import java.util.List;
-
+import me.matt11matthew.atherialrunes.Constants;
+import me.matt11matthew.atherialrunes.command.AtherialCommand;
+import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.auctionhouse.menus.FirstMenu;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.matt11matthew.atherialrunes.Constants;
-import me.matt11matthew.atherialrunes.command.AtherialCommand;
-import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.auctionhouse.menus.FirstMenu;
+import java.util.List;
 
 public class CommandDEV extends AtherialCommand {
 

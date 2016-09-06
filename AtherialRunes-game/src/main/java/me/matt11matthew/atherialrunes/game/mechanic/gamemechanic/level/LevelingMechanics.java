@@ -25,7 +25,7 @@ public class LevelingMechanics extends ListenerMechanic {
 
 	@Override
 	public LoadPriority getLoadPriority() {
-		return LoadPriority.NORMAL;
+		return LoadPriority.LOWEST;
 	}
 	
 	public void task() {
@@ -36,7 +36,7 @@ public class LevelingMechanics extends ListenerMechanic {
 				Bukkit.getOnlinePlayers().forEach(player -> {
 					GamePlayer gp = Main.getGamePlayer(player.getName());
 					if (!gp.isVanished()) {
-						gp.setExpBarMessage("&e(" + gp.getEXP() + "/" + LevelUtils.getEXPNeeded((gp.getLevel() + 1)) + "&lEXP&e)");
+						gp.setExpBarMessage(gp.getLevel() + "&lLVL &e[" + gp.getEXP() + "/" + LevelUtils.getEXPNeeded((gp.getLevel() + 1)) + "&lEXP&e]");
 						gp.msg(MessageType.ACTION, gp.getExpBarMessage());
 					}
 				});
