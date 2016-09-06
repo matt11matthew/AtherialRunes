@@ -1,19 +1,18 @@
 package me.matt11matthew.atherialrunes.game.utils;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.EOFException;
-import java.io.IOException;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.messaging.PluginMessageListener;
-
 import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.game.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.mechanic.LoadPriority;
 import me.matt11matthew.atherialrunes.network.bungeecord.BungeeServerInfo;
 import me.matt11matthew.atherialrunes.network.bungeecord.BungeeServerTracker;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.messaging.PluginMessageListener;
+
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.EOFException;
+import java.io.IOException;
 
 public class BungeeChannelListener extends ListenerMechanic implements PluginMessageListener {
 

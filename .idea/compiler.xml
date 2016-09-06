@@ -29,17 +29,16 @@
         <module name="AtherialRunes-network" />
         <module name="AtherialRunes-proxy" />
         <module name="DungeonRealms-bootstrap" />
-        <!-- change name -->
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="AtherialRunes" target="1.8" />
       <module name="AtherialRunes-common" target="1.8" />
-      <module name="AtherialRunes-discord" target="1.5" />
+      <module name="AtherialRunes-discord" target="1.8" />
       <module name="AtherialRunes-game" target="1.8" />
       <module name="AtherialRunes-lobby" target="1.5" />
       <module name="AtherialRunes-network" target="1.8" />
-      <module name="AtherialRunes-proxy" target="1.5" />
+      <module name="AtherialRunes-proxy" target="1.8" />
       <module name="DungeonRealms-bootstrap" target="1.8" />
     </bytecodeTargetLevel>
   </component>

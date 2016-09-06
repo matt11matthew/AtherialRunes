@@ -57,6 +57,11 @@
             <version>5.9.1-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>org.inventivetalent.nicknamer</groupId>
+            <artifactId>api</artifactId>
+            <version>3.12.3</version>
+        </dependency>
+        <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
             <version>3.5</version>

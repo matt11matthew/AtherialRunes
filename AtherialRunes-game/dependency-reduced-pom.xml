@@ -94,6 +94,11 @@
       </exclusions>
     </dependency>
     <dependency>
+      <groupId>org.inventivetalent.nicknamer</groupId>
+      <artifactId>api</artifactId>
+      <version>3.12.3</version>
+    </dependency>
+    <dependency>
       <groupId>com.sk89q</groupId>
       <artifactId>worldedit</artifactId>
       <version>RELEASE</version>

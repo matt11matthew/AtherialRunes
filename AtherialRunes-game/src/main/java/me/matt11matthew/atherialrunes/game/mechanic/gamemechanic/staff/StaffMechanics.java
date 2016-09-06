@@ -13,9 +13,12 @@ import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.inventivetalent.nicknamer.api.NickManager;
+import org.inventivetalent.nicknamer.api.NickNamerAPI;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class StaffMechanics extends ListenerMechanic {
 
@@ -53,6 +56,8 @@ public class StaffMechanics extends ListenerMechanic {
 			public void run() {
 				Bukkit.getServer().getOnlinePlayers().forEach(player -> {
 					GamePlayer gp = Main.getGamePlayer(player.getName());
+					NickManager manager = NickNamerAPI.getNickManager();
+					manager.setNick(UUID.fromString(gp.getUUID()), gp.getNick());
 					if (Rank.isGM(player.getName())) {
 						if (gp.isInAdminMode()) {
 							gp.setVanished(true);

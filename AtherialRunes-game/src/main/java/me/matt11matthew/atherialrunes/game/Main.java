@@ -97,6 +97,7 @@ public class Main extends JavaPlugin {
             e.printStackTrace();
         }
 
+
 		//Registries must be loaded after connection establishment.
         //After it has been loaded into the server, it can be used.
 		try
@@ -106,7 +107,6 @@ public class Main extends JavaPlugin {
 		{
 			e.printStackTrace();
 		}
-		Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 		DatabaseAPI.loadDatabaseAPI();
 		BossbarUtils.setHPAboveHead();
         BungeeUtils.setPlugin(this);
@@ -155,7 +155,7 @@ public class Main extends JavaPlugin {
 		}
 		shard = ShardInfo.getByShardID(shardId);
 	}
-	
+
 	public void onDisable() {
 		MechanicManager.disableMechanics();
 	}
@@ -208,7 +208,7 @@ public class Main extends JavaPlugin {
 		MechanicManager.loadMechanics();
 		
 	}
-	
+
 	public static void sendNetworkMessage(String task, String message, String... contents) {
 	        ByteArrayDataOutput out = ByteStreams.newDataOutput();
 	        out.writeUTF(task);
