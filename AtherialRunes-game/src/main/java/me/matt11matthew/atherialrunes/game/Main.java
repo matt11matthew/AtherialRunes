@@ -96,7 +96,7 @@ public class Main extends JavaPlugin
             e.printStackTrace();
         }
 
-        //Must be loaded AFTER connection establishment.
+        //Must be loaded AFTER connection establishment. connection > registry.
         try
         {
             RegistryLoader.load()
