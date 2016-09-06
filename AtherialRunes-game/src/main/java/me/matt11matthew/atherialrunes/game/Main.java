@@ -74,7 +74,11 @@ public class Main extends JavaPlugin {
 	private static GameClient client;
 	private static ShardInfo shard;
 	private String shardId;
-	
+
+	//** registries **//
+	private ItemRegistry itemRegistry;
+	private PlayerRegistry playerRegistry;
+
 	public void onEnable() {
 		instance = this;
 		print("Enabling game...");
@@ -93,9 +97,10 @@ public class Main extends JavaPlugin {
         }
 
 		//Registries must be loaded after connection establishment.
+        //After it has been loaded into the server, it can be used.
 		try
 		{
-			RegistryLoader.load().register(new PlayerRegistry()).register(new ItemRegistry()).manageLoad();
+			RegistryLoader.load().register(playerRegistry = new PlayerRegistry()).register(itemRegistry = new ItemRegistry()).manageLoad();
 		} catch (LoaderNotHandledException e)
 		{
 			e.printStackTrace();
@@ -266,5 +271,16 @@ public class Main extends JavaPlugin {
 			player.kickPlayer(Utils.colorCodes("&c&lServer rebooting"));
 		});
 		Bukkit.getServer().spigot().restart();
+	}
+
+	//get registries
+	public ItemRegistry getItemRegistry()
+	{
+		return itemRegistry;
+	}
+
+	public PlayerRegistry getPlayerRegistry()
+	{
+		return playerRegistry;
 	}
 }

@@ -10,7 +10,5 @@ public interface DataRegistry
 {
     boolean call();
 
-    ConcurrentHashMap<?, ?> getRegistry();
-
     Field get(Class<?> caller);
 }

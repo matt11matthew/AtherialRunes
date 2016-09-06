@@ -21,8 +21,7 @@ public class PlayerRegistry implements DataRegistry
         return false;
     }
 
-    @Override
-    public ConcurrentHashMap<?, ?> getRegistry()
+    public ConcurrentHashMap<UUID, GamePlayer> getRegistry()
     {
         return playerRegistry;
     }

@@ -21,8 +21,7 @@ public class ItemRegistry implements DataRegistry
         return false;
     }
 
-    @Override
-    public ConcurrentHashMap<?, ?> getRegistry()
+    public ConcurrentHashMap<ItemStack, ?> getRegistry()
     {
         return itemRegistry;
     }

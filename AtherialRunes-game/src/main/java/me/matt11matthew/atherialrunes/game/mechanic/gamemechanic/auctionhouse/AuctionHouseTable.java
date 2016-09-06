@@ -50,7 +50,7 @@ public class AuctionHouseTable extends Table {
 	}
 	
 	public void loadItems() {
-		PreparedStatement pst = null;
+		PreparedStatement pst;
 
 		try {
 			pst = (PreparedStatement) getConnection().prepareStatement("SELECT * FROM " + getName() + " order by id");
