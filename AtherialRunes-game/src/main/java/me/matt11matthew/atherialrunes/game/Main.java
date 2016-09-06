@@ -1,22 +1,8 @@
 package me.matt11matthew.atherialrunes.game;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import me.matt11matthew.atherialrunes.game.exception.LoaderNotHandledException;
-import me.matt11matthew.atherialrunes.game.registry.RegistryLoader;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import com.esotericsoftware.minlog.Log;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
-
 import me.matt11matthew.atherialrunes.command.AtherialCommandManager;
 import me.matt11matthew.atherialrunes.database.DatabaseAPI;
 import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
@@ -24,6 +10,7 @@ import me.matt11matthew.atherialrunes.database.data.player.UUIDData;
 import me.matt11matthew.atherialrunes.game.commands.CommandDEV;
 import me.matt11matthew.atherialrunes.game.commands.CommandSetRank;
 import me.matt11matthew.atherialrunes.game.commands.CommandZone;
+import me.matt11matthew.atherialrunes.game.exception.LoaderNotHandledException;
 import me.matt11matthew.atherialrunes.game.mechanic.Mechanic;
 import me.matt11matthew.atherialrunes.game.mechanic.MechanicManager;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.HealthMechanic;
@@ -32,6 +19,7 @@ import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.auctionhouse.Au
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.auctionhouse.menus.FirstMenu;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.combat.CombatMechanics;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.combat.commands.CommandPvPFlag;
+import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.item.ItemMechanics;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.level.LevelingMechanics;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.level.commands.CommandSetLevel;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.player.PlayerMechanics;
@@ -55,6 +43,7 @@ import me.matt11matthew.atherialrunes.game.mechanic.servermechanic.deployment.De
 import me.matt11matthew.atherialrunes.game.mechanic.servermechanic.patch.PatchMechanics;
 import me.matt11matthew.atherialrunes.game.mechanic.servermechanic.patch.commands.CommandPatchNotes;
 import me.matt11matthew.atherialrunes.game.player.GamePlayer;
+import me.matt11matthew.atherialrunes.game.registry.RegistryLoader;
 import me.matt11matthew.atherialrunes.game.utils.BossbarUtils;
 import me.matt11matthew.atherialrunes.game.utils.BungeeChannelListener;
 import me.matt11matthew.atherialrunes.game.utils.NetworkClientListener;
@@ -64,6 +53,16 @@ import me.matt11matthew.atherialrunes.network.ShardInfo;
 import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.utils.Utils;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main extends JavaPlugin {
 	
@@ -201,6 +200,7 @@ public class Main extends JavaPlugin {
 		registerMechanic(new DeploymentMechanics());
 		registerMechanic(new NetworkClientListener());
 		registerMechanic(new BungeeChannelListener());
+		registerMechanic(new ItemMechanics());
 		MechanicManager.loadMechanics();
 		
 	}
