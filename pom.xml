@@ -3,9 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>me.matt11matthew.atherialrunes</groupId>
+    <artifactId>AtherialRunes-maven</artifactId>
     <packaging>pom</packaging>
+    <version>default</version>
 
+    <modules>
+        <module>AtherialRunes-common</module>
+        <module>AtherialRunes-bootstrap</module>
+        <module>AtherialRunes-discord</module>
+        <module>AtherialRunes-game</module>
+        <module>AtherialRunes-lobby</module>
+        <module>AtherialRunes-proxy</module>
+        <module>AtherialRunes-network</module>
+    </modules>
 
     <build>
         <plugins>
@@ -57,10 +68,6 @@
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
         <repository>
-  <id>javacord-repo</id>
-  <url>http://repo.bastian-oppermann.de</url>
-</repository>
-        <repository>
             <id>inventive-repo</id>
             <url>https://repo.inventivetalent.org/content/groups/public/</url>
         </repository>
@@ -76,76 +83,5 @@
             <id>releases</id>
             <url>http://198.199.70.92:8082/content/repositories/releases</url>
         </repository>
-
     </repositories>
-
-    <artifactId>AtherialRunes-parent</artifactId>
-    <version>1.0.0</version>
-    <groupId>me.matt11matthew.atherialrunes</groupId>
-    <modules>
-    	<module>AtherialRunes-discord</module>
-    </modules>
-    <dependencies>
-    	<dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.4</version>
-    </dependency>
-<dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-compress</artifactId>
-      <version>1.12</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
-<dependency>
-    <groupId>org.apache.httpcomponents</groupId>
-    <artifactId>httpclient</artifactId>
-    <version>4.5</version>
-</dependency>
-    
-    <dependency>
-  <groupId>org.apache.httpcomponents</groupId>
-  <artifactId>httpclient</artifactId>
-  <version>4.5.2</version>
-</dependency>
-
-
-
-        <!--Spigot GameAPI-->
-
-
-        <!--Bukkit GameAPI-->
-   
-  
-   <!-- This will use the shaded javacord which contains all required dependencies -->
-
-   <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.0</version>
-    </dependency>
-<dependency>
-  <groupId>de.btobastian.javacord</groupId>
-  <artifactId>javacord</artifactId>
-  <version>2.0.10</version>
-   <!-- This will use the shaded javacord which contains all required dependencies -->
-  <classifier>shaded</classifier>
-</dependency>
-<!-- A SLF4J comaptible logging framework. I would recommend to use logback -->
-<dependency>
-  <groupId>ch.qos.logback</groupId>
-  <artifactId>logback-classic</artifactId>
-  <version>1.0.13</version>
-</dependency>
-
-
-
-
-        <dependency>
-            <groupId>org.ini4j</groupId>
-            <artifactId>ini4j</artifactId>
-            <version>0.5.4</version>
-    
-        </dependency>
-    </dependencies>
 </project>

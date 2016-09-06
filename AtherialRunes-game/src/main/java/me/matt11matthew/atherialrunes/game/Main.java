@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import me.matt11matthew.atherialrunes.game.exception.LoaderNotHandledException;
+import me.matt11matthew.atherialrunes.game.registry.RegistryLoader;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -89,6 +91,15 @@ public class Main extends JavaPlugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+		//Registries must be loaded after connection establishment.
+		try
+		{
+			RegistryLoader.load().register(new PlayerRegistry()).register(new ItemRegistry()).manageLoad();
+		} catch (LoaderNotHandledException e)
+		{
+			e.printStackTrace();
+		}
 		Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 		DatabaseAPI.loadDatabaseAPI();
 		BossbarUtils.setHPAboveHead();

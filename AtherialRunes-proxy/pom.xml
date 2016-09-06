@@ -2,18 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-         
-             <modelVersion>4.0.0</modelVersion>
+
+    <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>AtherialRunes-parent</artifactId>
+        <artifactId>AtherialRunes-maven</artifactId>
         <groupId>me.matt11matthew.atherialrunes</groupId>
-        <version>1.0.0</version>
+        <version>default</version>
     </parent>
-
-
     <artifactId>AtherialRunes-proxy</artifactId>
-
-
     <build>
         <defaultGoal>clean install</defaultGoal>
         <finalName>Proxy</finalName>
@@ -48,13 +44,13 @@
                             <artifactSet>
                                 <includes>
                                     <include>org.ini4j:ini4j</include>
-             
+
                                     <include>commons-net:commons-net</include>
-            
+
                                     <include>org.objenesis:objenesis</include>
                                     <include>net.lingala.zip4j:zip4j</include>
                                     <include>me.matt11matthew.atherialrunes:AtherialRunes-common</include>
-  
+
                                 </includes>
                             </artifactSet>
                         </configuration>
@@ -81,10 +77,12 @@
             <version>2.5.3</version>
             <scope>provided</scope>
         </dependency>
-        
-        <dependency><groupId>net.md-5</groupId>
-      <artifactId>bungeecord-api</artifactId>
-      <version>1.8-SNAPSHOT</version></dependency>
+
+        <dependency>
+            <groupId>net.md-5</groupId>
+            <artifactId>bungeecord-api</artifactId>
+            <version>1.8-SNAPSHOT</version>
+        </dependency>
 
         <!--Spigot GameAPI-->
         <dependency>
@@ -117,7 +115,6 @@
             <artifactId>bossbarapi</artifactId>
             <version>2.4.1</version>
         </dependency>
-
 
 
         <dependency>
@@ -184,9 +181,9 @@
             <version>1.0.0</version>
         </dependency>
         <dependency>
-        	<groupId>me.matt11matthew.atherialrunes</groupId>
-        	<artifactId>AtherialRunes-common</artifactId>
-        	<version>1.0.0</version>
+            <groupId>me.matt11matthew.atherialrunes</groupId>
+            <artifactId>AtherialRunes-common</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 

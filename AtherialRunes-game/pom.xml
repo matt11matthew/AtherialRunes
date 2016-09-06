@@ -3,9 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>AtherialRunes-parent</artifactId>
+        <artifactId>AtherialRunes-maven</artifactId>
         <groupId>me.matt11matthew.atherialrunes</groupId>
-        <version>1.0.0</version>
+        <version>default</version>
     </parent>
     <artifactId>AtherialRunes-game</artifactId>
     <modelVersion>4.0.0</modelVersion>
@@ -34,7 +34,7 @@
         <dependency>
             <groupId>me.matt11matthew.atherialrunes</groupId>
             <artifactId>AtherialRunes-network</artifactId>
-            <version>${project.parent.version}</version>
+            <version>default</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
