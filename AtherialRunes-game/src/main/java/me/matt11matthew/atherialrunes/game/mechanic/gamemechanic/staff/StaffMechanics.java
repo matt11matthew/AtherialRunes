@@ -54,14 +54,18 @@ public class StaffMechanics extends ListenerMechanic {
 				Bukkit.getServer().getOnlinePlayers().forEach(player -> {
 					GamePlayer gp = Main.getGamePlayer(player.getName());
 					if (Rank.isGM(player.getName())) {
+						if (gp.isInAdminMode()) {
+							gp.setVanished(true);
+							gp.getPlayer().setPlayerListName(gp.getRank().getTabListName() + gp.getNick());
+						}
 						if (gp.isVanished()) {
-							gp.getPlayer().setPlayerListName(Utils.colorCodes(ChatColor.RED + gp.getName()));
+							gp.getPlayer().setPlayerListName(Utils.colorCodes(ChatColor.RED + gp.getNick()));
 							gp.msg(MessageType.ACTION, GameConstants.CURRENTLY_HIDDEN_MESSAGE);
 						} else {
-							gp.getPlayer().setPlayerListName(gp.getRank().getTabListName(gp.getName()));
+							gp.getPlayer().setPlayerListName(gp.getRank().getTabListName() + gp.getNick());
 						}
 					} else {
-						gp.getPlayer().setPlayerListName(gp.getRank().getTabListName(gp.getName()));
+						gp.getPlayer().setPlayerListName(gp.getRank().getTabListName() + gp.getNick());
 						Mute mute = Mute.getMute(gp.getName());
 						if (mute.isMuted()) {
 							if (mute.canUnmute()) {

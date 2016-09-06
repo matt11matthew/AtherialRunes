@@ -7,7 +7,6 @@ import me.matt11matthew.atherialrunes.database.data.player.LocalData;
 import me.matt11matthew.atherialrunes.database.data.player.Mute;
 import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
 import me.matt11matthew.atherialrunes.game.Main;
-import me.matt11matthew.atherialrunes.game.enums.Unicodes;
 import me.matt11matthew.atherialrunes.game.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.mechanic.LoadPriority;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank.ChatChannel;
@@ -19,22 +18,14 @@ import me.matt11matthew.atherialrunes.game.player.GamePlayer;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlayerMechanics extends ListenerMechanic {
 
@@ -70,6 +61,8 @@ public class PlayerMechanics extends ListenerMechanic {
 		gp.setGold(p.getGold());
 		gp.setSilver(p.getSilver());
 		gp.setCopper(p.getCopper());
+		gp.setNick(p.getNick());
+		gp.setAdminMode(p.isInAdminMode());
 		GamePlayer.players.put(e.getUniqueId().toString(), gp);
 		if (Rank.isStaff(gp.getName())) {
 			Main.staff.add(gp.getName());
@@ -79,7 +72,6 @@ public class PlayerMechanics extends ListenerMechanic {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		Player player = e.getPlayer();
-		new LocalData().update(player);
 		new BukkitRunnable() {
 			
 			@Override
@@ -96,6 +88,12 @@ public class PlayerMechanics extends ListenerMechanic {
 				
 			}
 		}.runTaskLater(Main.getInstance(), 15L);
+		GamePlayer gp = Main.getGamePlayer(e.getPlayer().getName());
+		if (!gp.isLegit()) {
+			return;
+		}
+		new LocalData().update(player);
+
 	}
 	
 	@EventHandler
@@ -139,6 +137,22 @@ public class PlayerMechanics extends ListenerMechanic {
 			e.setCancelled(true);
 		}
 	}
+
+	@EventHandler
+	public void onDrop(PlayerDropItemEvent e) {
+		GamePlayer gp = Main.getGamePlayer(e.getPlayer().getName());
+		if (!gp.isLegit()) {
+			e.setCancelled(true);
+		}
+	}
+
+	@EventHandler
+	public void onPickup(PlayerPickupItemEvent e) {
+		GamePlayer gp = Main.getGamePlayer(e.getPlayer().getName());
+		if (!gp.isLegit()) {
+			e.setCancelled(true);
+		}
+	}
 	
 	@EventHandler(priority = EventPriority.LOW)
 	public void onLogin(PlayerLoginEvent e) {
@@ -173,21 +187,23 @@ public class PlayerMechanics extends ListenerMechanic {
 		ap.setVanished(gp.isVanished());
 		ap.setGold(gp.getGold());
 		ap.setSilver(gp.getSilver());
+		ap.setNick(gp.getNick());
+		ap.setAdminMode(gp.isInAdminMode());
 		ap.setCopper(gp.getCopper());
-		if (gp.isInCombat()) {
-			Location loc = player.getLocation();
-			Zombie zombie = loc.getWorld().spawn(loc, Zombie.class);
-			zombie.setAI(false);
-			zombie.setBaby(false);
-			zombie.setCanPickupItems(false);
-			zombie.setCollidable(false);
-			zombie.setCustomName(gp.getDisplayName());
-			zombie.setCustomNameVisible(true);
-			Location head = zombie.getEyeLocation();
-			List<String> holo = new ArrayList<>();
-			holo.set(1, Utils.colorCodes((int) zombie.getHealth() + " &c" + Unicodes.COMMON_HEART.get()));
-
-		}
+//		if (gp.isInCombat()) {
+//			Location loc = player.getLocation();
+//			Zombie zombie = loc.getWorld().spawn(loc, Zombie.class);
+//			zombie.setAI(false);
+//			zombie.setBaby(false);
+//			zombie.setCanPickupItems(false);
+//			zombie.setCollidable(false);
+//			zombie.setCustomName(gp.getDisplayName());
+//			zombie.setCustomNameVisible(true);
+//			Location head = zombie.getEyeLocation();
+//			List<String> holo = new ArrayList<>();
+//			holo.set(1, Utils.colorCodes((int) zombie.getHealth() + " &c" + Unicodes.COMMON_HEART.get()));
+//
+//		}
 		
 		DatabaseAPI.getInstance().getPlayerData(player.getName()).save(player.getUniqueId().toString());
 		DatabaseAPI.getInstance().getUUIDData().save(player);
@@ -195,6 +211,9 @@ public class PlayerMechanics extends ListenerMechanic {
 		GamePlayer.players.remove(player.getUniqueId().toString());
 		if (Main.staff.contains(player.getName())) {
 			Main.staff.remove(player.getName());
+		}
+		if (!gp.isLegit()) {
+			return;
 		}
 		new LocalData().save(player);
 	}

@@ -242,7 +242,9 @@ public class Main extends JavaPlugin {
 		gp.setEXP(p.getEXP());
 		gp.setLevel(p.getLevel());
 		gp.setSkillPoints(p.getSkillPoints());
-		gp.setVanished(gp.isVanished());
+		gp.setVanished(p.isVanished());
+		gp.setNick(p.getNick());
+		gp.setAdminMode(p.isInAdminMode());
 		GamePlayer.players.put(UUIDData.getUUID(pname), gp);
 		return gp;
 	}

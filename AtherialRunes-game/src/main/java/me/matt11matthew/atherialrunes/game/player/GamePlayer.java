@@ -1,15 +1,5 @@
 package me.matt11matthew.atherialrunes.game.player;
 
-import java.util.HashMap;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.FireworkEffect.Type;
-import org.bukkit.entity.Firework;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.meta.FireworkMeta;
-
 import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
 import me.matt11matthew.atherialrunes.database.data.player.UUIDData;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
@@ -23,11 +13,20 @@ import me.matt11matthew.atherialrunes.sound.AtherialSound;
 import me.matt11matthew.atherialrunes.utils.BanUtils;
 import me.matt11matthew.atherialrunes.utils.MuteUtils;
 import me.matt11matthew.atherialrunes.utils.Utils;
+import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
+import org.bukkit.FireworkEffect.Type;
+import org.bukkit.entity.Firework;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.meta.FireworkMeta;
+
+import java.util.HashMap;
 
 public class GamePlayer {
 	
 	public static HashMap<String, GamePlayer> players = new HashMap<String, GamePlayer>();
-	
+
 	private String name;
 	private String uuid;
 	private Rank rank;
@@ -41,7 +40,10 @@ public class GamePlayer {
 	private int gold;
 	private int silver;
 	private int copper;
-	
+	private boolean adminMode;
+	private String displayName;
+	private String nick;
+
 	public GamePlayer(String name) {
 		this.name = name;
 		this.uuid = UUIDData.getUUID(name);
@@ -143,7 +145,7 @@ public class GamePlayer {
 	}
 
 	public String getDisplayName() {
-		return Utils.colorCodes("&f" + name);
+		return Utils.colorCodes(displayName);
 	}
 
 	public boolean isVanished() {
@@ -233,4 +235,27 @@ public class GamePlayer {
 		this.silver = silver;
 	}
 
+	public boolean isLegit() {
+		return (!isInAdminMode());
+	}
+
+	public boolean isInAdminMode() {
+		return adminMode;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	public void setAdminMode(boolean adminMode) {
+		this.adminMode = adminMode;
+	}
 }
