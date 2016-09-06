@@ -71,7 +71,7 @@ public class AuctionHouseMechanics extends ListenerMechanic {
 					break;
 				case 5:
 					player.closeInventory();
-					new MarketMenu().open(player);
+					new MarketMenu(1).open(player);
 					break;
 			}
 		}
