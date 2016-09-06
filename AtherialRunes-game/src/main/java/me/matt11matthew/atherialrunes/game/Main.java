@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import me.matt11matthew.atherialrunes.game.exception.LoaderNotHandledException;
+import me.matt11matthew.atherialrunes.game.registry.RegistryLoader;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -63,197 +65,244 @@ import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.utils.Utils;
 
-public class Main extends JavaPlugin {
-	
-	private static Main instance;
-	
-	public static List<String> staff = new ArrayList<String>();
-	
-	private static GameClient client;
-	private static ShardInfo shard;
-	private String shardId;
-	
-	public void onEnable() {
-		instance = this;
-		print("Enabling game...");
-		loadShard();
-		registerCommands();
-		registerMechanics();
-		registerMenus();
-		BungeeUtils.setPlugin(this);
-		client = new GameClient();
+public class Main extends JavaPlugin
+{
 
-        try {
+    private static Main instance;
+
+    public static List<String> staff = new ArrayList<String>();
+
+    private static GameClient client;
+    private static ShardInfo shard;
+    private String shardId;
+
+    public void onEnable()
+    {
+        instance = this;
+        print("Enabling game...");
+        loadShard();
+        registerCommands();
+        registerMechanics();
+        registerMenus();
+        BungeeUtils.setPlugin(this);
+        client = new GameClient();
+
+        try
+        {
             client.connect();
             Log.set(Log.LEVEL_INFO);
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
-		Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
-		DatabaseAPI.loadDatabaseAPI();
-		BossbarUtils.setHPAboveHead();
+
+        //Must be loaded AFTER connection establishment.
+        try
+        {
+            RegistryLoader.load()
+                    .register(new PlayerRegistry())
+                    .register(new ItemRegistry())
+                    .manageLoad();
+        } catch (LoaderNotHandledException e)
+        {
+            e.printStackTrace();
+        }
+
+        Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        DatabaseAPI.loadDatabaseAPI();
+        BossbarUtils.setHPAboveHead();
         BungeeUtils.setPlugin(this);
-	}
-	
-	public String getShardFile() {
-		File file = new File("shardconfig.shard");
-		String text = null;
-		if (!file.exists()) {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(file));
-			StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-			while (line != null) {
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-			}
-			text = sb.toString();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				br.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return text;
-	}
-	
-	private void loadShard() {
-		String ss = getShardFile();
-		String[] s = ss.split("\n");
-		for (int i = 0; i < s.length; i++) {
-			if (s[i].contains("id: ")) {
-				shardId = s[i].split("id: ")[1].trim();
-			}
-		}
-		shard = ShardInfo.getByShardID(shardId);
-	}
-	
-	public void onDisable() {
-		MechanicManager.disableMechanics();
-	}
-	
-	public static Main getInstance() {
-		return instance;
-	}
-	
-	public static void print(String s) {
-		System.out.println(s);
-	}
-	
-	private void registerCommands() {
-		AtherialCommandManager cm = new AtherialCommandManager();
-		cm.registerCommand(new CommandSetRank("setrank", "/setrank <player> <rank>", "Sets the rank of a player.", Arrays.asList("setgroup")));
-		cm.registerCommand(new CommandZone("zone", "/zone", "The zone you are in.", Arrays.asList("z")));
-		cm.registerCommand(new CommandDEV("dev", "/dev", "Dev command."));
-		cm.registerCommand(new CommandKick("kick", "/kick <player> <reason>", "Kicks a player."));
-		cm.registerCommand(new CommandBan("ban", "/ban <player> <time> <reason>", "Bans a player."));
-		cm.registerCommand(new CommandUnBan("unban", "/unban <player> <reason>", "Unbans a player."));
-		cm.registerCommand(new CommandInvsee("invsee", "/invsee <player>", "Opens a players inventory.", Arrays.asList("viewinventory", "viewinv", "showinv", "showinventory", "inventorysee")));
-		cm.registerCommand(new CommandPvPFlag("tag", "/tag <player>", "Tags a player in pvp.", Arrays.asList("pvpflag", "pvptag")));
-		cm.registerCommand(new CommandShard("shard", "/shard", "Opens the shard menu."));
-		cm.registerCommand(new CommandMute("mute", "/mute <player> <time> <reason>", "Mutes a player."));
-		cm.registerCommand(new CommandUnmute("unmute", "/unmute <player> <reason>", "Unmutes a player."));
-		cm.registerCommand(new CommandVanish("vanish", "/vanish", "Vanish.", Arrays.asList("atherialvanish", "hide")));
-		cm.registerCommand(new CommandSetLevel("setlevel", "/setlevel <player> <level>", "Set a players level.", Arrays.asList("setlvl")));
-		cm.registerCommand(new CommandPatchNotes("patchnotes", "/patchnotes", "Views patch notes.", Arrays.asList("notes")));
-	}
-	
-	private void registerMechanics() {
-		registerMechanic(new LevelingMechanics());
-		registerMechanic(new HealthMechanic());
-		registerMechanic(new RankMechanics());
-		registerMechanic(new MotdMechanics());
-		registerMechanic(new PlayerMechanics());
-		registerMechanic(new ZoneMechanics());
-		registerMechanic(new AuctionHouseMechanics());
-		registerMechanic(new CombatMechanics());
-		registerMechanic(new ShardMechanics());
-		registerMechanic(new StaffMechanics());
-		registerMechanic(new SpawnerMechanics());
-		registerMechanic(new PatchMechanics());
-		registerMechanic(new DeploymentMechanics());
-		registerMechanic(new NetworkClientListener());
-		registerMechanic(new BungeeChannelListener());
-		MechanicManager.loadMechanics();
-		
-	}
-	
-	 public static void sendNetworkMessage(String task, String message, String... contents) {
-	        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-	        out.writeUTF(task);
-	        out.writeUTF(message);
+    }
 
-	        for (String s : contents)
-	            out.writeUTF(s);
+    public String getShardFile()
+    {
+        File file = new File("shardconfig.shard");
+        String text = null;
+        if (!file.exists())
+        {
+            try
+            {
+                file.createNewFile();
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        BufferedReader br = null;
+        try
+        {
+            br = new BufferedReader(new FileReader(file));
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            while (line != null)
+            {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            text = sb.toString();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        } finally
+        {
+            try
+            {
+                br.close();
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return text;
+    }
 
-	        getClient().sendTCP(out.toByteArray());
-	    }
-	
-	private void registerMenus() {
-		MenuManager.registerMenu(new FirstMenu());
-		MenuManager.registerMenu(new ShardMenu());
-	}
-	
-	public static void registerMechanic(Mechanic mechanic) {
-		MechanicManager.mechanics.put(mechanic.getClass().getSimpleName(), mechanic);
-	}
+    private void loadShard()
+    {
+        String ss = getShardFile();
+        String[] s = ss.split("\n");
+        for (int i = 0; i < s.length; i++)
+        {
+            if (s[i].contains("id: "))
+            {
+                shardId = s[i].split("id: ")[1].trim();
+            }
+        }
+        shard = ShardInfo.getByShardID(shardId);
+    }
 
-	public static GamePlayer getGamePlayer(String pname) {
-		if (GamePlayer.players.containsKey(UUIDData.getUUID(pname))) {
-			return GamePlayer.players.get(UUIDData.getUUID(pname));
-		}
-		DatabaseAPI.getInstance().getPlayerData(pname).update();
-		AtherialPlayer p = PlayerData.getAtherialPlayer(pname);
-		GamePlayer gp = new GamePlayer(p.getName());
-		gp.setRank(Rank.valueOf(p.getRank().toUpperCase()));
-		gp.setChatChannel(ChatChannel.getChatChannelFromId(p.getChatChannel()));
-		gp.setCombatTime(p.getCombatTime());
-		gp.setEXP(p.getEXP());
-		gp.setLevel(p.getLevel());
-		gp.setSkillPoints(p.getSkillPoints());
-		gp.setVanished(gp.isVanished());
-		GamePlayer.players.put(UUIDData.getUUID(pname), gp);
-		return gp;
-	}
-	
-	public static void sendMessageToStaff(String msg) {
-		for (String staffName : staff) {
-			BungeeUtils.sendPlayerMessage(staffName, Utils.colorCodes(msg));
-		}
-	}
+    public void onDisable()
+    {
+        MechanicManager.disableMechanics();
+    }
 
-	public static ShardInfo getShard() {
-		return shard;
-	}
+    public static Main getInstance()
+    {
+        return instance;
+    }
 
-	public static void setShard(ShardInfo shard) {
-		Main.shard = shard;
-	}
+    public static void print(String s)
+    {
+        System.out.println(s);
+    }
 
-	public static GameClient getClient() {
-		return client;
-	}
+    private void registerCommands()
+    {
+        AtherialCommandManager cm = new AtherialCommandManager();
+        cm.registerCommand(new CommandSetRank("setrank", "/setrank <player> <rank>", "Sets the rank of a player.", Arrays.asList("setgroup")));
+        cm.registerCommand(new CommandZone("zone", "/zone", "The zone you are in.", Arrays.asList("z")));
+        cm.registerCommand(new CommandDEV("dev", "/dev", "Dev command."));
+        cm.registerCommand(new CommandKick("kick", "/kick <player> <reason>", "Kicks a player."));
+        cm.registerCommand(new CommandBan("ban", "/ban <player> <time> <reason>", "Bans a player."));
+        cm.registerCommand(new CommandUnBan("unban", "/unban <player> <reason>", "Unbans a player."));
+        cm.registerCommand(new CommandInvsee("invsee", "/invsee <player>", "Opens a players inventory.", Arrays.asList("viewinventory", "viewinv", "showinv", "showinventory", "inventorysee")));
+        cm.registerCommand(new CommandPvPFlag("tag", "/tag <player>", "Tags a player in pvp.", Arrays.asList("pvpflag", "pvptag")));
+        cm.registerCommand(new CommandShard("shard", "/shard", "Opens the shard menu."));
+        cm.registerCommand(new CommandMute("mute", "/mute <player> <time> <reason>", "Mutes a player."));
+        cm.registerCommand(new CommandUnmute("unmute", "/unmute <player> <reason>", "Unmutes a player."));
+        cm.registerCommand(new CommandVanish("vanish", "/vanish", "Vanish.", Arrays.asList("atherialvanish", "hide")));
+        cm.registerCommand(new CommandSetLevel("setlevel", "/setlevel <player> <level>", "Set a players level.", Arrays.asList("setlvl")));
+        cm.registerCommand(new CommandPatchNotes("patchnotes", "/patchnotes", "Views patch notes.", Arrays.asList("notes")));
+    }
 
-	public static void setClient(GameClient client) {
-		Main.client = client;
-	}
+    private void registerMechanics()
+    {
+        registerMechanic(new LevelingMechanics());
+        registerMechanic(new HealthMechanic());
+        registerMechanic(new RankMechanics());
+        registerMechanic(new MotdMechanics());
+        registerMechanic(new PlayerMechanics());
+        registerMechanic(new ZoneMechanics());
+        registerMechanic(new AuctionHouseMechanics());
+        registerMechanic(new CombatMechanics());
+        registerMechanic(new ShardMechanics());
+        registerMechanic(new StaffMechanics());
+        registerMechanic(new SpawnerMechanics());
+        registerMechanic(new PatchMechanics());
+        registerMechanic(new DeploymentMechanics());
+        registerMechanic(new NetworkClientListener());
+        registerMechanic(new BungeeChannelListener());
+        MechanicManager.loadMechanics();
 
-	public static void stop() {
-		Bukkit.getServer().broadcastMessage(Utils.colorCodes("&cStopping"));
-		Bukkit.getServer().getOnlinePlayers().forEach(player -> {
-			player.kickPlayer(Utils.colorCodes("&c&lServer rebooting"));
-		});
-		Bukkit.getServer().spigot().restart();
-	}
+    }
+
+    public static void sendNetworkMessage(String task, String message, String... contents)
+    {
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF(task);
+        out.writeUTF(message);
+
+        for (String s : contents)
+            out.writeUTF(s);
+
+        getClient().sendTCP(out.toByteArray());
+    }
+
+    private void registerMenus()
+    {
+        MenuManager.registerMenu(new FirstMenu());
+        MenuManager.registerMenu(new ShardMenu());
+    }
+
+    public static void registerMechanic(Mechanic mechanic)
+    {
+        MechanicManager.mechanics.put(mechanic.getClass().getSimpleName(), mechanic);
+    }
+
+    public static GamePlayer getGamePlayer(String pname)
+    {
+        if (GamePlayer.players.containsKey(UUIDData.getUUID(pname)))
+        {
+            return GamePlayer.players.get(UUIDData.getUUID(pname));
+        }
+        DatabaseAPI.getInstance().getPlayerData(pname).update();
+        AtherialPlayer p = PlayerData.getAtherialPlayer(pname);
+        GamePlayer gp = new GamePlayer(p.getName());
+        gp.setRank(Rank.valueOf(p.getRank().toUpperCase()));
+        gp.setChatChannel(ChatChannel.getChatChannelFromId(p.getChatChannel()));
+        gp.setCombatTime(p.getCombatTime());
+        gp.setEXP(p.getEXP());
+        gp.setLevel(p.getLevel());
+        gp.setSkillPoints(p.getSkillPoints());
+        gp.setVanished(gp.isVanished());
+        GamePlayer.players.put(UUIDData.getUUID(pname), gp);
+        return gp;
+    }
+
+    public static void sendMessageToStaff(String msg)
+    {
+        for (String staffName : staff)
+        {
+            BungeeUtils.sendPlayerMessage(staffName, Utils.colorCodes(msg));
+        }
+    }
+
+    public static ShardInfo getShard()
+    {
+        return shard;
+    }
+
+    public static void setShard(ShardInfo shard)
+    {
+        Main.shard = shard;
+    }
+
+    public static GameClient getClient()
+    {
+        return client;
+    }
+
+    public static void setClient(GameClient client)
+    {
+        Main.client = client;
+    }
+
+    public static void stop()
+    {
+        Bukkit.getServer().broadcastMessage(Utils.colorCodes("&cStopping"));
+        Bukkit.getServer().getOnlinePlayers().forEach(player -> {
+            player.kickPlayer(Utils.colorCodes("&c&lServer rebooting"));
+        });
+        Bukkit.getServer().spigot().restart();
+    }
 }
