@@ -1,18 +1,18 @@
 package me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.auctionhouse;
 
-import java.util.HashMap;
-import java.util.UUID;
-
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType.SlotType;
-
 import me.matt11matthew.atherialrunes.game.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.mechanic.LoadPriority;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.auctionhouse.menus.MarketItem;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.auctionhouse.menus.OptionMenu;
 import me.matt11matthew.atherialrunes.utils.Utils;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType.SlotType;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public class AuctionHouseMechanics extends ListenerMechanic {
 	
@@ -77,4 +77,7 @@ public class AuctionHouseMechanics extends ListenerMechanic {
 		}
 	}
 
+	public static List<MarketItem> getItems(int page) {
+		return null;
+	}
 }
