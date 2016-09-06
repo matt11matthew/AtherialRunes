@@ -20,6 +20,7 @@ import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.auctionhouse.me
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.combat.CombatMechanics;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.combat.commands.CommandPvPFlag;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.item.ItemMechanics;
+import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.item.commands.CommandGiveCustomItem;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.level.LevelingMechanics;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.level.commands.CommandAddEXP;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.level.commands.CommandSetLevel;
@@ -184,6 +185,7 @@ public class Main extends JavaPlugin {
 		cm.registerCommand(new CommandSetLevel("setlevel", "/setlevel <player> <level>", "Set a players level.", Arrays.asList("setlvl")));
 		cm.registerCommand(new CommandPatchNotes("patchnotes", "/patchnotes", "Views patch notes.", Arrays.asList("notes")));
 		cm.registerCommand(new CommandAddEXP("addexp", "/addexp <player> <exp>", "Gives a player exp.", Arrays.asList("giveexp")));
+		cm.registerCommand(new CommandGiveCustomItem("givecustomitem", "/givecustomitem <item>", "Gives yourself a custom item.", Arrays.asList("addcustomitem")));
 	}
 	
 	private void registerMechanics() {
