@@ -29,6 +29,6 @@ public class LevelUtils {
 			return 100;
 		}
 		int percent = (int) (100.0D * lvl);
-		return (percent ^ 2);
+		return (int) (percent * 1.05);
 	}
 }

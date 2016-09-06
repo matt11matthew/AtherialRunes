@@ -1,9 +1,9 @@
 package me.matt11matthew.atherialrunes;
 
-import java.util.logging.Logger;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+
+import java.util.logging.Logger;
 
 public class Constants {
 	
@@ -48,7 +48,9 @@ public class Constants {
 	public static final Location LOBBY_SPAWN = Bukkit.getWorld("hub").getSpawnLocation();
 	
 	public static Logger log = Logger.getLogger(Constants.class.getName());
-	
+
+	public static final String DISCORD_SERVER_ID = "216389507572957184";
+	public static final String DISCORD_BOT_TOKEN = "MjIyNDA3NjY3OTA4MzQ1ODU3.Cq880Q.FHIKaK8fJQCq3BzV4NYR_6vcaf4";
 	
 	
 	
@@ -141,7 +143,7 @@ public class Constants {
 	public static final int FTP_PORT = 21;
 	
 	
-	public static final String SQL_URL = "jdbc:mysql://localhost:3306/atherialrunes";
+	public static final String SQL_URL = "jdbc:mysql://192.99.37.67:3306/atherialrunes";
 	public static final String SQL_USER = "matt11matthew";
 	public static final String SQL_PASSWORD = "pass";
 	

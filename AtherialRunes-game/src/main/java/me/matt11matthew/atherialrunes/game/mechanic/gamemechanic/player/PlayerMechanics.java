@@ -1,24 +1,5 @@
 package me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.player;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Zombie;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
-import org.bukkit.event.player.PlayerLoginEvent.Result;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scheduler.BukkitRunnable;
-
-import de.Herbystar.TTA.TTA_Methods;
 import me.matt11matthew.atherialrunes.Constants;
 import me.matt11matthew.atherialrunes.database.DatabaseAPI;
 import me.matt11matthew.atherialrunes.database.data.player.Ban;
@@ -37,6 +18,23 @@ import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank.events.Ath
 import me.matt11matthew.atherialrunes.game.player.GamePlayer;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.utils.Utils;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerLoginEvent.Result;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerMechanics extends ListenerMechanic {
 
@@ -188,7 +186,7 @@ public class PlayerMechanics extends ListenerMechanic {
 			Location head = zombie.getEyeLocation();
 			List<String> holo = new ArrayList<>();
 			holo.set(1, Utils.colorCodes((int) zombie.getHealth() + " &c" + Unicodes.COMMON_HEART.get()));
-			TTA_Methods.createHolo(head, holo);
+
 		}
 		
 		DatabaseAPI.getInstance().getPlayerData(player.getName()).save(player.getUniqueId().toString());

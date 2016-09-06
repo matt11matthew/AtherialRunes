@@ -21,6 +21,7 @@ import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.combat.CombatMe
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.combat.commands.CommandPvPFlag;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.item.ItemMechanics;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.level.LevelingMechanics;
+import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.level.commands.CommandAddEXP;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.level.commands.CommandSetLevel;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.player.PlayerMechanics;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank.ChatChannel;
@@ -182,6 +183,7 @@ public class Main extends JavaPlugin {
 		cm.registerCommand(new CommandVanish("vanish", "/vanish", "Vanish.", Arrays.asList("atherialvanish", "hide")));
 		cm.registerCommand(new CommandSetLevel("setlevel", "/setlevel <player> <level>", "Set a players level.", Arrays.asList("setlvl")));
 		cm.registerCommand(new CommandPatchNotes("patchnotes", "/patchnotes", "Views patch notes.", Arrays.asList("notes")));
+		cm.registerCommand(new CommandAddEXP("addexp", "/addexp <player> <exp>", "Gives a player exp.", Arrays.asList("giveexp")));
 	}
 	
 	private void registerMechanics() {
@@ -205,7 +207,7 @@ public class Main extends JavaPlugin {
 		
 	}
 	
-	 public static void sendNetworkMessage(String task, String message, String... contents) {
+	public static void sendNetworkMessage(String task, String message, String... contents) {
 	        ByteArrayDataOutput out = ByteStreams.newDataOutput();
 	        out.writeUTF(task);
 	        out.writeUTF(message);
