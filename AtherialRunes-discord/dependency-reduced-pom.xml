@@ -41,14 +41,28 @@
                   <include>org.ini4j:ini4j</include>
                   <include>commons-net:commons-net</include>
                   <include>net.lingala.zip4j:zip4j</include>
-                  <include>me.matt11matthew.atherialrunes:AtherialRunes-common</include>
                   <include>ch.qos.logback:logback-classic</include>
                   <include>de.btobastian.javacord:javacord</include>
+                  <include>com.mashape.unirest:unirest-java</include>
+                  <include>junit:junit</include>
+                  <include>org.apache.commands:commons-lang3</include>
+                  <include>org.apache.commands:commons-compress</include>
+                  <include>org.apache.httpcomponents:httpclient</include>
                 </includes>
               </artifactSet>
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>me.matt11matthew.atherialrunes.discord.Main</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
       </plugin>
     </plugins>
   </build>
@@ -60,22 +74,16 @@
   </repositories>
   <dependencies>
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.14.2</version>
-      <scope>provided</scope>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.4</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.mongodb</groupId>
-      <artifactId>mongo-java-driver</artifactId>
-      <version>3.2.2</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mongodb</groupId>
-      <artifactId>bson</artifactId>
-      <version>3.2.2</version>
-      <scope>provided</scope>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-compress</artifactId>
+      <version>1.12</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 </project>

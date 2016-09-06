@@ -30,7 +30,7 @@ public class PlayerData implements Data {
 		AtherialPlayer player = players.get(uuid);
 		if (player.isNewPlayer()) {
 			new PlayerdataTable().insert("INSERT INTO " + new PlayerdataTable().getName()
-					+ "(uuid, ign, rank, channel, combat, level, vanish, exp, skillpoints, shard) "
+					+ "(uuid, ign, rank, channel, combat, level, vanish, exp, skillpoints, gold, silver, copper, shard) "
 					+ "VALUES("
 					+ "'" + player.getUUID()
 					+ "', '" + player.getName()
@@ -41,6 +41,9 @@ public class PlayerData implements Data {
 					+ "', '"+ player.isVanished()
 					+ "', '"+ player.getEXP()
 					+ "', '"+ player.getSkillPoints()
+					+ "', '"+ player.getGold()
+					+ "', '"+ player.getSilver()
+					+ "', '"+ player.getCopper()
 					+ "', '" + player.getShard() + "') "
 					+ "ON DUPLICATE KEY UPDATE "
 					+ "uuid='" + player.getUUID()
@@ -52,6 +55,9 @@ public class PlayerData implements Data {
 					+ "', vanish='" + player.isVanished()
 					+ "', exp='" + player.getEXP()
 					+ "', skillpoints='" + player.getSkillPoints()
+					+ "', gold='" + player.getGold()
+					+ "', silver='" + player.getSilver()
+					+ "', copper='" + player.getCopper()
 					+ "', shard='" + player.getShard() + "'");
 		} else {
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `rank`='" + player.getRank() + "' WHERE `uuid`='" + getUUID(name) + "';");
@@ -62,6 +68,9 @@ public class PlayerData implements Data {
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `level`='" + player.getLevel() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `exp`='" + player.getEXP() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `skillpoints`='" + player.getSkillPoints() + "' WHERE `uuid`='" + getUUID(name) + "';");
+			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `gold`='" + player.getGold() + "' WHERE `uuid`='" + getUUID(name) + "';");
+			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `silver`='" + player.getSilver() + "' WHERE `uuid`='" + getUUID(name) + "';");
+			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `copper`='" + player.getCopper() + "' WHERE `uuid`='" + getUUID(name) + "';");
 		}
 		players.remove(uuid);
 	}
@@ -83,6 +92,9 @@ public class PlayerData implements Data {
 				player.setVanished(false);
 				player.setNewPlayer(true);
 				player.setCombatTime(0);
+				player.setGold(0);
+				player.setCopper(0);
+				player.setSilver(0);
 			} else {
 				player.setNewPlayer(false);
 				String rank = rs.getString("rank");
@@ -92,6 +104,9 @@ public class PlayerData implements Data {
 				int exp = rs.getInt("exp");
 				int level = rs.getInt("level");
 				int skillpoints = rs.getInt("skillpoints");
+				int gold = rs.getInt("gold");
+				int silver = rs.getInt("silver");
+				int copper = rs.getInt("copper");
 				boolean vanished = Boolean.parseBoolean(rs.getString("vanish"));
 				player.setChatChannel(channel);
 				player.setSkillPoints(skillpoints);
@@ -100,6 +115,9 @@ public class PlayerData implements Data {
 				player.setEXP(exp);
 				player.setLevel(level);
 				player.setVanished(vanished);
+				player.setCopper(copper);
+				player.setSilver(silver);
+				player.setGold(gold);
 				player.setCombatTime(combatTime);
 				
 			}

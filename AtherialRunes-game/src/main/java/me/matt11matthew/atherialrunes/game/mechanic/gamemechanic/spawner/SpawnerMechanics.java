@@ -19,11 +19,13 @@ public class SpawnerMechanics extends ListenerMechanic {
 	public void onEnable() {
 		print("[SpawnerMechanics] Enabling...");
 		registerListeners();
+		loadSpawners();
 	}
 
 	@Override
 	public void onDisable() {
 		print("[SpawnerMechanics] Disabling...");
+		saveSpawners();
 	}
 
 	@Override
@@ -42,6 +44,7 @@ public class SpawnerMechanics extends ListenerMechanic {
 				file.mkdirs();
 			}
 			file = new File(Main.getInstance().getDataFolder() + "/Spawners/mobdata.spawners");
+			file.delete();
 			if (!file.exists()) {
 				try {
 					file.createNewFile();

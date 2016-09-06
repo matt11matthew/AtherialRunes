@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>DungeonRealms-bootstrap</artifactId>
+    <artifactId>AtherialRunes-bootstrap</artifactId>
 
 
     <build>

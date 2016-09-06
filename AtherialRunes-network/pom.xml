@@ -72,13 +72,7 @@
     		<type>jar</type>
             <scope>compile</scope>
     	</dependency>
-    	    	<dependency>
-    		<groupId>org.mongodb</groupId>
-    		<artifactId>mongo-java-driver</artifactId>
-    		<version>3.2.2</version>
-    		<type>jar</type>
-            <scope>compile</scope>
-    	</dependency>
+    	    	
     	 <dependency>
             <groupId>com.esotericsoftware</groupId>
             <artifactId>kryo-shaded</artifactId>
@@ -89,12 +83,6 @@
             <artifactId>kryonet</artifactId>
             <version>2.22.0-RC1</version>
         </dependency>
-    	<dependency>
-    		<groupId>org.mongodb</groupId>
-    		<artifactId>bson</artifactId>
-    		<version>3.2.2</version>
-    		<type>jar</type>
-            <scope>compile</scope>
-    	</dependency>
+    	
     </dependencies>
 </project>

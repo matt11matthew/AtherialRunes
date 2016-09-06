@@ -6,7 +6,7 @@
     <version>1.0.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>DungeonRealms-bootstrap</artifactId>
+  <artifactId>AtherialRunes-bootstrap</artifactId>
   <build>
     <defaultGoal>clean install</defaultGoal>
     <finalName>Master-Server</finalName>
@@ -57,13 +57,5 @@
       </plugin>
     </plugins>
   </build>
-  <dependencies>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.14.2</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
 </project>
 

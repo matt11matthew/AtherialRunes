@@ -69,6 +69,9 @@ public class PlayerMechanics extends ListenerMechanic {
 		gp.setLevel(p.getLevel());
 		gp.setVanished(gp.isVanished());
 		gp.setSkillPoints(p.getSkillPoints());
+		gp.setGold(p.getGold());
+		gp.setSilver(p.getSilver());
+		gp.setCopper(p.getCopper());
 		GamePlayer.players.put(e.getUniqueId().toString(), gp);
 		if (Rank.isStaff(gp.getName())) {
 			Main.staff.add(gp.getName());
@@ -170,7 +173,9 @@ public class PlayerMechanics extends ListenerMechanic {
 		ap.setSkillPoints(gp.getSkillPoints());
 		ap.setLevel(gp.getLevel());
 		ap.setVanished(gp.isVanished());
-		
+		ap.setGold(gp.getGold());
+		ap.setSilver(gp.getSilver());
+		ap.setCopper(gp.getCopper());
 		if (gp.isInCombat()) {
 			Location loc = player.getLocation();
 			Zombie zombie = loc.getWorld().spawn(loc, Zombie.class);

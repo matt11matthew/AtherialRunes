@@ -38,6 +38,9 @@ public class GamePlayer {
 	private int exp;
 	private String expBarMessage;
 	private int skillPoints;
+	private int gold;
+	private int silver;
+	private int copper;
 	
 	public GamePlayer(String name) {
 		this.name = name;
@@ -204,6 +207,30 @@ public class GamePlayer {
 
 	public void setSkillPoints(int skillPoints) {
 		this.skillPoints = skillPoints;
+	}
+
+	public int getGold() {
+		return gold;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+
+	public int getCopper() {
+		return copper;
+	}
+
+	public void setCopper(int copper) {
+		this.copper = copper;
+	}
+
+	public int getSilver() {
+		return silver;
+	}
+
+	public void setSilver(int silver) {
+		this.silver = silver;
 	}
 
 }

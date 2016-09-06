@@ -1,4 +1,4 @@
-package me.matt11matthew.atherialrunes.database;
+package me.matt11matthew.atherialrunes.database.table;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

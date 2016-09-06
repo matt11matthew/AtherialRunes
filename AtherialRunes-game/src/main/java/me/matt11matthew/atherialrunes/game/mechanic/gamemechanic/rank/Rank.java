@@ -11,33 +11,39 @@ import me.matt11matthew.atherialrunes.utils.Utils;
 
 public enum Rank {
 	
-	LEAD_DEVELOPER(1, "&6&lLEAD DEV &7", ":&f "),
-	LEAD(2, "&a&lLEAD &7", ":&f "),
-	DEVELOPER(3, "&c&lDEV &7", ":&f "),
-	GA(4, "&e&lGA &7", ":&f "),
-	DEFAULT(5, "&7", ": "),
-	APPRENTICE(6, "&a&lA &7", ":&f "),
-	KNIGHT(7, "&3&lK &7", ":&f "),
-	NOBEL(8, "&d&lN &7", ":&f "),
-	FOUNDER(9, "&b&lF &7", ":&f "),
-	MOD(10, "&6&lMOD &7", ":&f "),
-	BUILDER(11, "&3&lBUILDER &7", ":&f "),
-	YOUTUBER(12, "&c&lYT &7", ":&f ");
+	LEAD_DEVELOPER(1, "&6&lLEAD DEV &7", ":&f ", "Lead Developer"),
+	LEAD(2, "&a&lLEAD &7", ":&f ", "Lead"),
+	DEVELOPER(3, "&c&lDEV &7", ":&f ", "Developer"),
+	GA(4, "&e&lGA &7", ":&f ", "Global Admin"),
+	DEFAULT(5, "&7", ": ", "Default"),
+	APPRENTICE(6, "&a&lA &7", ":&f ", "Apprentice"),
+	KNIGHT(7, "&3&lK &7", ":&f ", "Knight"),
+	NOBEL(8, "&d&lN &7", ":&f ", "Nobel"),
+	FOUNDER(9, "&b&lF &7", ":&f ", "Founder"),
+	MOD(10, "&6&lMOD &7", ":&f ", "Moderator"),
+	BUILDER(11, "&3&lBUILDER &7", ":&f ", "Builder"),
+	YOUTUBER(12, "&c&lYT &7", ":&f ", "Youtuber");
 	
 	int id;
 	String tag;
 	String chatColor;
+	String name;
 
-	Rank(int id, String tag, String chatColor) {
+	Rank(int id, String tag, String chatColor, String name) {
 		this.id = id;
 		this.tag = tag;
 		this.chatColor = chatColor;
+		this.name = name;
 	}
 	
 	public int getId() {
 		return this.id;
 	}
 	
+	public String getName() {
+		return name;
+	}
+ 	
 	public String getChatColor() {
 		return this.chatColor;
 	}

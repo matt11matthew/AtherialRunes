@@ -1,8 +1,6 @@
 package me.matt11matthew.atherialrunes.database.table.tables.player;
 
-import org.bukkit.entity.Player;
 
-import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
 import me.matt11matthew.atherialrunes.database.table.Table;
 
 public class PlayerdataTable extends Table {
@@ -31,8 +29,6 @@ public class PlayerdataTable extends Table {
 				+ " ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 	}
 	
-	public void save(Player player) {
-		new PlayerData(player.getName()).save(player.getUniqueId().toString());
-	}
+
 }
 //uuid, ign, rank, channel, combat, level, vanish, exp, shard
