@@ -213,21 +213,26 @@ public class Main extends JavaPlugin {
 		if (GamePlayer.players.containsKey(UUIDData.getUUID(pname))) {
 			return GamePlayer.players.get(UUIDData.getUUID(pname));
 		}
-		DatabaseAPI.getInstance().getPlayerData(pname).update();
-		AtherialPlayer p = PlayerData.getAtherialPlayer(pname);
-		GamePlayer gp = new GamePlayer(p.getName());
-		gp.setRank(Rank.valueOf(p.getRank().toUpperCase()));
-		gp.setChatChannel(ChatChannel.getChatChannelFromId(p.getChatChannel()));
-		gp.setCombatTime(p.getCombatTime());
-		gp.setEXP(p.getEXP());
-		gp.setLevel(p.getLevel());
-		gp.setSkillPoints(p.getSkillPoints());
-		gp.setVanished(gp.isVanished());
-		gp.setGold(p.getGold());
-		gp.setSilver(p.getSilver());
-		gp.setCopper(p.getCopper());
-		GamePlayer.players.put(UUIDData.getUUID(pname), gp);
-		return gp;
+		GamePlayer gp = null;
+		try {
+			DatabaseAPI.getInstance().getPlayerData(pname).update();
+			AtherialPlayer p = PlayerData.getAtherialPlayer(pname);
+			gp = new GamePlayer(p.getName());
+			gp.setRank(Rank.valueOf(p.getRank().toUpperCase()));
+			gp.setChatChannel(ChatChannel.getChatChannelFromId(p.getChatChannel()));
+			gp.setCombatTime(p.getCombatTime());
+			gp.setEXP(p.getEXP());
+			gp.setLevel(p.getLevel());
+			gp.setSkillPoints(p.getSkillPoints());
+			gp.setVanished(gp.isVanished());
+			gp.setGold(p.getGold());
+			gp.setSilver(p.getSilver());
+			gp.setCopper(p.getCopper());
+			GamePlayer.players.put(UUIDData.getUUID(pname), gp);
+			return gp;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 	public static void sendMessageToStaff(String msg) {

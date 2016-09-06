@@ -8,7 +8,7 @@ import de.btobastian.javacord.entities.User;
 import de.btobastian.javacord.entities.message.Message;
 import de.btobastian.javacord.entities.permissions.Role;
 import de.btobastian.javacord.listener.message.MessageCreateListener;
-import me.matt11matthew.atherialrunes.discord.Main;
+import me.matt11matthew.atherialrunes.Constants;
 
 public class CommandManager implements MessageCreateListener {
 	
@@ -21,16 +21,17 @@ public class CommandManager implements MessageCreateListener {
 				if (msg.getContent().startsWith("!" + commandKey)) {
 					Command command = commands.get(commandKey);
 					User user = msg.getAuthor();
-					Main.print(canRun(user, command, api) + "");
 					if (canRun(user, command, api)) {
 						if (msg.getContent().contains(" ")) {
 							String[] args = msg.getContent().split(commandKey)[1].split(" ");
-							command.execute(user, args, api);
+							msg.delete();
+							command.execute(user, args, api, msg);
 						} else {
 							String[] s = null;
-							command.execute(user, s, api);
+							msg.delete();
+							command.execute(user, s, api, msg);
 						}
-						msg.delete();
+						
 					}
 				}
 			});
@@ -38,8 +39,10 @@ public class CommandManager implements MessageCreateListener {
 	}
 	
 	private boolean canRun(User user, Command command, DiscordAPI api) {
-		Server server = api.getServerById("216389507572957184");
-		Main.print(user.getRoles(server).toString());
+		Server server = api.getServerById(Constants.DISCORD_SERVER_ID);
+		if (command.getRoles() == null) {
+			return true;
+		}
 		for (Role userRoles : user.getRoles(server)) {
 			if (command.getRoles().contains(userRoles.getName())) {
 				return true;
