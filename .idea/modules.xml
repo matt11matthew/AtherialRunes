@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/AtherialRunes.iml" filepath="$PROJECT_DIR$/.idea/AtherialRunes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AtherialRunes-common/AtherialRunes-common.iml" filepath="$PROJECT_DIR$/AtherialRunes-common/AtherialRunes-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AtherialRunes-discord/AtherialRunes-discord.iml" filepath="$PROJECT_DIR$/AtherialRunes-discord/AtherialRunes-discord.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AtherialRunes-game/AtherialRunes-game.iml" filepath="$PROJECT_DIR$/AtherialRunes-game/AtherialRunes-game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AtherialRunes-lobby/AtherialRunes-lobby.iml" filepath="$PROJECT_DIR$/AtherialRunes-lobby/AtherialRunes-lobby.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AtherialRunes-network/AtherialRunes-network.iml" filepath="$PROJECT_DIR$/AtherialRunes-network/AtherialRunes-network.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AtherialRunes-proxy/AtherialRunes-proxy.iml" filepath="$PROJECT_DIR$/AtherialRunes-proxy/AtherialRunes-proxy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AtherialRunes-bootstrap/DungeonRealms-bootstrap.iml" filepath="$PROJECT_DIR$/AtherialRunes-bootstrap/DungeonRealms-bootstrap.iml" />
+    </modules>
+  </component>
+</project>
