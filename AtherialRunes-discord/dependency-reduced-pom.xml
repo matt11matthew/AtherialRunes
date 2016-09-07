@@ -85,6 +85,30 @@
       <version>1.12</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>me.matt11matthew.atherialrunes</groupId>
+      <artifactId>AtherialRunes-network</artifactId>
+      <version>default</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>me.matt11matthew.atherialrunes</groupId>
+      <artifactId>AtherialRunes-game</artifactId>
+      <version>default</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>me.matt11matthew.atherialrunes</groupId>
+      <artifactId>AtherialRunes-common</artifactId>
+      <version>default</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.inventivetalent.nicknamer</groupId>
+      <artifactId>api</artifactId>
+      <version>3.12.3</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 </project>
 

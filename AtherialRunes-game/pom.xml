@@ -10,14 +10,28 @@
     <artifactId>AtherialRunes-game</artifactId>
     <modelVersion>4.0.0</modelVersion>
     <build>
+
         <defaultGoal>clean install</defaultGoal>
         <finalName>AtherialRunes</finalName>
         <resources>
             <resource>
+                <includes>
+                    <include>org.ini4j:ini4j</include>
+                    <include>commons-net:commons-net</include>
+                    <include>com.esotericsoftware:kryo-shaded</include>
+                    <include>com.esotericsoftware:kryonet</include>
+                    <include>com.esotericsoftware:minlog</include>
+                    <include>com.esotericsoftware.reflectasm:reflectasm</include>
+                    <include>org.objenesis:objenesis</include>
+                    <include>net.lingala.zip4j:zip4j</include>
+                    <include>me.matt11matthew.atherialrunes:AtherialRunes-common</include>
+                    <include>me.matt11matthew.atherialrunes:AtherialRunes-network</include>
+                </includes>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -28,6 +42,33 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>me.matt11matthew.atherialrunes:AtherialRunes-common</include>
+                                    <include>me.matt11matthew.atherialrunes:AtherialRunes-network</include>
+                                    <include>com.esotericsoftware:kryo-shaded</include>
+                                    <include>com.esotericsoftware:kryonet</include>
+                                    <include>com.esotericsoftware:minlog</include>
+                                    <include>com.esotericsoftware.reflectasm:reflectasm</include>
+                                    <include>org.objenesis:objenesis</include>
+                                </includes>
+                            </artifactSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
     <dependencies>

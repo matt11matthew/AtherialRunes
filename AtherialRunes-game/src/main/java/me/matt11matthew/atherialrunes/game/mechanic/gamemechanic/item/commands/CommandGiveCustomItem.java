@@ -5,7 +5,6 @@ import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.item.ItemMechanics;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.item.customitems.CustomItem;
 import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank.Rank;
-import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.staff.gmmode.GAModeUtils;
 import me.matt11matthew.atherialrunes.game.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.utils.CommandUtils;
 import org.bukkit.command.Command;
@@ -31,7 +30,7 @@ public class CommandGiveCustomItem extends AtherialCommand {
                 String item = args[0];
                 try {
                     GamePlayer gp = Main.getGamePlayer(player.getName());
-                    if (GAModeUtils.isLegit(gp)) {
+                    if (gp.isLegit()) {
                         return true;
                     }
                     if (ItemMechanics.customItems.containsKey(item)) {
@@ -55,7 +54,7 @@ public class CommandGiveCustomItem extends AtherialCommand {
             if (Rank.isGM(player.getName())) {
                 try {
                     GamePlayer gp = Main.getGamePlayer(player.getName());
-                    if (GAModeUtils.isLegit(gp)) {
+                    if (gp.isLegit()) {
                         return null;
                     }
                     return CommandUtils.getPossibleCompletionsForGivenArgs(args, (List<CustomItem>) ItemMechanics.customItems.values(), false);

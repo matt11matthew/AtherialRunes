@@ -31,6 +31,20 @@ public class CommandStats implements Command {
 								"Experience: [" + 543 + "/" + LevelUtils.getEXPNeeded(44) + "]" + "," +
 								"Skill Points: " + 60 + "," +
 								"------------------------------------" + ",";
+			} else if (name.equals("Jackychen1999")) {
+				stats =
+						"------------------------------------," +
+								"IGN: " + name + "," +
+								"Rank: " + rank + "," +
+								"Chat Channel: " + chatChannel + "," +
+								"Gold: " + 0 + "," +
+								"Silver: " + 2 + "," +
+								"Copper: " + 0 + "," +
+								"Level: " + 0 + "," +
+								"Experience: [" + 0 + "/" + LevelUtils.getEXPNeeded(2) + "]" + "," +
+								"Skill Points: " + 0 + "," +
+								"------------------------------------" + ",";
+
 			} else {
 				stats =
 						"------------------------------------," +
