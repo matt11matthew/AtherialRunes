@@ -6,6 +6,7 @@ import me.matt11matthew.atherialrunes.utils.json.JSONUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.File;
@@ -57,10 +58,8 @@ public class CustomItem {
         String name = (String) obj.get("name");
         short durability = (short) obj.get("durability");
         List<String> lore = new ArrayList<>();
-        String rawLore = obj.get("lore").toString();
-        for (String l : rawLore.split("/")) {
-            lore.add(Utils.colorCodes(l));
-        }
+        JSONArray lore1 = (JSONArray) obj.get("lore");
+        lore.addAll(lore1);
         this.type = Material.valueOf(type.toUpperCase());
         setName(name);
         setLore(lore);
@@ -164,7 +163,11 @@ public class CustomItem {
         ItemStack item = new ItemStack(type);
         ItemMeta im = item.getItemMeta();
         if (!item_lore.isEmpty()) {
-            im.setLore(item_lore);
+            List<String> lore = new ArrayList<>();
+            for (String allLore : item_lore) {
+                lore.add(Utils.colorCodes(allLore));
+            }
+            im.setLore(lore);
         }
         if (name != null) {
             im.setDisplayName(Utils.colorCodes(name));
