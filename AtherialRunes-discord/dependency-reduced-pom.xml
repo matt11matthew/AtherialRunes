@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
-    <artifactId>AtherialRunes-parent</artifactId>
+    <artifactId>AtherialRunes-maven</artifactId>
     <groupId>me.matt11matthew.atherialrunes</groupId>
-    <version>1.0.0</version>
+    <version>default</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>AtherialRunes-discord</artifactId>
@@ -83,6 +83,30 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-compress</artifactId>
       <version>1.12</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>me.matt11matthew.atherialrunes</groupId>
+      <artifactId>AtherialRunes-network</artifactId>
+      <version>default</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>me.matt11matthew.atherialrunes</groupId>
+      <artifactId>AtherialRunes-game</artifactId>
+      <version>default</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>me.matt11matthew.atherialrunes</groupId>
+      <artifactId>AtherialRunes-common</artifactId>
+      <version>default</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.inventivetalent.nicknamer</groupId>
+      <artifactId>api</artifactId>
+      <version>3.12.3</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

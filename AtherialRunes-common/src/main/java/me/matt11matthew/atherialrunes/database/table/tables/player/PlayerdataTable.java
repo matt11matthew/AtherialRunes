@@ -27,6 +27,8 @@ public class PlayerdataTable extends Table {
 				+ " `gold` INT,"
 				+ " `silver` INT,"
 				+ " `copper` INT,"
+				+ " `nick` varchar(20) NOT NULL,"
+				+ " `admin` varchar(20) NOT NULL,"
 				+ " `shard` varchar(20) NOT NULL)"
 				+ " ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 	}

@@ -74,7 +74,6 @@ public class BungeeServerInfo {
         }
     }
 
-
     public long getLastRequest() {
         return lastRequest;
     }

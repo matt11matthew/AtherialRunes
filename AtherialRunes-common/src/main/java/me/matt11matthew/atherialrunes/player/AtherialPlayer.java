@@ -21,6 +21,8 @@ public class AtherialPlayer {
 	private int gold;
 	private int copper;
 	private int silver;
+	private String nick;
+	private boolean adminMode;
 	
 	public String getName() {
 		return name;
@@ -152,4 +154,19 @@ public class AtherialPlayer {
 		this.silver = silver;
 	}
 
+	public boolean isInAdminMode() {
+		return adminMode;
+	}
+
+	public void setAdminMode(boolean adminMode) {
+		this.adminMode = adminMode;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 }

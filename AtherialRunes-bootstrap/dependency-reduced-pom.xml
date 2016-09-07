@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
-    <artifactId>AtherialRunes-parent</artifactId>
+    <artifactId>AtherialRunes-maven</artifactId>
     <groupId>me.matt11matthew.atherialrunes</groupId>
-    <version>1.0.0</version>
+    <version>default</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>AtherialRunes-bootstrap</artifactId>
@@ -57,5 +57,13 @@
       </plugin>
     </plugins>
   </build>
+  <dependencies>
+    <dependency>
+      <groupId>org.inventivetalent.nicknamer</groupId>
+      <artifactId>api</artifactId>
+      <version>3.12.3</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
 </project>
 

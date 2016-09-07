@@ -1,4 +1,4 @@
-package me.matt11matthew.atherialrunes.game.api.player;
+package me.matt11matthew.atherialrunes.game.player;
 
 import java.util.HashMap;
 
@@ -13,9 +13,10 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
 import me.matt11matthew.atherialrunes.database.data.player.UUIDData;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
-import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.ChatChannel;
-import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
-import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.zone.Zone;
+import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank.ChatChannel;
+import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank.Rank;
+import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.zone.Zone;
+import me.matt11matthew.atherialrunes.game.utils.RegionUtils;
 import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.sound.AtherialSound;
@@ -136,7 +137,7 @@ public class GamePlayer {
 	public Zone getZone() {
 		if ((Bukkit.getPlayerExact(name) != null) && (Bukkit.getPlayerExact(name).isOnline())) {
 			Player player = Bukkit.getPlayerExact(name);
-			return null;
+			return RegionUtils.getZone(player.getLocation());
 		}
 		return Zone.SAFE;
 	}

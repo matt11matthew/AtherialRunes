@@ -84,4 +84,11 @@
             <url>http://198.199.70.92:8082/content/repositories/releases</url>
         </repository>
     </repositories>
+    <dependencies>
+        <dependency>
+            <groupId>org.inventivetalent.nicknamer</groupId>
+            <artifactId>api</artifactId>
+            <version>3.12.3</version>
+        </dependency>
+    </dependencies>
 </project>

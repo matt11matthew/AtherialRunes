@@ -1,7 +1,7 @@
-package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item;
+package me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.item;
 
-import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
-import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.mechanic.ListenerMechanic;
+import me.matt11matthew.atherialrunes.game.mechanic.LoadPriority;
 
 public class ItemMechanics extends ListenerMechanic {
 

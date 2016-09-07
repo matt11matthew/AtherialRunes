@@ -1,26 +1,46 @@
 package me.matt11matthew.atherialrunes.database.data.player;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
 import me.matt11matthew.atherialrunes.database.ConnectionPool;
 import me.matt11matthew.atherialrunes.database.data.Data;
 import me.matt11matthew.atherialrunes.database.table.tables.player.PlayerLocalDataTable;
+import me.matt11matthew.atherialrunes.item.ItemSerialization;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.player.LocalPlayer;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LocalData implements Data {
 
 	public void save(Player player) {
 		AtherialPlayer a = PlayerData.getAtherialPlayer(player.getName());
-		String inventory = "wip";
+		String inventory = ItemSerialization.toString(player.getInventory());
+		String saveArmor = "";
+		ArrayList<String> armor = new ArrayList<>();
+		for (ItemStack stack : player.getEquipment().getArmorContents()) {
+			if (stack == null || stack.getType() == Material.AIR) {
+				armor.add("");
+			} else {
+				armor.add(ItemSerialization.itemStackToBase64(stack));
+			}
+		}
+		ItemStack offHand = player.getEquipment().getItemInOffHand();
+		if (offHand == null || offHand.getType() == Material.AIR) {
+			armor.add("");
+		} else {
+			armor.add(ItemSerialization.itemStackToBase64(offHand));
+		}
+		saveArmor = armor.toString().replace(")", "").replace("(", "");
 		if (a.isNewPlayer()) {
 			new PlayerLocalDataTable().insert("INSERT INTO " + new PlayerLocalDataTable().getName()
-					+ "(uuid, ign, level, food, location, hp, maxhp, inventory) "
+					+ "(uuid, ign, level, food, location, hp, maxhp, armor, inventory) "
 					+ "VALUES("
 					+ "'" + a.getUUID()
 					+ "', '" + a.getName()
@@ -29,6 +49,7 @@ public class LocalData implements Data {
 					+ "', '"+ parseLocation(player.getLocation())
 					+ "', '"+ (int) player.getHealth()
 					+ "', '"+ (int) player.getMaxHealth()
+					+ "', '"+ saveArmor
 					+ "', '" + inventory + "') "
 					+ "ON DUPLICATE KEY UPDATE "
 					+ "uuid='" + a.getUUID()
@@ -38,6 +59,7 @@ public class LocalData implements Data {
 					+ "', location='" + parseLocation(player.getLocation())
 					+ "', hp='" + (int) player.getHealth()
 					+ "', maxhp='" + (int) player.getMaxHealth()
+					+ "', armor='" + saveArmor
 					+ "', inventory='" + inventory + "'");
 		} else {
 			String name = player.getName();
@@ -47,6 +69,7 @@ public class LocalData implements Data {
 			new PlayerLocalDataTable().updateValue("UPDATE `" + new PlayerLocalDataTable().getName() + "` SET `hp`='" + (int) player.getHealth() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerLocalDataTable().updateValue("UPDATE `" + new PlayerLocalDataTable().getName() + "` SET `maxhp`='" + (int) player.getMaxHealth() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerLocalDataTable().updateValue("UPDATE `" + new PlayerLocalDataTable().getName() + "` SET `inventory`='" + inventory + "' WHERE `uuid`='" + getUUID(name) + "';");
+			new PlayerLocalDataTable().updateValue("UPDATE `" + new PlayerLocalDataTable().getName() + "` SET `armor`='" + saveArmor + "' WHERE `uuid`='" + getUUID(name) + "';");
 		}
 		
 	}
@@ -71,7 +94,8 @@ public class LocalData implements Data {
 				l.setLevel(player.getLevel());
 				l.setHP((int) player.getHealth());
 				l.setMaxHP((int) player.getMaxHealth());
-				l.setInventory("wip");
+				l.setInventory("null");
+				l.setArmor(null);
 				l.setLocation(parseLocation(player.getLocation()));
 			} else {
 				l.setFoodLevel(rs.getInt("food"));
@@ -80,6 +104,11 @@ public class LocalData implements Data {
 				l.setMaxHP(rs.getInt("maxhp"));
 				l.setInventory(rs.getString("inventory"));
 				l.setLocation(rs.getString("location"));
+				List<String> armor = new ArrayList<>();
+				for (String arm : rs.getString("armor").split(",")) {
+					armor.add(arm);
+				}
+				l.setArmor(armor);
 			}
 			l.load(player);
 		} catch (SQLException e) {

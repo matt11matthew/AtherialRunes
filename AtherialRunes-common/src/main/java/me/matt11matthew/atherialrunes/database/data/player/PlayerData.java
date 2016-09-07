@@ -1,14 +1,14 @@
 package me.matt11matthew.atherialrunes.database.data.player;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-
 import me.matt11matthew.atherialrunes.database.ConnectionPool;
 import me.matt11matthew.atherialrunes.database.data.Data;
 import me.matt11matthew.atherialrunes.database.table.tables.player.PlayerdataTable;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
 
 public class PlayerData implements Data {
 	
@@ -30,7 +30,7 @@ public class PlayerData implements Data {
 		AtherialPlayer player = players.get(uuid);
 		if (player.isNewPlayer()) {
 			new PlayerdataTable().insert("INSERT INTO " + new PlayerdataTable().getName()
-					+ "(uuid, ign, rank, channel, combat, level, vanish, exp, skillpoints, gold, silver, copper, shard) "
+					+ "(uuid, ign, rank, channel, combat, level, vanish, exp, skillpoints, gold, silver, copper, nick, admin, shard) "
 					+ "VALUES("
 					+ "'" + player.getUUID()
 					+ "', '" + player.getName()
@@ -44,6 +44,8 @@ public class PlayerData implements Data {
 					+ "', '"+ player.getGold()
 					+ "', '"+ player.getSilver()
 					+ "', '"+ player.getCopper()
+					+ "', '"+ player.getNick()
+					+ "', '"+ player.isInAdminMode()
 					+ "', '" + player.getShard() + "') "
 					+ "ON DUPLICATE KEY UPDATE "
 					+ "uuid='" + player.getUUID()
@@ -58,6 +60,8 @@ public class PlayerData implements Data {
 					+ "', gold='" + player.getGold()
 					+ "', silver='" + player.getSilver()
 					+ "', copper='" + player.getCopper()
+					+ "', nick='" + player.getNick()
+					+ "', admin='" + player.isInAdminMode()
 					+ "', shard='" + player.getShard() + "'");
 		} else {
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `rank`='" + player.getRank() + "' WHERE `uuid`='" + getUUID(name) + "';");
@@ -95,6 +99,8 @@ public class PlayerData implements Data {
 				player.setGold(0);
 				player.setCopper(0);
 				player.setSilver(0);
+				player.setNick(player.getName());
+				player.setAdminMode(false);
 			} else {
 				player.setNewPlayer(false);
 				String rank = rs.getString("rank");
@@ -119,6 +125,8 @@ public class PlayerData implements Data {
 				player.setSilver(silver);
 				player.setGold(gold);
 				player.setCombatTime(combatTime);
+				player.setNick(rs.getString("nick"));
+				player.setAdminMode(Boolean.parseBoolean(rs.getString("admin")));
 				
 			}
 			players.put(uuid, player);	

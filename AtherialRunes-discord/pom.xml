@@ -3,9 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>AtherialRunes-parent</artifactId>
+        <artifactId>AtherialRunes-maven</artifactId>
         <groupId>me.matt11matthew.atherialrunes</groupId>
-        <version>1.0.0</version>
+        <version>default</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -138,14 +138,26 @@
     
         </dependency>
 
-<!-- https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java -->
-<dependency>
-    <groupId>com.mashape.unirest</groupId>
-    <artifactId>unirest-java</artifactId>
-    <version>1.3.0</version>
-</dependency>
+        <dependency>
+            <groupId>me.matt11matthew.atherialrunes</groupId>
+            <artifactId>AtherialRunes-network</artifactId>
+            <version>default</version>
+            <scope>compile</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>me.matt11matthew.atherialrunes</groupId>
+            <artifactId>AtherialRunes-game</artifactId>
+            <version>default</version>
+            <scope>compile</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>me.matt11matthew.atherialrunes</groupId>
+            <artifactId>AtherialRunes-common</artifactId>
+            <version>default</version>
+            <scope>compile</scope>
+        </dependency>
 
 
 

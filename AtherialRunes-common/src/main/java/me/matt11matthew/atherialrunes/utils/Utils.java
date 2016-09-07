@@ -1,13 +1,13 @@
 package me.matt11matthew.atherialrunes.utils;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 public class Utils {
 	

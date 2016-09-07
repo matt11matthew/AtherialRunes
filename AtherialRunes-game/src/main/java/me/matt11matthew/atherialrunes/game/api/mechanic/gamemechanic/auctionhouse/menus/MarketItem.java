@@ -1,4 +1,4 @@
-package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.menus;
+package me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.auctionhouse.menus;
 
 import java.util.ArrayList;
 import java.util.List;

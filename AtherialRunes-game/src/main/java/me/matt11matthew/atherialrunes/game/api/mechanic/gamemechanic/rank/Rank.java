@@ -1,4 +1,4 @@
-package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank;
+package me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.bukkit.ChatColor;
 
 import me.matt11matthew.atherialrunes.database.data.player.UUIDData;
-import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
+import me.matt11matthew.atherialrunes.game.player.GamePlayer;
 import me.matt11matthew.atherialrunes.utils.Utils;
 
 public enum Rank {

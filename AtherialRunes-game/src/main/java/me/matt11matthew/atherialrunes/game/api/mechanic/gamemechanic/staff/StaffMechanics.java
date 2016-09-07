@@ -1,4 +1,4 @@
-package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff;
+package me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.staff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +11,10 @@ import me.matt11matthew.atherialrunes.database.data.player.Mute;
 import me.matt11matthew.atherialrunes.game.GameConstants;
 import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
-import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
-import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
-import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
-import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
+import me.matt11matthew.atherialrunes.game.mechanic.ListenerMechanic;
+import me.matt11matthew.atherialrunes.game.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank.Rank;
+import me.matt11matthew.atherialrunes.game.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.utils.AtherialRunnable;
 import me.matt11matthew.atherialrunes.utils.Utils;
 

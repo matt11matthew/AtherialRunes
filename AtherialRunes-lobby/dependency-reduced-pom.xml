@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
-    <artifactId>AtherialRunes-parent</artifactId>
+    <artifactId>AtherialRunes-maven</artifactId>
     <groupId>me.matt11matthew.atherialrunes</groupId>
-    <version>1.0.0</version>
+    <version>default</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>AtherialRunes-lobby</artifactId>
@@ -89,7 +89,6 @@
       <version>2.4.1</version>
       <scope>compile</scope>
     </dependency>
-
     <dependency>
       <groupId>org.inventivetalent.npclib</groupId>
       <artifactId>api</artifactId>
@@ -97,24 +96,8 @@
       <scope>provided</scope>
       <exclusions>
         <exclusion>
-          <artifactId>craftbukkit</artifactId>
-          <groupId>org.bukkit</groupId>
-        </exclusion>
-        <exclusion>
           <artifactId>json</artifactId>
           <groupId>org.json</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>reflectionhelper</artifactId>
-          <groupId>org.inventivetalent</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>api</artifactId>
-          <groupId>org.inventivetalent.packetlistener</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>api</artifactId>
-          <groupId>org.inventivetalent.nicknamer</groupId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -147,10 +130,6 @@
         <exclusion>
           <artifactId>commandbook</artifactId>
           <groupId>com.sk89q</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jsr305</artifactId>
-          <groupId>com.google.code.findbugs</groupId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -189,10 +168,10 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.14.2</version>
-      <scope>provided</scope>
+      <groupId>org.inventivetalent.nicknamer</groupId>
+      <artifactId>api</artifactId>
+      <version>3.12.3</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 </project>
