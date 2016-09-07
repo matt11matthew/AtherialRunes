@@ -30,7 +30,7 @@ public class AuctionHouseMechanics extends ListenerMechanic {
 
 	@Override
 	public LoadPriority getLoadPriority() {
-		return LoadPriority.NORMAL;
+		return LoadPriority.LOWEST;
 	}
 
 	/**

@@ -155,7 +155,7 @@
         <dependency>
             <groupId>me.matt11matthew.atherialrunes</groupId>
             <artifactId>AtherialRunes-common</artifactId>
-            <version>default</version>
+            <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
 

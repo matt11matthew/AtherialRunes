@@ -76,6 +76,7 @@ public class PlayerMechanics extends ListenerMechanic {
 			
 			@Override
 			public void run() {
+				new LocalData().update(player);
 				Mute mute = Mute.getMute(player.getName());
 				if (mute.isMuted()) {
 					String time = Utils.parseMilis(mute.getTime());
@@ -88,11 +89,7 @@ public class PlayerMechanics extends ListenerMechanic {
 				
 			}
 		}.runTaskLater(Main.getInstance(), 15L);
-		GamePlayer gp = Main.getGamePlayer(e.getPlayer().getName());
-		if (!gp.isLegit()) {
-			return;
-		}
-		new LocalData().update(player);
+
 
 	}
 	
@@ -212,7 +209,7 @@ public class PlayerMechanics extends ListenerMechanic {
 		if (Main.staff.contains(player.getName())) {
 			Main.staff.remove(player.getName());
 		}
-		if (!gp.isLegit()) {
+		if (gp.isInAdminMode()) {
 			return;
 		}
 		new LocalData().save(player);

@@ -2,12 +2,12 @@ package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhou
 
 import com.mysql.jdbc.PreparedStatement;
 import me.matt11matthew.atherialrunes.database.table.Table;
+import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.menus.MarketItem;
 import me.matt11matthew.atherialrunes.item.ItemSerialization;
 import org.bukkit.inventory.ItemStack;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.UUID;
 
 public class AuctionHouseTable extends Table {
@@ -19,7 +19,7 @@ public class AuctionHouseTable extends Table {
 
 	@Override
 	public void createTable() {
-		create("CREATE TABLE IF NOT EXISTS `" + getName() + "` (`id` VARCHAR(100) NOT NULL, `item` VARCHAR(100) NOT NULL, `seller` varchar(50) NOT NULL, `page` INT, `price` INT) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+		//create("CREATE TABLE IF NOT EXISTS `" + getName() + "` (`id` VARCHAR(76100) NOT NULL, `item` VARCHAR(17800) NOT NULL, `seller` varchar(50) NOT NULL, `page` INT, `price` INT) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 	}
 	
 	public void saveItems() {
@@ -79,8 +79,9 @@ public class AuctionHouseTable extends Table {
 				Page pageObject = MarketManager.getPage(page);
 				pageObject.addItem(marketItem);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			Main.print("Could not load market items");
+			return;
 		}
 	}
 }

@@ -155,7 +155,7 @@ public class Constants {
 	public static final int FTP_PORT = 21;
 	
 	
-	public static final String SQL_URL = "jdbc:mysql://192.99.37.67:3306/atherialrunes";
+	public static final String SQL_URL = "jdbc:mysql://localhost:3306/atherialrunes";
 	public static final String SQL_USER = "matt11matthew";
 	public static final String SQL_PASSWORD = "pass";
 	

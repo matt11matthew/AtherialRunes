@@ -1,0 +1,10 @@
+<build>
+
+&aFixed:
+  &c-/ban
+  &c-/kick
+  &c-/unban
+  &c-/mute
+  &c-/unmute
+  &c-Bungee
+  &c-Shards

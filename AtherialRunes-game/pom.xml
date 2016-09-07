@@ -63,6 +63,7 @@
                                     <include>com.esotericsoftware.reflectasm:reflectasm</include>
                                     <include>org.objenesis:objenesis</include>
                                 </includes>
+
                             </artifactSet>
                         </configuration>
                     </execution>
@@ -76,6 +77,12 @@
             <groupId>me.matt11matthew.atherialrunes</groupId>
             <artifactId>AtherialRunes-network</artifactId>
             <version>default</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.matt11matthew.atherialrunes</groupId>
+            <artifactId>AtherialRunes-common</artifactId>
+            <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

@@ -9,32 +9,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.inventivetalent.nicknamer:api:3.12.3" level="project" />
-    <orderEntry type="library" name="Maven: org.inventivetalent:apimanager:1.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.bukkit:craftbukkit:1.9-R0.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: org.inventivetalent.packetlistener:api:3.4.4" level="project" />
-    <orderEntry type="library" name="Maven: org.inventivetalent:reflectionhelper:1.10.5-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: org.inventivetalent:mc-wrappers:1.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.inventivetalent:data-api:1.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.16.8" level="project" />
-    <orderEntry type="library" name="Maven: com.google.code.findbugs:findbugs:3.0.1" level="project" />
-    <orderEntry type="library" name="Maven: net.jcip:jcip-annotations:1.0" level="project" />
-    <orderEntry type="library" name="Maven: com.google.code.findbugs:bcel-findbugs:6.0" level="project" />
-    <orderEntry type="library" name="Maven: com.google.code.findbugs:jFormatString:2.0.1" level="project" />
-    <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
-    <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.0.b2" level="project" />
-    <orderEntry type="library" name="Maven: org.ow2.asm:asm-debug-all:5.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.ow2.asm:asm-commons:5.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.ow2.asm:asm-tree:5.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.ow2.asm:asm:5.0.2" level="project" />
-    <orderEntry type="library" name="Maven: com.apple:AppleJavaExtensions:1.4" level="project" />
-    <orderEntry type="library" name="Maven: jaxen:jaxen:1.1.6" level="project" />
-    <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver:3.0.4" level="project" />
-    <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-core:3.0.4" level="project" />
-    <orderEntry type="library" name="Maven: org.mongodb:bson:3.0.4" level="project" />
-    <orderEntry type="library" name="Maven: redis.clients:jedis:2.8.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.3" level="project" />
-    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.6" level="project" />
     <orderEntry type="module" module-name="AtherialRunes-common" />
     <orderEntry type="library" name="Maven: org.spigotmc:spigot-api:1.9.4-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />

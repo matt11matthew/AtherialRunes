@@ -87,6 +87,7 @@ public class Main extends JavaPlugin {
 		registerMechanics();
 		registerMenus();
 		BungeeUtils.setPlugin(this);
+
 		client = new GameClient();
 
         try {

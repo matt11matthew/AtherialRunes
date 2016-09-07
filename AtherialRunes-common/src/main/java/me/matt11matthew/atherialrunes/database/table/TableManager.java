@@ -1,11 +1,6 @@
 package me.matt11matthew.atherialrunes.database.table;
 
-import me.matt11matthew.atherialrunes.database.table.tables.player.BanDataTable;
-import me.matt11matthew.atherialrunes.database.table.tables.player.MuteDataTable;
-import me.matt11matthew.atherialrunes.database.table.tables.player.PlayerLocalDataTable;
-import me.matt11matthew.atherialrunes.database.table.tables.player.PlayerdataBackupTable;
-import me.matt11matthew.atherialrunes.database.table.tables.player.PlayerdataTable;
-import me.matt11matthew.atherialrunes.database.table.tables.player.UUIDTable;
+import me.matt11matthew.atherialrunes.database.table.tables.player.*;
 
 public class TableManager {
 	

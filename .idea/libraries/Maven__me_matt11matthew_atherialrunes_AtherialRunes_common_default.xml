@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Maven: me.matt11matthew.atherialrunes:AtherialRunes-common:default">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/me/matt11matthew/atherialrunes/AtherialRunes-common/default/AtherialRunes-common-default.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/AtherialRunes-common/AtherialRunes-common-default-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/me/matt11matthew/atherialrunes/AtherialRunes-common/default/AtherialRunes-common-default-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/AtherialRunes-common/AtherialRunes-common-default-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/me/matt11matthew/atherialrunes/AtherialRunes-common/default/AtherialRunes-common-default-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

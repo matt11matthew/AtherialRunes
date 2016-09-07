@@ -13,8 +13,6 @@
         <module>AtherialRunes-bootstrap</module>
         <module>AtherialRunes-discord</module>
         <module>AtherialRunes-game</module>
-        <module>AtherialRunes-lobby</module>
-        <module>AtherialRunes-proxy</module>
         <module>AtherialRunes-network</module>
     </modules>
 
@@ -78,10 +76,6 @@
         <repository>
             <id>sk89q-repo</id>
             <url>http://maven.sk89q.com/repo/</url>
-        </repository>
-        <repository>
-            <id>releases</id>
-            <url>http://198.199.70.92:8082/content/repositories/releases</url>
         </repository>
     </repositories>
     <dependencies>

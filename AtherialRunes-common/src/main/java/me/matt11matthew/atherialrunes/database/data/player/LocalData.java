@@ -7,15 +7,11 @@ import me.matt11matthew.atherialrunes.item.ItemSerialization;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.player.LocalPlayer;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class LocalData implements Data {
 
@@ -23,21 +19,6 @@ public class LocalData implements Data {
 		AtherialPlayer a = PlayerData.getAtherialPlayer(player.getName());
 		String inventory = ItemSerialization.toString(player.getInventory());
 		String saveArmor = "";
-		ArrayList<String> armor = new ArrayList<>();
-		for (ItemStack stack : player.getEquipment().getArmorContents()) {
-			if (stack == null || stack.getType() == Material.AIR) {
-				armor.add("");
-			} else {
-				armor.add(ItemSerialization.itemStackToBase64(stack));
-			}
-		}
-		ItemStack offHand = player.getEquipment().getItemInOffHand();
-		if (offHand == null || offHand.getType() == Material.AIR) {
-			armor.add("");
-		} else {
-			armor.add(ItemSerialization.itemStackToBase64(offHand));
-		}
-		saveArmor = armor.toString().replace(")", "").replace("(", "");
 		if (a.isNewPlayer()) {
 			new PlayerLocalDataTable().insert("INSERT INTO " + new PlayerLocalDataTable().getName()
 					+ "(uuid, ign, level, food, location, hp, maxhp, armor, inventory) "
@@ -88,6 +69,7 @@ public class LocalData implements Data {
 			LocalPlayer l = new LocalPlayer(player);
 			pst = (PreparedStatement) ConnectionPool.getConnection().prepareStatement("SELECT * FROM `" + new PlayerLocalDataTable().getName() + "` WHERE `uuid` ='" + player.getUniqueId().toString() + "'");
 			pst.execute();
+			boolean newPlayer = false;
 			ResultSet rs = pst.getResultSet();
 			if (!rs.next()) {
 				l.setFoodLevel(player.getFoodLevel());
@@ -97,6 +79,7 @@ public class LocalData implements Data {
 				l.setInventory("null");
 				l.setArmor(null);
 				l.setLocation(parseLocation(player.getLocation()));
+				newPlayer = true;
 			} else {
 				l.setFoodLevel(rs.getInt("food"));
 				l.setLevel(rs.getInt("level"));
@@ -104,13 +87,10 @@ public class LocalData implements Data {
 				l.setMaxHP(rs.getInt("maxhp"));
 				l.setInventory(rs.getString("inventory"));
 				l.setLocation(rs.getString("location"));
-				List<String> armor = new ArrayList<>();
-				for (String arm : rs.getString("armor").split(",")) {
-					armor.add(arm);
-				}
-				l.setArmor(armor);
+				l.setArmor(null);
+				newPlayer = false;
 			}
-			l.load(player);
+			l.load(player, newPlayer);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}  finally {

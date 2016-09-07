@@ -2,6 +2,7 @@ package me.matt11matthew.atherialrunes.game.commands;
 
 import me.matt11matthew.atherialrunes.Constants;
 import me.matt11matthew.atherialrunes.command.AtherialCommand;
+import me.matt11matthew.atherialrunes.database.ConnectionPool;
 import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.MarketManager;
 import org.bukkit.command.Command;
@@ -24,6 +25,13 @@ public class CommandDEV extends AtherialCommand {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if (!(sender instanceof Player)) {
+			try {
+				ConnectionPool.getConnection();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
 			if (Constants.DEBUG) {
