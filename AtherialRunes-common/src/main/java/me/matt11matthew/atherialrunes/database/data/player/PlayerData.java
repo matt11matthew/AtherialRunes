@@ -75,6 +75,8 @@ public class PlayerData implements Data {
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `gold`='" + player.getGold() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `silver`='" + player.getSilver() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `copper`='" + player.getCopper() + "' WHERE `uuid`='" + getUUID(name) + "';");
+			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `nick`='" + player.getNick() + "' WHERE `uuid`='" + getUUID(name) + "';");
+			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `admin`='" + player.isInAdminMode() + "' WHERE `uuid`='" + getUUID(name) + "';");
 		}
 		players.remove(uuid);
 	}

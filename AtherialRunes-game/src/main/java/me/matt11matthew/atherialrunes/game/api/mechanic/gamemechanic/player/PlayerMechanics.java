@@ -76,7 +76,6 @@ public class PlayerMechanics extends ListenerMechanic {
 			
 			@Override
 			public void run() {
-				new LocalData().update(player);
 				Mute mute = Mute.getMute(player.getName());
 				if (mute.isMuted()) {
 					String time = Utils.parseMilis(mute.getTime());
@@ -89,7 +88,7 @@ public class PlayerMechanics extends ListenerMechanic {
 				
 			}
 		}.runTaskLater(Main.getInstance(), 15L);
-
+		new LocalData().update(player);
 
 	}
 	

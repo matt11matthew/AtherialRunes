@@ -1,6 +1,7 @@
 package me.matt11matthew.atherialrunes.game.utils.json;
 
 import me.matt11matthew.atherialrunes.exceptions.NotJsonFileException;
+import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.utils.FileUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -26,7 +27,7 @@ public class JSONUtils {
         if (!file.getName().endsWith(".json")) {
             throw new NotJsonFileException(file.getName());
         } else {
-            String text = FileUtils.getTextOfFile(file.getPath(), file.getName());
+            String text = FileUtils.getTextOfFile(Main.getInstance().getDataFolder() + "/custom_items/", file.getName());
             return convertStringToJSONObject(text);
         }
     }
