@@ -10,9 +10,9 @@ import org.bukkit.ChatColor;
 import com.esotericsoftware.kryonet.Connection;
 
 import me.matt11matthew.atherialrunes.game.Main;
-import me.matt11matthew.atherialrunes.game.mechanic.ListenerMechanic;
-import me.matt11matthew.atherialrunes.game.mechanic.LoadPriority;
-import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank.Rank;
+import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
+import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
 import me.matt11matthew.atherialrunes.network.packet.BasicMessagePacket;
 
 public class NetworkClientListener extends ListenerMechanic {

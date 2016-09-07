@@ -1,7 +1,7 @@
 package me.matt11matthew.atherialrunes.game;
 
-import me.matt11matthew.atherialrunes.game.player.GamePlayer;
-import me.matt11matthew.atherialrunes.game.registry.DataRegistry;
+import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
+import me.matt11matthew.atherialrunes.game.api.registry.DataRegistry;
 
 import java.lang.reflect.Field;
 import java.util.UUID;

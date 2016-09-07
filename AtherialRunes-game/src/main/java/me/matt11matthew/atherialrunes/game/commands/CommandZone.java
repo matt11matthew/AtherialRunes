@@ -7,7 +7,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.matt11matthew.atherialrunes.command.AtherialCommand;
-import me.matt11matthew.atherialrunes.game.utils.RegionUtils;
 
 public class CommandZone extends AtherialCommand {
 
@@ -19,7 +18,6 @@ public class CommandZone extends AtherialCommand {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
-			player.sendMessage(RegionUtils.getZone(player.getLocation()).getMessage());
 			return true;
 		}
 		return true;

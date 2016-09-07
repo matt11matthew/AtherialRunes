@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 
 import me.matt11matthew.atherialrunes.command.AtherialCommand;
 import me.matt11matthew.atherialrunes.game.Main;
-import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank.Rank;
-import me.matt11matthew.atherialrunes.game.player.GamePlayer;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
+import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.utils.Utils;
 
 public class CommandSetRank extends AtherialCommand {

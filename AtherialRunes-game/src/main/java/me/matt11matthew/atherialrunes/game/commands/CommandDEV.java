@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import me.matt11matthew.atherialrunes.Constants;
 import me.matt11matthew.atherialrunes.command.AtherialCommand;
-import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.auctionhouse.menus.FirstMenu;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.menus.FirstMenu;
 
 public class CommandDEV extends AtherialCommand {
 

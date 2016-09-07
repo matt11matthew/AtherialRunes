@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import me.matt11matthew.atherialrunes.game.Main;
-import me.matt11matthew.atherialrunes.game.mechanic.ListenerMechanic;
-import me.matt11matthew.atherialrunes.game.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
+import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
 import me.matt11matthew.atherialrunes.network.bungeecord.BungeeServerInfo;
 import me.matt11matthew.atherialrunes.network.bungeecord.BungeeServerTracker;
 

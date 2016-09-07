@@ -1,6 +1,6 @@
 package me.matt11matthew.atherialrunes.game;
 
-import me.matt11matthew.atherialrunes.game.registry.DataRegistry;
+import me.matt11matthew.atherialrunes.game.api.registry.DataRegistry;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Field;
