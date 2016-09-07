@@ -10,13 +10,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType.SlotType;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class AuctionHouseMechanics extends ListenerMechanic {
-	
-	public static HashMap<UUID, MarketItem> items = new HashMap<UUID, MarketItem>();
 
 	@Override
 	public void onEnable() {

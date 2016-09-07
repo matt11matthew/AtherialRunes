@@ -13,8 +13,8 @@ public class SortPriceLowest extends Sorter {
 	 * @return sorted from lowest price to highest price
 	 */
 	@Override
-	public List<MarketItem> getSorted() {
-		List<MarketItem> byPriceLow = getItems();
+	public List<MarketItem> getSorted(int page) {
+		List<MarketItem> byPriceLow = getItems(page);
 		Collections.sort(byPriceLow, new Comparator<MarketItem>() {
 
 			@Override

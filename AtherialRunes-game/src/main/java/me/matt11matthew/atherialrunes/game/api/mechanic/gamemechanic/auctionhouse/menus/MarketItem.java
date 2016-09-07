@@ -1,5 +1,7 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.menus;
 
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.MarketManager;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.Page;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -19,6 +21,7 @@ public class MarketItem {
 	private int amount = 1;
 	private short durability = 0;
 	private Material type = Material.DIRT;
+	private int page;
 
 	/**
 	 *
@@ -220,5 +223,17 @@ public class MarketItem {
 		item.setAmount(amount);
 		item.setDurability(durability);
 		return item;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public Page getPageObject() {
+		return MarketManager.getPage(page);
 	}
 }

@@ -10,10 +10,10 @@ public class MarketMenu extends Menu {
 
 	/**
 	 *
-	 * @param page the page
+	 * @param pg the page
      */
-	public MarketMenu(int page) {
-		super("&c&lMarket (" + page + ")", (6 * 9));
+	public MarketMenu(int pg) {
+		super("&c&lMarket (" + pg + ")", (6 * 9));
 		
 		AtherialItem divider = new AtherialItem(Material.STAINED_GLASS_PANE, (short) 15, 1);
 		divider.setName(" ");
@@ -48,7 +48,19 @@ public class MarketMenu extends Menu {
 		setItem(51, divider.build());
 		setItem(52, divider.build());
 		setItem(53, divider.build());
-		int i = 9;
-
+		Page page = MarketManager.getPage(pg);
+		int i = 10;
+		try {
+			while ((i < page.getItemList().size())) {
+				if (i > 39) {
+					break;
+				}
+				setItem(i, page.getItem(i).buildItem());
+				i++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();;
+			return;
+		}
 	}
 }
