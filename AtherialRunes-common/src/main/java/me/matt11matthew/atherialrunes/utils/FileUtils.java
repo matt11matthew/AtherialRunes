@@ -7,6 +7,12 @@ import java.io.IOException;
 
 public class FileUtils {
 
+    /**
+     *
+     * @param path file path
+     * @param name file name
+     * @return the text inside a file
+     */
     public static String getTextOfFile(String path, String name) {
         File file = new File(path);
         String text = null;

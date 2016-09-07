@@ -8,6 +8,10 @@ import java.util.Map;
 
 public class Main {
 
+	/**
+	 *
+	 * @param args main method
+     */
 	public static void main(String[] args) {
 		JSONObject obj = new JSONObject();
 
@@ -36,6 +40,10 @@ public class Main {
 		print("\n");
 	}
 
+	/**
+	 *
+	 * @param s prints
+     */
 	public static void print(String s) {
 		System.out.println(s);
 	}

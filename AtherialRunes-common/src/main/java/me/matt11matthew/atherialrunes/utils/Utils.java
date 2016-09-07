@@ -10,7 +10,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Utils {
-	
+
+	/**
+	 *
+	 * @param command a command promp runs a command
+     */
     public static void executeCommand(String command) {
         ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", command);
         builder.redirectErrorStream(true);
@@ -30,12 +34,22 @@ public class Utils {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+	 *
+	 * @param s input string
+	 * @return colored
+     */
     public static String colorCodes(String s) {
     	s = s.replaceAll("&", Unicodes.SECTION_SIGN.get());
     	return s;
     }
-    
+
+    /**
+	 *
+	 * @param l input
+	 * @return parsed
+     */
 	public static String parseMilis(long l) {
 		long day = TimeUnit.MILLISECONDS.toDays(l);
 		long min = TimeUnit.MILLISECONDS.toMinutes(l);
@@ -64,7 +78,12 @@ public class Utils {
 		}
 		return null;
 	}
-	
+
+	/**
+	 *
+	 * @param s input
+	 * @return as int
+     */
 	public static int convertStringToInt(String s) {
 		int i = 0;
 		try {
@@ -74,7 +93,12 @@ public class Utils {
 		}
 		return i;
 	}
-	
+
+	/**
+	 *
+	 * @param s input
+	 * @return as millis
+     */
 	public static long convertStringToMillis(String s) {
 		try {
 			if (s.contains("day")) {
@@ -91,11 +115,23 @@ public class Utils {
 			return 0;
 		}
 	}
-	
+
+	/**
+	 *
+	 * @param rawtime the rawtime
+	 * @return if it can
+     */
 	public static boolean canParseTime(String rawtime) {
 		return (convertStringToMillis(rawtime) == 0) ? false : true;
 	}
 
+	/**
+	 *
+	 * @param args command args
+	 * @param strings options
+	 * @param addPlayers add players
+     * @return completions
+     */
 	public static List<String> getPossibleCompletionsForGivenArgs(String[] args, String[] strings, boolean addPlayers) {
 		String arg = args[args.length-1].toLowerCase();
 		ArrayList<String> possableComplete = new ArrayList<>();
@@ -117,7 +153,14 @@ public class Utils {
 		}
 		return possableComplete;
 	}
-	
+
+	/**
+	 *
+	 * @param args command args
+	 * @param strings options
+	 * @param addPlayers add players
+	 * @return completions
+	 */
 	public static List<String> getPossibleCompletionsForGivenArgs(String[] args, List<String> strings, boolean addPlayers) {
 		String arg = args[args.length-1].toLowerCase();
 		ArrayList<String> possableComplete = new ArrayList<>();
@@ -139,7 +182,12 @@ public class Utils {
 		}
 		return possableComplete;
 	}
-	
+
+	/**
+	 *
+	 * @param text input
+	 * @return as centered
+     */
     public static String asCentered(String text) {
         StringBuilder builder = new StringBuilder(text);
         char space = ' ';
@@ -150,7 +198,12 @@ public class Utils {
         }
         return builder.toString();
     }
-	
+
+	/**
+	 *
+	 * @param args current args
+	 * @return names
+     */
 	public static ArrayList<String> getOnlinePlayerNames(String[] args) {
 		ArrayList<String> onlinePlayerNames = new ArrayList<>();
 		

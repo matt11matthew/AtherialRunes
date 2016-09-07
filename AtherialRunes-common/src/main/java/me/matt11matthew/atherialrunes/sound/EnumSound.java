@@ -7,11 +7,19 @@ public enum EnumSound {
 	LEVEL_UP(Sound.ENTITY_PLAYER_LEVELUP);
 	
 	Sound sound;
-	
+
+	/**
+	 *
+	 * @param sound the sound
+     */
 	EnumSound(Sound sound) {
 		this.sound = sound;
 	}
-	
+
+	/**
+	 *
+	 * @return returns the sound
+     */
 	public Sound getSound() {
 		return sound;
 	}

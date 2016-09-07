@@ -1,10 +1,10 @@
 package me.matt11matthew.atherialrunes.reflection;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public enum Version {
 
@@ -16,15 +16,28 @@ public enum Version {
 	V1_10(210);
 	
 	int protocolVersion;
-	
+
+	/**
+	 *
+	 * @param protocolVersion contructer
+     */
 	Version(int protocolVersion) {
 		this.protocolVersion = protocolVersion;
 	}
-	
+
+	/**
+	 *
+	 * @return the version
+     */
 	public int getProtocolVersion() {
 		return protocolVersion;
 	}
-	
+
+	/**
+	 *
+	 * @param player the player
+	 * @return the version
+     */
 	public static int getProtocolVersion(Player player) {
 		try {
 			String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
@@ -66,7 +79,12 @@ public enum Version {
 		}
 		return 0;
 	}
-	
+
+	/**
+	 *
+	 * @param player the player
+	 * @return the players ping
+     */
 	public static int getPing(Player player) {
 		try {
 			String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];

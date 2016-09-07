@@ -12,7 +12,12 @@ public class Constants {
 	
 	public static final String[] DEVELOPERS = {"matt11matthew"};
 	public static final String[] GLOBAL_ADMINS = {"Jackychen1999", "Kav_"};
-	
+
+	/**
+	 *
+	 * @param name the players name
+	 * @return if they are or not
+	 */
 	public static boolean isGlobalAdmin(String name) {
 		for (int i = 0; i < GLOBAL_ADMINS.length; i++) {
 			if (GLOBAL_ADMINS[i].equals(name)) {
@@ -21,7 +26,12 @@ public class Constants {
 		}
 		return false;
 	}
-	
+
+	/**
+	 *
+	 * @param name the players name
+	 * @return if they are or not
+     */
 	public static boolean isDeveloper(String name) {
 		for (int i = 0; i < DEVELOPERS.length; i++) {
 			if (DEVELOPERS[i].equals(name)) {
