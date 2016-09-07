@@ -54,6 +54,7 @@ import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.BufferedReader;
@@ -242,6 +243,10 @@ public class Main extends JavaPlugin {
 		gp.setAdminMode(p.isInAdminMode());
 		GamePlayer.players.put(UUIDData.getUUID(pname), gp);
 		return gp;
+	}
+
+	public static GamePlayer getGamePlayer(Player player) {
+		return getGamePlayer(player.getName());
 	}
 	
 	public static void sendMessageToStaff(String msg) {

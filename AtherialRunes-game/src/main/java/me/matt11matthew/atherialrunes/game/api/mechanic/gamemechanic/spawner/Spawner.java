@@ -9,13 +9,17 @@ public class Spawner {
 	private int range;
 	private boolean active;
 	private String mob;
+	private boolean elite;
+	private int tier;
 	
-	public Spawner(Location location, int cooldown, int range) {
+	public Spawner(Location location, int cooldown, int range, boolean elite, String mob, int tier) {
 		this.location = location;
 		this.cooldown = cooldown;
 		this.range = range;
 		this.active = false;
-		this.mob = "T1";
+		this.mob = mob;
+		this.tier = tier;
+		this.elite = elite;
 	}
 
 	public Location getLocation() {
@@ -56,5 +60,21 @@ public class Spawner {
 
 	public void setMob(String mob) {
 		this.mob = mob;
+	}
+
+	public boolean isElite() {
+		return elite;
+	}
+
+	public void setElite(boolean elite) {
+		this.elite = elite;
+	}
+
+	public int getTier() {
+		return tier;
+	}
+
+	public void setTier(int tier) {
+		this.tier = tier;
 	}
 }

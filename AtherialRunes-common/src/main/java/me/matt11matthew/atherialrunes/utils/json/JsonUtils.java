@@ -11,6 +11,11 @@ import java.util.Map;
 
 public class JSONUtils {
 
+    /**
+     *
+     * @param s input string
+     * @return as jsonobject
+     */
     public static JSONObject convertStringToJSONObject(String s) {
         JSONObject new_obj = new JSONObject();
         JSONParser parser = new JSONParser();
@@ -22,6 +27,11 @@ public class JSONUtils {
         return new_obj;
     }
 
+    /**
+     *
+     * @param file json file
+     * @return as jsonobject
+     */
     public static JSONObject convertStringToJSONObject(File file) throws NotJsonFileException {
         if (!file.getName().endsWith(".json")) {
             throw new NotJsonFileException(file.getName());
