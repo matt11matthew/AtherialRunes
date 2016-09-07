@@ -1,5 +1,6 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse;
 
+import me.matt11matthew.atherialrunes.game.GameConstants;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.menus.MarketItem;
 
 import java.util.ArrayList;
@@ -36,5 +37,9 @@ public class Page {
 
     public MarketItem getItem(int i) {
         return itemList.get(i);
+    }
+
+    public boolean isFull() {
+        return (itemList.size() >= GameConstants.MAX_MARKET_ITEMS_PER_PAGE);
     }
 }

@@ -2,7 +2,8 @@ package me.matt11matthew.atherialrunes.game.commands;
 
 import me.matt11matthew.atherialrunes.Constants;
 import me.matt11matthew.atherialrunes.command.AtherialCommand;
-import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.menus.FirstMenu;
+import me.matt11matthew.atherialrunes.game.Main;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.MarketManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -26,15 +27,15 @@ public class CommandDEV extends AtherialCommand {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
 			if (Constants.DEBUG) {
-				test(player);
+				test(player, Integer.parseInt(args[0]));
 				return true;
 			}
 		}
 		return true;
 	}
 	
-	public void test(Player player) {
-		new FirstMenu().open(player);
+	public void test(Player player, int price) {
+		MarketManager.sellItem(player.getItemInHand(), price, Main.getGamePlayer(player));
 	}
 
 	@Override

@@ -7,4 +7,6 @@ public class GameConstants {
 	public static final String OUT_COMBAT_MESSAGE = "&aLeaving &lCOMBAT";
 	
 	public static final String CURRENTLY_HIDDEN_MESSAGE = "&cYou're currently &lHIDDEN";
+
+	public static final int MAX_MARKET_ITEMS_PER_PAGE = 30;
 }
