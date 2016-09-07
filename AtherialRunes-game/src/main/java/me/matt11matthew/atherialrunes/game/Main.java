@@ -18,6 +18,7 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhous
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.combat.CombatMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.combat.commands.CommandPvPFlag;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item.ItemMechanics;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item.commands.CommandGiveCustomItem;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.LevelingMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.commands.CommandSetLevel;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.player.PlayerMechanics;
@@ -29,6 +30,7 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.shard.Shard
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.shard.commands.CommandShard;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.spawner.SpawnerMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.StaffMechanics;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.commands.CommandAdminMode;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.commands.CommandInvsee;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.commands.CommandKick;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.commands.CommandVanish;
@@ -179,6 +181,8 @@ public class Main extends JavaPlugin {
 		cm.registerCommand(new CommandUnmute("unmute", "/unmute <player> <reason>", "Unmutes a player."));
 		cm.registerCommand(new CommandVanish("vanish", "/vanish", "Vanish.", Arrays.asList("atherialvanish", "hide")));
 		cm.registerCommand(new CommandSetLevel("setlevel", "/setlevel <player> <level>", "Set a players level.", Arrays.asList("setlvl")));
+		cm.registerCommand(new CommandGiveCustomItem("givecustomitem", "/givecustomitem <item>", "Gives yourself a custom item.", Arrays.asList("addcustomitem")));
+		cm.registerCommand(new CommandAdminMode("adminmode", "/adminmode <nick>", "Go into adminmode", Arrays.asList("globaladminmode")));
 	}
 	
 	private void registerMechanics() {
@@ -233,7 +237,9 @@ public class Main extends JavaPlugin {
 		gp.setEXP(p.getEXP());
 		gp.setLevel(p.getLevel());
 		gp.setSkillPoints(p.getSkillPoints());
-		gp.setVanished(gp.isVanished());
+		gp.setVanished(p.isVanished());
+		gp.setNick(p.getNick());
+		gp.setAdminMode(p.isInAdminMode());
 		GamePlayer.players.put(UUIDData.getUUID(pname), gp);
 		return gp;
 	}

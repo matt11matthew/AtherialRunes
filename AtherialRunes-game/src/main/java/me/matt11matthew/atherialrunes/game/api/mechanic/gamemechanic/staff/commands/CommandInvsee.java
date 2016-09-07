@@ -15,6 +15,13 @@ import java.util.List;
 
 public class CommandInvsee extends AtherialCommand {
 
+	/**
+	 *
+	 * @param command the command
+	 * @param usage the usage
+	 * @param description the description
+	 * @param args the aliases
+	 */
 	public CommandInvsee(String command, String usage, String description, List<String> args) {
 		super(command, usage, description, args);
 	}

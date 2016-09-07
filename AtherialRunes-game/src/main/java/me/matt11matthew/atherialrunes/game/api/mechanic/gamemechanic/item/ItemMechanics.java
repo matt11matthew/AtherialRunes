@@ -31,6 +31,9 @@ public class ItemMechanics extends ListenerMechanic {
         return LoadPriority.LOWEST;
     }
 
+    /**
+     * loads custom items
+     */
     public void loadCustomItems() {
         List<File> files = new ArrayList<>();
         File[] itemFiles = new File(Main.getInstance().getDataFolder() + "/custom_items/").listFiles();

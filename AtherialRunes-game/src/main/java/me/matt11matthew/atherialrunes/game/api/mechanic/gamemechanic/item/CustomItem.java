@@ -21,6 +21,10 @@ public class CustomItem {
     private Material type = Material.DIRT;
     private File file;
 
+    /**
+     *
+     * @param item the custom itemstack
+     */
     public CustomItem(ItemStack item) {
         this.file = null;
         this.type = item.getType();
@@ -37,6 +41,10 @@ public class CustomItem {
         }
     }
 
+    /**
+     *
+     * @param file the file for the custom item
+     */
     public CustomItem(File file) {
         JSONObject obj = null;
         try {
@@ -60,50 +68,98 @@ public class CustomItem {
         this.amount = 1;
     }
 
+    /**
+     *
+     * @return the item dura
+     */
     public short getDurability() {
         return durability;
     }
 
+    /**
+     *
+     * @param durability the dura the item dura is getting set to
+     */
     public void setDurability(short durability) {
         this.durability = durability;
     }
 
+    /**
+     *
+     * @return item amount
+     */
     public int getAmount() {
         return amount;
     }
 
+    /**
+     *
+     * @param amount amount getting set
+     */
     public void setAmount(int amount) {
         this.amount = amount;
     }
 
+    /**
+     *
+     * @return custom items name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name the name item will be set to
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return items lore
+     */
     public List<String> getLore() {
         return item_lore;
     }
 
+    /**
+     *
+     * @param lore a line of lore that is added
+     */
     public void addLore(String lore) {
         item_lore.add(Utils.colorCodes(lore));
     }
 
+    /**
+     *
+     * @param item_lore the lore of the item is set
+     */
     public void setLore(List<String> item_lore) {
         this.item_lore = item_lore;
     }
 
+    /**
+     *
+     * @return type
+     */
     public Material getType() {
         return type;
     }
 
+    /**
+     *
+     * @param type sets type
+     */
     public void setType(Material type) {
         this.type = type;
     }
 
+    /**
+     *
+     * @return the item built
+     */
     public ItemStack buildItem() {
         ItemStack item = new ItemStack(type);
         ItemMeta im = item.getItemMeta();
@@ -119,6 +175,10 @@ public class CustomItem {
         return item;
     }
 
+    /**
+     *
+     * @return the item file
+     */
     public File getFile() {
         return file;
     }

@@ -11,7 +11,13 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.shard.Shard
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 
 public class CommandShard extends AtherialCommand {
-	
+
+	/**
+	 *
+	 * @param command the command
+	 * @param usage the usage
+	 * @param description the description
+	 */
 	public CommandShard(String command, String usage, String description) {
 		super(command, usage, description);
 	}

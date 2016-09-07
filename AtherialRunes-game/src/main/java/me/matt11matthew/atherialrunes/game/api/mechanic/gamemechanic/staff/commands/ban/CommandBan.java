@@ -15,6 +15,12 @@ import java.util.List;
 
 public class CommandBan extends AtherialCommand {
 
+	/**
+	 *
+	 * @param command the command
+	 * @param usage the usage
+	 * @param description the description
+	 */
 	public CommandBan(String command, String usage, String description) {
 		super(command, usage, description);
 	}

@@ -36,11 +36,17 @@ public class AuctionHouseMechanics extends ListenerMechanic {
 	public LoadPriority getLoadPriority() {
 		return LoadPriority.NORMAL;
 	}
-	
+
+	/**
+	 * loads items
+	 */
 	public static void loadItems() {
 		new AuctionHouseTable().loadItems();
 	}
-	
+
+	/**
+	 * saves items
+	 */
 	public static void saveItems() {
 		new AuctionHouseTable().saveItems();
 	}
@@ -77,6 +83,11 @@ public class AuctionHouseMechanics extends ListenerMechanic {
 		}
 	}
 
+	/**
+	 *
+	 * @param page the page your gettings items for
+	 * @return the items returned
+     */
 	public static List<MarketItem> getItems(int page) {
 		return null;
 	}

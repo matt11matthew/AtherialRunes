@@ -8,6 +8,10 @@ import me.matt11matthew.atherialrunes.menu.Menu;
 
 public class MarketMenu extends Menu {
 
+	/**
+	 *
+	 * @param page the page
+     */
 	public MarketMenu(int page) {
 		super("&c&lMarket (" + page + ")", (6 * 9));
 		

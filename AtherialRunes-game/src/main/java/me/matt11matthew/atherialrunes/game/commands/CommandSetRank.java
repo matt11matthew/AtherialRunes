@@ -16,6 +16,13 @@ import java.util.List;
 
 public class CommandSetRank extends AtherialCommand {
 
+	/**
+	 *
+	 * @param command the command
+	 * @param usage the usage
+	 * @param description the description
+	 * @param aliases the aliases
+	 */
 	public CommandSetRank(String command, String usage, String description, List<String> aliases) {
 		super(command, usage, description, aliases);
 	}

@@ -15,6 +15,12 @@ import java.util.List;
 
 public class CommandKick extends AtherialCommand {
 
+	/**
+	 *
+	 * @param command the command
+	 * @param usage the usage
+	 * @param description the description
+	 */
 	public CommandKick(String command, String usage, String description) {
 		super(command, usage, description);
 	}
