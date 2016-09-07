@@ -1,17 +1,16 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.commands;
 
-import java.util.List;
-
+import me.matt11matthew.atherialrunes.command.AtherialCommand;
+import me.matt11matthew.atherialrunes.game.Main;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
+import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
+import me.matt11matthew.atherialrunes.game.enums.MessageType;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.matt11matthew.atherialrunes.command.AtherialCommand;
-import me.matt11matthew.atherialrunes.game.Main;
-import me.matt11matthew.atherialrunes.game.enums.MessageType;
-import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
-import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
+import java.util.List;
 
 public class CommandVanish extends AtherialCommand {
 

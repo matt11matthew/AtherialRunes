@@ -1,16 +1,15 @@
 package me.matt11matthew.atherialrunes.game.utils;
 
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
-
+import me.matt11matthew.atherialrunes.game.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
 
-import me.matt11matthew.atherialrunes.game.Main;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 
 public class AtherialRunnable implements org.bukkit.scheduler.BukkitScheduler {
 

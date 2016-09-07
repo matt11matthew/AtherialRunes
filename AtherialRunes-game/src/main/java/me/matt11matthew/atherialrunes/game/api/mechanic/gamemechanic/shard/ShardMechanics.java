@@ -1,7 +1,13 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.shard;
 
-import java.util.HashMap;
-
+import me.matt11matthew.atherialrunes.game.Main;
+import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
+import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
+import me.matt11matthew.atherialrunes.game.enums.MessageType;
+import me.matt11matthew.atherialrunes.network.ShardInfo;
+import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
+import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -9,22 +15,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType.SlotType;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 
-import me.matt11matthew.atherialrunes.game.Main;
-import me.matt11matthew.atherialrunes.game.enums.MessageType;
-import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
-import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
-import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
-import me.matt11matthew.atherialrunes.network.ShardInfo;
-import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
-import me.matt11matthew.atherialrunes.utils.Utils;
+import java.util.HashMap;
 
 public class ShardMechanics extends ListenerMechanic {
 	

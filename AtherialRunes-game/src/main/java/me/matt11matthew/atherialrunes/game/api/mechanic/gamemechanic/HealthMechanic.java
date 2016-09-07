@@ -1,12 +1,11 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
 import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
 import me.matt11matthew.atherialrunes.game.utils.AtherialRunnable;
 import me.matt11matthew.atherialrunes.game.utils.BossbarUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 public class HealthMechanic extends ListenerMechanic {
 

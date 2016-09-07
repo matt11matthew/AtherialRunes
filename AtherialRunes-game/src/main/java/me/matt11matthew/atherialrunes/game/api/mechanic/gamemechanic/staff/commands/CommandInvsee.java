@@ -1,8 +1,8 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.commands;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import me.matt11matthew.atherialrunes.command.AtherialCommand;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
+import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,9 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import me.matt11matthew.atherialrunes.command.AtherialCommand;
-import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
-import me.matt11matthew.atherialrunes.utils.Utils;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommandInvsee extends AtherialCommand {
 

@@ -1,16 +1,15 @@
-package me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.combat;
-
-import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
+package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.combat;
 
 import me.matt11matthew.atherialrunes.game.GameConstants;
 import me.matt11matthew.atherialrunes.game.Main;
+import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
+import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.damage.events.PlayerDamagePlayerEvent;
+import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
-import me.matt11matthew.atherialrunes.game.mechanic.ListenerMechanic;
-import me.matt11matthew.atherialrunes.game.mechanic.LoadPriority;
-import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.damage.events.PlayerDamagePlayerEvent;
-import me.matt11matthew.atherialrunes.game.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.utils.AtherialRunnable;
+import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
 
 public class CombatMechanics extends ListenerMechanic {
 
@@ -52,11 +51,14 @@ public class CombatMechanics extends ListenerMechanic {
 			public void run() {
 				Bukkit.getServer().getOnlinePlayers().forEach(player -> {
 					GamePlayer gp = Main.getGamePlayer(player.getName());
-					if (gp.getCombatTime() > 0) {
-						gp.setCombatTime((gp.getCombatTime() - 1));
-					} else {
-						gp.msg(MessageType.ACTION, GameConstants.OUT_COMBAT_MESSAGE);
-						return;
+					if (gp.isInCombat()) {
+						if (gp.getCombatTime() > 0) {
+							gp.setCombatTime((gp.getCombatTime() - 1));
+						} else {
+							gp.setCombatTime(-1);
+							gp.msg(MessageType.ACTION, GameConstants.OUT_COMBAT_MESSAGE);
+							return;
+						}
 					}
 				});
 			}

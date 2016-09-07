@@ -1,11 +1,5 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.commands;
 
-import java.util.List;
-
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
 import me.matt11matthew.atherialrunes.command.AtherialCommand;
 import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.LevelUtils;
@@ -13,6 +7,11 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.utils.IntegerUtils;
 import me.matt11matthew.atherialrunes.utils.Utils;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.List;
 
 public class CommandAddEXP extends AtherialCommand {
 

@@ -1,7 +1,18 @@
-package me.matt11matthew.atherialrunes.game.player;
+package me.matt11matthew.atherialrunes.game.api.player;
 
-import java.util.HashMap;
-
+import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
+import me.matt11matthew.atherialrunes.database.data.player.UUIDData;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.ChatChannel;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.zone.Zone;
+import me.matt11matthew.atherialrunes.game.enums.MessageType;
+import me.matt11matthew.atherialrunes.game.utils.RegionUtils;
+import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
+import me.matt11matthew.atherialrunes.player.AtherialPlayer;
+import me.matt11matthew.atherialrunes.sound.AtherialSound;
+import me.matt11matthew.atherialrunes.utils.BanUtils;
+import me.matt11matthew.atherialrunes.utils.MuteUtils;
+import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
@@ -10,19 +21,7 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 
-import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
-import me.matt11matthew.atherialrunes.database.data.player.UUIDData;
-import me.matt11matthew.atherialrunes.game.enums.MessageType;
-import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank.ChatChannel;
-import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank.Rank;
-import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.zone.Zone;
-import me.matt11matthew.atherialrunes.game.utils.RegionUtils;
-import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
-import me.matt11matthew.atherialrunes.player.AtherialPlayer;
-import me.matt11matthew.atherialrunes.sound.AtherialSound;
-import me.matt11matthew.atherialrunes.utils.BanUtils;
-import me.matt11matthew.atherialrunes.utils.MuteUtils;
-import me.matt11matthew.atherialrunes.utils.Utils;
+import java.util.HashMap;
 
 public class GamePlayer {
 	
@@ -41,6 +40,8 @@ public class GamePlayer {
 	private int gold;
 	private int silver;
 	private int copper;
+	private String nick;
+	private boolean adminMode;
 	
 	public GamePlayer(String name) {
 		this.name = name;
@@ -233,4 +234,23 @@ public class GamePlayer {
 		this.silver = silver;
 	}
 
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	public void setAdminMode(boolean adminMode) {
+		this.adminMode = adminMode;
+	}
+
+	public boolean isInAdminMode() {
+		return adminMode;
+	}
+
+	public boolean isLegit() {
+		return (!adminMode);
+	}
 }

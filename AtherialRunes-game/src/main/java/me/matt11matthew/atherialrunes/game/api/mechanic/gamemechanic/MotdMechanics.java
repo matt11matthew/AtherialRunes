@@ -1,12 +1,11 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic;
 
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.server.ServerListPingEvent;
-
 import me.matt11matthew.atherialrunes.Constants;
 import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
 import me.matt11matthew.atherialrunes.utils.Utils;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.server.ServerListPingEvent;
 
 public class MotdMechanics extends ListenerMechanic {
 

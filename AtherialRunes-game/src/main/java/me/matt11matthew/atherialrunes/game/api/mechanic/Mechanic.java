@@ -1,7 +1,6 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic;
 
 import com.esotericsoftware.kryonet.Listener;
-
 import me.matt11matthew.atherialrunes.game.Main;
 
 public abstract class Mechanic extends Listener {

@@ -1,5 +1,7 @@
 package me.matt11matthew.atherialrunes.game.player;
 
+import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
+
 public class PlayerStatistics {
 
     private final GamePlayer gamePlayer;

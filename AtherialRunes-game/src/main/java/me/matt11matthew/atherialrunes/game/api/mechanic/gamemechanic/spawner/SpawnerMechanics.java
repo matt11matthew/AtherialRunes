@@ -1,15 +1,14 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.spawner;
 
+import me.matt11matthew.atherialrunes.game.Main;
+import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
+import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
+import org.bukkit.Location;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-
-import org.bukkit.Location;
-
-import me.matt11matthew.atherialrunes.game.Main;
-import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
-import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
 
 public class SpawnerMechanics extends ListenerMechanic {
 	

@@ -1,22 +1,24 @@
-package me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.staff;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
+package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff;
 
 import me.matt11matthew.atherialrunes.database.data.player.Mute;
 import me.matt11matthew.atherialrunes.game.GameConstants;
 import me.matt11matthew.atherialrunes.game.Main;
+import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
+import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
+import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
-import me.matt11matthew.atherialrunes.game.mechanic.ListenerMechanic;
-import me.matt11matthew.atherialrunes.game.mechanic.LoadPriority;
-import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank.Rank;
-import me.matt11matthew.atherialrunes.game.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.utils.AtherialRunnable;
 import me.matt11matthew.atherialrunes.utils.Utils;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.inventivetalent.nicknamer.api.NickManager;
+import org.inventivetalent.nicknamer.api.NickNamerAPI;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class StaffMechanics extends ListenerMechanic {
 
@@ -54,15 +56,21 @@ public class StaffMechanics extends ListenerMechanic {
 			public void run() {
 				Bukkit.getServer().getOnlinePlayers().forEach(player -> {
 					GamePlayer gp = Main.getGamePlayer(player.getName());
+					NickManager manager = NickNamerAPI.getNickManager();
+					manager.setNick(UUID.fromString(gp.getUUID()), gp.getNick());
 					if (Rank.isGM(player.getName())) {
+						if (gp.isInAdminMode()) {
+							gp.setVanished(true);
+							gp.getPlayer().setPlayerListName(gp.getRank().getTabListName() + gp.getNick());
+						}
 						if (gp.isVanished()) {
-							gp.getPlayer().setPlayerListName(Utils.colorCodes(ChatColor.DARK_AQUA + gp.getName()));
+							gp.getPlayer().setPlayerListName(Utils.colorCodes(ChatColor.RED + gp.getNick()));
 							gp.msg(MessageType.ACTION, GameConstants.CURRENTLY_HIDDEN_MESSAGE);
 						} else {
-							gp.getPlayer().setPlayerListName(gp.getRank().getTabListName(gp.getName()));
+							gp.getPlayer().setPlayerListName(gp.getRank().getTabListName() + gp.getNick());
 						}
 					} else {
-						gp.getPlayer().setPlayerListName(gp.getRank().getTabListName(gp.getName()));
+						gp.getPlayer().setPlayerListName(gp.getRank().getTabListName() + gp.getNick());
 						Mute mute = Mute.getMute(gp.getName());
 						if (mute.isMuted()) {
 							if (mute.canUnmute()) {

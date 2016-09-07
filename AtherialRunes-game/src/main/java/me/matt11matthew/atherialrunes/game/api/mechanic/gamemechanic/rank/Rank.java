@@ -1,13 +1,13 @@
-package me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.rank;
+package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank;
+
+import me.matt11matthew.atherialrunes.database.data.player.UUIDData;
+import me.matt11matthew.atherialrunes.game.Main;
+import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
+import me.matt11matthew.atherialrunes.utils.Utils;
+import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.bukkit.ChatColor;
-
-import me.matt11matthew.atherialrunes.database.data.player.UUIDData;
-import me.matt11matthew.atherialrunes.game.player.GamePlayer;
-import me.matt11matthew.atherialrunes.utils.Utils;
 
 public enum Rank {
 	
@@ -53,11 +53,15 @@ public enum Rank {
 	}
 	
 	public String getChatMessage(String name, String msg) {
+		GamePlayer gp = Main.getGamePlayer(name);
+		if (gp.isInAdminMode()) {
+			return Utils.colorCodes("&7" + gp.getNick() + ": " + ChatColor.stripColor(msg));
+		}
 		return Utils.colorCodes(getTag() + name + chatColor + ChatColor.stripColor(msg));
 	}
 	
-	public String getTabListName(String name) {
-		return Utils.colorCodes(tag + name);
+	public String getTabListName() {
+		return Utils.colorCodes(tag);
 	}
 	
 	public static boolean isDeveloper(String name) {

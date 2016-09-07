@@ -1,6 +1,6 @@
 package me.matt11matthew.atherialrunes.game.utils;
 
-import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.item.customitems.CustomItem;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item.CustomItem;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -9,6 +9,13 @@ import java.util.List;
 
 public class CommandUtils {
 
+    /**
+     *
+     * @param args command args
+     * @param items the item
+     * @param addPlayers if you have players
+     * @return the return string
+     */
     public static List<String> getPossibleCompletionsForGivenArgs(String[] args, List<CustomItem> items, boolean addPlayers) {
         String arg = args[args.length-1].toLowerCase();
         ArrayList<String> possableComplete = new ArrayList<>();

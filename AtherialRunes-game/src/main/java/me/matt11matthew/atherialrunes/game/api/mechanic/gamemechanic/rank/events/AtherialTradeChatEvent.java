@@ -1,10 +1,9 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events;
 
+import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-
-import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 
 public class AtherialTradeChatEvent extends Event implements Cancellable {
 	

@@ -1,7 +1,7 @@
-package me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.level;
+package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level;
 
+import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
-import me.matt11matthew.atherialrunes.game.player.GamePlayer;
 import me.matt11matthew.atherialrunes.sound.AtherialSound;
 import me.matt11matthew.atherialrunes.sound.EnumSound;
 
@@ -25,10 +25,10 @@ public class LevelUtils {
 	}
 	
 	public static int getEXPNeeded(int lvl) {
-		if (lvl == 1) {
+		if (lvl == 2) {
 			return 100;
 		}
 		int percent = (int) (100.0D * lvl);
-		return (percent ^ 2);
+		return (int) (percent * 1.05);
 	}
 }

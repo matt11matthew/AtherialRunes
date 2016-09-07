@@ -1,13 +1,12 @@
-package me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.level;
-
-import org.bukkit.Bukkit;
+package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level;
 
 import me.matt11matthew.atherialrunes.game.Main;
+import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
+import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
-import me.matt11matthew.atherialrunes.game.mechanic.ListenerMechanic;
-import me.matt11matthew.atherialrunes.game.mechanic.LoadPriority;
-import me.matt11matthew.atherialrunes.game.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.utils.AtherialRunnable;
+import org.bukkit.Bukkit;
 
 public class LevelingMechanics extends ListenerMechanic {
 
@@ -25,7 +24,7 @@ public class LevelingMechanics extends ListenerMechanic {
 
 	@Override
 	public LoadPriority getLoadPriority() {
-		return LoadPriority.NORMAL;
+		return LoadPriority.LOWEST;
 	}
 	
 	public void task() {
@@ -36,7 +35,7 @@ public class LevelingMechanics extends ListenerMechanic {
 				Bukkit.getOnlinePlayers().forEach(player -> {
 					GamePlayer gp = Main.getGamePlayer(player.getName());
 					if (!gp.isVanished()) {
-						gp.setExpBarMessage("&e(" + gp.getEXP() + "/" + LevelUtils.getEXPNeeded((gp.getLevel() + 1)) + "&lEXP&e)");
+						gp.setExpBarMessage(gp.getLevel() + "&lLVL &e[" + gp.getEXP() + "/" + LevelUtils.getEXPNeeded((gp.getLevel() + 1)) + "&lEXP&e]");
 						gp.msg(MessageType.ACTION, gp.getExpBarMessage());
 					}
 				});

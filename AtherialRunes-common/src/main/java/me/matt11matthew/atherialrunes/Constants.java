@@ -38,6 +38,8 @@ public class Constants {
 	
 	public static final int MASTER_SERVER_PORT = 45678;
 	public static final String MASTER_SERVER_IP = "localhost";
+
+	public static final String DATE = "9/7/2016";
 	
 	public static final String WEBSITE_LINK = "www.atherialrunes.net";
 	
