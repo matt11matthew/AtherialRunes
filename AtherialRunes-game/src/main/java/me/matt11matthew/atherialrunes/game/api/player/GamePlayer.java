@@ -51,6 +51,7 @@ public class GamePlayer {
 	private int notoriety;
 	private String nameColor = "&7";
 	private Player player = null;
+	private PlayerToggle playerToggle;
 
 	public GamePlayer(String name) {
 		this.name = name;
@@ -316,10 +317,21 @@ public class GamePlayer {
 		}
 		getPlayer().setHealth((getPlayer().getHealth() - damage));
 		getPlayer().playEffect(EntityEffect.HURT);
+		if (damager.getPlayerToggle().isDebug()) {
+			damager.msg(MessageType.CHAT, "&c" + (int) + damage + " &c&lDMG -> " + getName());
+		}
 	}
 
 	private void kill() {
 		getPlayer().setHealth(0.0D);
 		getPlayer().spigot().respawn();
+	}
+
+	public void setPlayerToggle(PlayerToggle playerToggle) {
+		this.playerToggle = playerToggle;
+	}
+
+	public PlayerToggle getPlayerToggle() {
+		return playerToggle;
 	}
 }

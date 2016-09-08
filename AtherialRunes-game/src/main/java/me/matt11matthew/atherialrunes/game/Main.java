@@ -45,6 +45,7 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.comma
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.stats.StatMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.zone.ZoneMechanics;
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
+import me.matt11matthew.atherialrunes.game.api.player.PlayerToggle;
 import me.matt11matthew.atherialrunes.game.api.registry.RegistryLoader;
 import me.matt11matthew.atherialrunes.game.api.tab.variables.NotorietyVariable;
 import me.matt11matthew.atherialrunes.game.api.tab.variables.ShardNameVariable;
@@ -257,6 +258,9 @@ public class Main extends JavaPlugin {
 		gp.setNick(p.getNick());
 		gp.setNotoriety(p.getNotoriety());
 		gp.setAdminMode(p.isInAdminMode());
+		PlayerToggle playerToggle = new PlayerToggle(gp);
+		playerToggle.addToggles(p.getToggles());
+		gp.setPlayerToggle(playerToggle);
 		GamePlayer.players.put(UUIDData.getUUID(pname), gp);
 		return gp;
 	}

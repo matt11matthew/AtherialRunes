@@ -3,6 +3,9 @@ package me.matt11matthew.atherialrunes.player;
 import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
 import me.matt11matthew.atherialrunes.database.data.player.UUIDData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AtherialPlayer {
 	
 	private String name;
@@ -24,6 +27,7 @@ public class AtherialPlayer {
 	private String nick;
 	private boolean adminMode;
 	private int notoriety;
+	private List<String> toggles = new ArrayList<String>();
 	
 	public String getName() {
 		return name;
@@ -177,5 +181,13 @@ public class AtherialPlayer {
 
 	public void setNotoriety(int notoriety) {
 		this.notoriety = notoriety;
+	}
+
+	public List<String> getToggles() {
+		return toggles;
+	}
+
+	public void setToggles(List<String> toggles) {
+		this.toggles = toggles;
 	}
 }

@@ -1,5 +1,6 @@
 package me.matt11matthew.atherialrunes.database.data.player;
 
+import me.matt11matthew.atherialrunes.Constants;
 import me.matt11matthew.atherialrunes.database.ConnectionPool;
 import me.matt11matthew.atherialrunes.database.data.Data;
 import me.matt11matthew.atherialrunes.database.table.tables.player.PlayerdataTable;
@@ -8,7 +9,9 @@ import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class PlayerData implements Data {
 	
@@ -30,7 +33,7 @@ public class PlayerData implements Data {
 		AtherialPlayer player = players.get(uuid);
 		if (player.isNewPlayer()) {
 			new PlayerdataTable().insert("INSERT INTO " + new PlayerdataTable().getName()
-					+ "(uuid, ign, rank, channel, combat, level, vanish, exp, skillpoints, gold, silver, copper, nick, admin, notoriety, shard) "
+					+ "(uuid, ign, rank, channel, combat, level, vanish, exp, skillpoints, gold, silver, copper, nick, admin, notoriety, toggles, shard) "
 					+ "VALUES("
 					+ "'" + player.getUUID()
 					+ "', '" + player.getName()
@@ -47,6 +50,7 @@ public class PlayerData implements Data {
 					+ "', '"+ player.getNick()
 					+ "', '"+ player.isInAdminMode()
 					+ "', '"+ player.getNotoriety()
+					+ "', '"+ Constants.DEFAULT_TOGGLES_STRING
 					+ "', '" + player.getShard() + "') "
 					+ "ON DUPLICATE KEY UPDATE "
 					+ "uuid='" + player.getUUID()
@@ -64,8 +68,10 @@ public class PlayerData implements Data {
 					+ "', nick='" + player.getNick()
 					+ "', admin='" + player.isInAdminMode()
 					+ "', notoriety='" + player.getNotoriety()
+					+ "', toggles='" + Constants.DEFAULT_TOGGLES_STRING
 					+ "', shard='" + player.getShard() + "'");
 		} else {
+			String toggles = player.getToggles().toString().replace(")", "").replace("(", "").trim();
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `rank`='" + player.getRank() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `shard`='" + player.getShard() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `channel`='" + player.getChatChannel() + "' WHERE `uuid`='" + getUUID(name) + "';");
@@ -80,6 +86,7 @@ public class PlayerData implements Data {
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `nick`='" + player.getNick() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `admin`='" + player.isInAdminMode() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `notoriety`='" + player.getNotoriety() + "' WHERE `uuid`='" + getUUID(name) + "';");
+			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `toggles`='" + toggles + "' WHERE `uuid`='" + getUUID(name) + "';");
 		}
 		players.remove(uuid);
 	}
@@ -106,6 +113,7 @@ public class PlayerData implements Data {
 				player.setSilver(0);
 				player.setNick(player.getName());
 				player.setAdminMode(false);
+				player.setToggles(Constants.DEFAULT_TOGGLES);
 			} else {
 				player.setNewPlayer(false);
 				String rank = rs.getString("rank");
@@ -132,7 +140,10 @@ public class PlayerData implements Data {
 				player.setCombatTime(combatTime);
 				player.setNick(rs.getString("nick"));
 				player.setAdminMode(Boolean.parseBoolean(rs.getString("admin")));
-				
+				List<String> toggles = new ArrayList<>();
+				for (String toggle : rs.getString("toggles").split(",")) {
+					toggles.add(toggle);
+				}
 			}
 			players.put(uuid, player);	
 		} catch (SQLException e) {

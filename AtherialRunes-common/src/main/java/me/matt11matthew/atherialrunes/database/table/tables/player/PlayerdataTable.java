@@ -30,6 +30,7 @@ public class PlayerdataTable extends Table {
 				+ " `nick` varchar(20) NOT NULL,"
 				+ " `admin` varchar(20) NOT NULL,"
 				+ " `notoriety` INT,"
+				+ " `toggles` varchar(2000) NOT NULL,"
 				+ " `shard` varchar(20) NOT NULL)"
 				+ " ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 	}

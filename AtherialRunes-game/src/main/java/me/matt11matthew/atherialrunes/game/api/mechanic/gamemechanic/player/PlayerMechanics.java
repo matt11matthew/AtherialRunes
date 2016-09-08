@@ -15,6 +15,7 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialLocalChatEvent;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialTradeChatEvent;
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
+import me.matt11matthew.atherialrunes.game.api.player.PlayerToggle;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Bukkit;
@@ -64,6 +65,9 @@ public class PlayerMechanics extends ListenerMechanic {
 		gp.setNick(p.getNick());
 		gp.setAdminMode(p.isInAdminMode());
 		gp.setNotoriety(p.getNotoriety());
+		PlayerToggle playerToggle = new PlayerToggle(gp);
+		playerToggle.addToggles(p.getToggles());
+		gp.setPlayerToggle(playerToggle);
 		GamePlayer.players.put(e.getUniqueId().toString(), gp);
 		if (Rank.isStaff(gp.getName())) {
 			Main.staff.add(gp.getName());
@@ -191,6 +195,7 @@ public class PlayerMechanics extends ListenerMechanic {
 		ap.setAdminMode(gp.isInAdminMode());
 		ap.setNotoriety(gp.getNotoriety());
 		ap.setCopper(gp.getCopper());
+		ap.setToggles(gp.getPlayerToggle().getToggles());
 //		if (gp.isInCombat()) {
 //			Location loc = player.getLocation();
 //			Zombie zombie = loc.getWorld().spawn(loc, Zombie.class);
