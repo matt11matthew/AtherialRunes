@@ -1,12 +1,15 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item;
 
 
+import me.matt11matthew.atherialrunes.exceptions.NotJsonFileException;
 import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.utils.json.JSONUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,23 +31,27 @@ public class ItemMechanics extends ListenerMechanic {
 
     @Override
     public LoadPriority getLoadPriority() {
-        return LoadPriority.LOWEST;
+        return LoadPriority.MONITOR;
     }
 
     /**
      * loads custom items
      */
     public void loadCustomItems() {
-        List<File> files = new ArrayList<>();
-        File[] itemFiles = new File(Main.getInstance().getDataFolder() + "/custom_items/").listFiles();
-        for (File file : itemFiles) {
-            files.add(file);
+        File itemFile = new File(Main.getInstance().getDataFolder() + "/custom_items/", "items.json");
+
+        JSONObject obj = null;
+        try {
+            obj = JSONUtils.convertStringToJSONObject(itemFile);
+        } catch (NotJsonFileException e) {
+            e.printStackTrace();
         }
-        files.forEach(itemFile -> {
-            CustomItem item = new CustomItem(itemFile);
-            customItems.put(itemFile.getName().split(".json")[0], item);
-            Main.print(item.getFile().getName().split(".json")[0].trim());
-        });
+        List<String> items = (JSONArray) obj.get("customitems");
+        for (String item : items) {
+            Main.print(item);
+            CustomItem customItem = new CustomItem(item, obj);
+            customItems.put(item, customItem);
+        }
     }
 }
   

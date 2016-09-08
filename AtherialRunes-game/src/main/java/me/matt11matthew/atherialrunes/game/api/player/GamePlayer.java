@@ -2,6 +2,7 @@ package me.matt11matthew.atherialrunes.game.api.player;
 
 import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
 import me.matt11matthew.atherialrunes.database.data.player.UUIDData;
+import me.matt11matthew.atherialrunes.game.GameConstants;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.ChatChannel;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.zone.Zone;
@@ -42,7 +43,9 @@ public class GamePlayer {
 	private int copper;
 	private String nick;
 	private boolean adminMode;
-	
+	private int notoriety;
+	private String nameColor = "&7";
+
 	public GamePlayer(String name) {
 		this.name = name;
 		this.uuid = UUIDData.getUUID(name);
@@ -252,5 +255,34 @@ public class GamePlayer {
 
 	public boolean isLegit() {
 		return (!adminMode);
+	}
+
+	public int getNotoriety() {
+		return notoriety;
+	}
+
+	public void setNotoriety(int notoriety) {
+		if (notoriety > 100) {
+			this.notoriety = 100;
+			return;
+		}
+		this.notoriety = notoriety;
+	}
+
+	public void setNameColor(String nameColor) {
+		this.nameColor = nameColor;
+	}
+
+	public String getNameColor() {
+		return nameColor;
+	}
+
+	public void daytime() {
+		if (GameConstants.NOTORIETY_LOSS_IN_MORNING > notoriety) {
+			this.notoriety = 0;
+		} else {
+			this.notoriety = (this.notoriety - GameConstants.NOTORIETY_LOSS_IN_MORNING);
+		}
+		msg(MessageType.CHAT, "&7A new day comes, and you feel more enlightened. &c-" + GameConstants.NOTORIETY_LOSS_IN_MORNING + " Notoriety”");
 	}
 }

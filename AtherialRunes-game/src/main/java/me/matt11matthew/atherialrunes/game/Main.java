@@ -20,7 +20,9 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.combat.comm
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item.ItemMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item.commands.CommandGiveCustomItem;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.LevelingMechanics;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.commands.CommandAddEXP;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.commands.CommandSetLevel;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.notoriety.NotorietyMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.player.PlayerMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.ChatChannel;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
@@ -44,6 +46,7 @@ import me.matt11matthew.atherialrunes.game.api.registry.RegistryLoader;
 import me.matt11matthew.atherialrunes.game.commands.CommandDEV;
 import me.matt11matthew.atherialrunes.game.commands.CommandSetRank;
 import me.matt11matthew.atherialrunes.game.commands.CommandZone;
+import me.matt11matthew.atherialrunes.game.utils.AtherialUtils;
 import me.matt11matthew.atherialrunes.game.utils.BossbarUtils;
 import me.matt11matthew.atherialrunes.game.utils.BungeeChannelListener;
 import me.matt11matthew.atherialrunes.game.utils.NetworkClientListener;
@@ -87,7 +90,7 @@ public class Main extends JavaPlugin {
 		registerMechanics();
 		registerMenus();
 		BungeeUtils.setPlugin(this);
-
+		AtherialUtils.load();
 		client = new GameClient();
 
         try {
@@ -185,6 +188,7 @@ public class Main extends JavaPlugin {
 		cm.registerCommand(new CommandSetLevel("setlevel", "/setlevel <player> <level>", "Set a players level.", Arrays.asList("setlvl")));
 		cm.registerCommand(new CommandGiveCustomItem("givecustomitem", "/givecustomitem <item>", "Gives yourself a custom item.", Arrays.asList("addcustomitem")));
 		cm.registerCommand(new CommandAdminMode("adminmode", "/adminmode <nick>", "Go into adminmode", Arrays.asList("globaladminmode")));
+		cm.registerCommand(new CommandAddEXP("addexp", "/addexp <player> <exp>", "Gives yourself exp", Arrays.asList("giveexp")));
 	}
 	
 	private void registerMechanics() {
@@ -202,6 +206,7 @@ public class Main extends JavaPlugin {
 		registerMechanic(new NetworkClientListener());
 		registerMechanic(new BungeeChannelListener());
 		registerMechanic(new ItemMechanics());
+		registerMechanic(new NotorietyMechanics());
 		MechanicManager.loadMechanics();
 		
 	}
@@ -242,6 +247,7 @@ public class Main extends JavaPlugin {
 		gp.setVanished(p.isVanished());
 		gp.setNick(p.getNick());
 		gp.setAdminMode(p.isInAdminMode());
+		gp.setNotoriety(p.getNotoriety());
 		GamePlayer.players.put(UUIDData.getUUID(pname), gp);
 		return gp;
 	}

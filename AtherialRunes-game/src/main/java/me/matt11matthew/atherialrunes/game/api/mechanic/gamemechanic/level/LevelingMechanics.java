@@ -35,7 +35,7 @@ public class LevelingMechanics extends ListenerMechanic {
 				Bukkit.getOnlinePlayers().forEach(player -> {
 					GamePlayer gp = Main.getGamePlayer(player.getName());
 					if (!gp.isVanished()) {
-						gp.setExpBarMessage(gp.getLevel() + "&lLVL &e[" + gp.getEXP() + "/" + LevelUtils.getEXPNeeded((gp.getLevel() + 1)) + "&lEXP&e]");
+						gp.setExpBarMessage("&c&lLevel: &a" + gp.getLevel() + " &e[" + gp.getEXP() + "/" + LevelUtils.getEXPNeeded((gp.getLevel() + 1)) + " &lEXP&e]");
 						gp.msg(MessageType.ACTION, gp.getExpBarMessage());
 					}
 				});

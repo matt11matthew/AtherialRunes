@@ -3,7 +3,6 @@ package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.player;
 import me.matt11matthew.atherialrunes.Constants;
 import me.matt11matthew.atherialrunes.database.DatabaseAPI;
 import me.matt11matthew.atherialrunes.database.data.player.Ban;
-import me.matt11matthew.atherialrunes.database.data.player.LocalData;
 import me.matt11matthew.atherialrunes.database.data.player.Mute;
 import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
 import me.matt11matthew.atherialrunes.game.Main;
@@ -62,6 +61,7 @@ public class PlayerMechanics extends ListenerMechanic {
 		gp.setSilver(p.getSilver());
 		gp.setCopper(p.getCopper());
 		gp.setNick(p.getNick());
+		gp.setNotoriety(p.getNotoriety());
 		gp.setAdminMode(p.isInAdminMode());
 		GamePlayer.players.put(e.getUniqueId().toString(), gp);
 		if (Rank.isStaff(gp.getName())) {
@@ -88,7 +88,7 @@ public class PlayerMechanics extends ListenerMechanic {
 				
 			}
 		}.runTaskLater(Main.getInstance(), 15L);
-		new LocalData().update(player);
+		//new LocalData().update(player);
 
 	}
 	
@@ -186,6 +186,7 @@ public class PlayerMechanics extends ListenerMechanic {
 		ap.setNick(gp.getNick());
 		ap.setAdminMode(gp.isInAdminMode());
 		ap.setCopper(gp.getCopper());
+		ap.setNotoriety(gp.getNotoriety());
 //		if (gp.isInCombat()) {
 //			Location loc = player.getLocation();
 //			Zombie zombie = loc.getWorld().spawn(loc, Zombie.class);
@@ -211,7 +212,7 @@ public class PlayerMechanics extends ListenerMechanic {
 		if (gp.isInAdminMode()) {
 			return;
 		}
-		new LocalData().save(player);
+		//new LocalData().save(player);
 	}
 	
 	@EventHandler

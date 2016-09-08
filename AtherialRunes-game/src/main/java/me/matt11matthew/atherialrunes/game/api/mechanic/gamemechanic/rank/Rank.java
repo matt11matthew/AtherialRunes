@@ -54,10 +54,10 @@ public enum Rank {
 	
 	public String getChatMessage(String name, String msg) {
 		GamePlayer gp = Main.getGamePlayer(name);
-		if (gp.isInAdminMode()) {
-			return Utils.colorCodes("&7" + gp.getNick() + ": " + ChatColor.stripColor(msg));
+		if ((isGM(name)) && (gp.isLegit())) {
+			return Utils.colorCodes("&7" + gp.getNameColor() + gp.getNick() + ": " + ChatColor.stripColor(msg));
 		}
-		return Utils.colorCodes(getTag() + name + chatColor + ChatColor.stripColor(msg));
+		return Utils.colorCodes(getTag() + gp.getNameColor() + name + chatColor + ChatColor.stripColor(msg));
 	}
 	
 	public String getTabListName() {

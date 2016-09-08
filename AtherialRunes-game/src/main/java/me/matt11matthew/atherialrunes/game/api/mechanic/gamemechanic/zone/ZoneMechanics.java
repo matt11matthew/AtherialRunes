@@ -38,8 +38,8 @@ public class ZoneMechanics extends ListenerMechanic
         Location to = e.getTo();
         if ((from.getX() != to.getX()) || (from.getY() != to.getY()) || (from.getZ() != to.getZ()))
         {
-            e.setCancelled(true);
-            p.teleport(from);
+            //e.setCancelled(true);
+           // p.teleport(from);
         }
     }
 

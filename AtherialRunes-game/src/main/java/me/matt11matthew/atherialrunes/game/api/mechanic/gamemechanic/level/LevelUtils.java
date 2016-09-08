@@ -26,9 +26,8 @@ public class LevelUtils {
 	
 	public static int getEXPNeeded(int lvl) {
 		if (lvl == 2) {
-			return 100;
+			return 1000;
 		}
-		int percent = (int) (100.0D * lvl);
-		return (int) (percent * 1.05);
+		return (int) (1000.0D * (lvl * lvl));
 	}
 }

@@ -11,7 +11,6 @@ import me.matt11matthew.atherialrunes.game.enums.MessageType;
 import me.matt11matthew.atherialrunes.game.utils.AtherialRunnable;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -55,15 +54,13 @@ public class StaffMechanics extends ListenerMechanic {
 					GamePlayer gp = Main.getGamePlayer(player.getName());
 					//NickManager manager = NickNamerAPI.getNickManager();
 					//manager.setNick(UUID.fromString(gp.getUUID()), gp.getNick());
+					gp.getPlayer().setPlayerListName(Utils.colorCodes(gp.getRank().getTabListName() + gp.getNameColor() + gp.getNick()));
 					if (Rank.isGM(player.getName())) {
 						if (gp.isVanished()) {
-							gp.getPlayer().setPlayerListName(Utils.colorCodes(ChatColor.RED + gp.getNick()));
+							gp.setNameColor("&3");
 							gp.msg(MessageType.ACTION, GameConstants.CURRENTLY_HIDDEN_MESSAGE);
-						} else {
-							gp.getPlayer().setPlayerListName(gp.getRank().getTabListName() + gp.getNick());
 						}
 					} else {
-						gp.getPlayer().setPlayerListName(gp.getRank().getTabListName() + gp.getNick());
 						Mute mute = Mute.getMute(gp.getName());
 						if (mute.isMuted()) {
 							if (mute.canUnmute()) {

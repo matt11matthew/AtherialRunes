@@ -1,8 +1,6 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item;
 
-import me.matt11matthew.atherialrunes.exceptions.NotJsonFileException;
 import me.matt11matthew.atherialrunes.utils.Utils;
-import me.matt11matthew.atherialrunes.utils.json.JSONUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -42,29 +40,18 @@ public class CustomItem {
         }
     }
 
-    /**
-     *
-     * @param file the file for the custom item
-     */
-    public CustomItem(File file) {
-        JSONObject obj = null;
+    public CustomItem(String id, JSONObject obj) {
         try {
-            obj = JSONUtils.convertStringToJSONObject(file);
-        } catch (NotJsonFileException e) {
-            e.printStackTrace();
+            String type = (String) obj.get(id + ".material");
+            String name = (String) obj.get(id + ".name");
+            List<String> lore = (JSONArray) obj.get(id + ".lore");
+            this.type = Material.getMaterial(type.toUpperCase());
+            setName(name);
+            setLore(lore);
+            this.amount = 1;
+        } catch (Exception e) {
+            return;
         }
-        this.file = file;
-        String type = (String) obj.get("material");
-        String name = (String) obj.get("name");
-        short durability = (short) obj.get("durability");
-        List<String> lore = new ArrayList<>();
-        JSONArray lore1 = (JSONArray) obj.get("lore");
-        lore.addAll(lore1);
-        this.type = Material.valueOf(type.toUpperCase());
-        setName(name);
-        setLore(lore);
-        this.durability = durability;
-        this.amount = 1;
     }
 
     /**

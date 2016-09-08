@@ -24,6 +24,7 @@
           <include>net.lingala.zip4j:zip4j</include>
           <include>me.matt11matthew.atherialrunes:AtherialRunes-common</include>
           <include>me.matt11matthew.atherialrunes:AtherialRunes-network</include>
+          <include>org.json:json</include>
         </includes>
       </resource>
     </resources>
@@ -99,6 +100,12 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.14.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20090211</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

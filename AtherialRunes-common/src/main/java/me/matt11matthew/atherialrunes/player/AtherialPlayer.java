@@ -23,6 +23,7 @@ public class AtherialPlayer {
 	private int silver;
 	private String nick;
 	private boolean adminMode;
+	private int notoriety;
 	
 	public String getName() {
 		return name;
@@ -168,5 +169,13 @@ public class AtherialPlayer {
 
 	public void setNick(String nick) {
 		this.nick = nick;
+	}
+
+	public int getNotoriety() {
+		return notoriety;
+	}
+
+	public void setNotoriety(int notoriety) {
+		this.notoriety = notoriety;
 	}
 }

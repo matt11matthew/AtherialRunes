@@ -38,7 +38,7 @@ public class SpawnerMechanics extends ListenerMechanic {
 
 	@Override
 	public LoadPriority getLoadPriority() {
-		return LoadPriority.MONITOR;
+		return LoadPriority.LOWEST;
 	}
 	
 	public void loadSpawners() {

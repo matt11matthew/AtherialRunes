@@ -1,9 +1,8 @@
 package me.matt11matthew.atherialrunes.game.enums;
 
-import org.bukkit.entity.Player;
-
-//import de.Herbystar.TTA.TTA_Methods;
+import me.matt11matthew.atherialrunes.game.utils.AtherialUtils;
 import me.matt11matthew.atherialrunes.utils.Utils;
+import org.bukkit.entity.Player;
 
 public enum MessageType {
 
@@ -19,6 +18,7 @@ public enum MessageType {
 		msg = msg.replaceAll("%TAB%", "    ");
 		switch (this) {
 			case ACTION:
+				AtherialUtils.sendActionBar(player, Utils.colorCodes(msg));
 				//TTA_Methods.sendActionBar(player, Utils.colorCodes(msg));
 				break;
 			case CHAT:

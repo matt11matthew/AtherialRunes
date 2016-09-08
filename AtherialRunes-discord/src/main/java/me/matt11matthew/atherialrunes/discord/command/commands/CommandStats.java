@@ -4,7 +4,7 @@ import de.btobastian.javacord.DiscordAPI;
 import de.btobastian.javacord.entities.User;
 import de.btobastian.javacord.entities.message.Message;
 import me.matt11matthew.atherialrunes.discord.command.Command;
-import me.matt11matthew.atherialrunes.game.mechanic.gamemechanic.level.LevelUtils;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.LevelUtils;
 
 import java.util.List;
 

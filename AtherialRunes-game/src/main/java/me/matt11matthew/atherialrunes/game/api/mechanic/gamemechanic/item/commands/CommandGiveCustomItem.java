@@ -30,9 +30,7 @@ public class CommandGiveCustomItem extends AtherialCommand {
                 String item = args[0];
                 try {
                     GamePlayer gp = Main.getGamePlayer(player.getName());
-                    if (gp.isLegit()) {
-                        return true;
-                    }
+
                     if (ItemMechanics.customItems.containsKey(item)) {
                         player.getInventory().addItem(ItemMechanics.customItems.get(item).buildItem());
                         return true;
@@ -54,9 +52,7 @@ public class CommandGiveCustomItem extends AtherialCommand {
             if (Rank.isGM(player.getName())) {
                 try {
                     GamePlayer gp = Main.getGamePlayer(player.getName());
-                    if (gp.isLegit()) {
-                        return null;
-                    }
+
                     return CommandUtils.getPossibleCompletionsForGivenArgs(args, (List<CustomItem>) ItemMechanics.customItems.values(), false);
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -30,7 +30,7 @@ public class PlayerData implements Data {
 		AtherialPlayer player = players.get(uuid);
 		if (player.isNewPlayer()) {
 			new PlayerdataTable().insert("INSERT INTO " + new PlayerdataTable().getName()
-					+ "(uuid, ign, rank, channel, combat, level, vanish, exp, skillpoints, gold, silver, copper, nick, admin, shard) "
+					+ "(uuid, ign, rank, channel, combat, level, vanish, exp, skillpoints, gold, silver, copper, nick, admin, notoriety, shard) "
 					+ "VALUES("
 					+ "'" + player.getUUID()
 					+ "', '" + player.getName()
@@ -46,6 +46,7 @@ public class PlayerData implements Data {
 					+ "', '"+ player.getCopper()
 					+ "', '"+ player.getNick()
 					+ "', '"+ player.isInAdminMode()
+					+ "', '"+ player.getNotoriety()
 					+ "', '" + player.getShard() + "') "
 					+ "ON DUPLICATE KEY UPDATE "
 					+ "uuid='" + player.getUUID()
@@ -62,6 +63,7 @@ public class PlayerData implements Data {
 					+ "', copper='" + player.getCopper()
 					+ "', nick='" + player.getNick()
 					+ "', admin='" + player.isInAdminMode()
+					+ "', notoriety='" + player.getNotoriety()
 					+ "', shard='" + player.getShard() + "'");
 		} else {
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `rank`='" + player.getRank() + "' WHERE `uuid`='" + getUUID(name) + "';");
@@ -77,6 +79,7 @@ public class PlayerData implements Data {
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `copper`='" + player.getCopper() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `nick`='" + player.getNick() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `admin`='" + player.isInAdminMode() + "' WHERE `uuid`='" + getUUID(name) + "';");
+			new PlayerdataTable().updateValue("UPDATE `" + new PlayerdataTable().getName() + "` SET `notoriety`='" + player.getNotoriety() + "' WHERE `uuid`='" + getUUID(name) + "';");
 		}
 		players.remove(uuid);
 	}
