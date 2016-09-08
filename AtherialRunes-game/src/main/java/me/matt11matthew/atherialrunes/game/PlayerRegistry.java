@@ -1,11 +1,11 @@
 package me.matt11matthew.atherialrunes.game;
 
-import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
-import me.matt11matthew.atherialrunes.game.api.registry.DataRegistry;
+        import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
+        import me.matt11matthew.atherialrunes.game.api.registry.DataRegistry;
 
-import java.lang.reflect.Field;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
+        import java.lang.reflect.Field;
+        import java.util.UUID;
+        import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Giovanni on 5-9-2016.

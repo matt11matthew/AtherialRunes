@@ -98,26 +98,26 @@ public class Main extends JavaPlugin {
 		BungeeTabListPlusBukkitAPI.registerVariable(this, new ShardNameVariable());
 		client = new GameClient();
 
-        try {
-            client.connect();
-            Log.set(Log.LEVEL_INFO);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		try {
+			client.connect();
+			Log.set(Log.LEVEL_INFO);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		//Registries must be loaded after connection establishment.
-        //After it has been loaded into the server, it can be used.
-		try
-		{
-			RegistryLoader.load().register(playerRegistry = new PlayerRegistry()).register(itemRegistry = new ItemRegistry()).manageLoad();
-		} catch (LoaderNotHandledException e)
-		{
+		//After it has been loaded into the server, it can be used.
+		try {
+			RegistryLoader.load().register(playerRegistry = new PlayerRegistry());
+			RegistryLoader.load().register(itemRegistry = new ItemRegistry());
+			RegistryLoader.load().manageLoad();
+		} catch (LoaderNotHandledException e) {
 			e.printStackTrace();
 		}
 		Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 		DatabaseAPI.loadDatabaseAPI();
 		BossbarUtils.setHPAboveHead();
-        BungeeUtils.setPlugin(this);
+		BungeeUtils.setPlugin(this);
 	}
 	
 	public String getShardFile() {
