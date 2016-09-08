@@ -1,12 +1,8 @@
 package me.matt11matthew.atherialrunes.player;
 
-import me.matt11matthew.atherialrunes.item.ItemSerialization;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
-import java.util.List;
 
 public class LocalPlayer {
 
@@ -18,7 +14,6 @@ public class LocalPlayer {
 	private String location;
 	private int hp;
 	private int maxHP;
-	private List<String> armor;
 	
 	public LocalPlayer(Player player) {
 		this.name = player.getName();
@@ -73,12 +68,6 @@ public class LocalPlayer {
 		if (!newPlayer) {
 			player.teleport(parseLocation(getLocation()));
 		}
-		String playerInv = getInventory();
-		if (playerInv != null && playerInv.length() > 0 && !playerInv.equalsIgnoreCase("null")) {
-			ItemStack[] items = ItemSerialization.fromString(playerInv, 36).getContents();
-			player.getInventory().setContents(items);
-			player.updateInventory();
-		}
 		return;
 	}
 
@@ -108,11 +97,4 @@ public class LocalPlayer {
 		this.hp = hp;
 	}
 
-	public List<String> getArmor() {
-		return armor;
-	}
-
-	public void setArmor(List<String> armor) {
-		this.armor = armor;
-	}
 }

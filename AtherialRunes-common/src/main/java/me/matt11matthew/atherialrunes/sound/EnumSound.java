@@ -4,7 +4,8 @@ import org.bukkit.Sound;
 
 public enum EnumSound {
 	
-	LEVEL_UP(Sound.ENTITY_PLAYER_LEVELUP);
+	LEVEL_UP(Sound.ENTITY_PLAYER_LEVELUP),
+	HURT(Sound.ENTITY_GENERIC_HURT);
 	
 	Sound sound;
 

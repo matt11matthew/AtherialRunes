@@ -18,6 +18,7 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhous
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.menus.FirstMenu;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.combat.CombatMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.combat.commands.CommandPvPFlag;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.damage.DamageMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item.ItemMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item.commands.CommandGiveCustomItem;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.LevelingMechanics;
@@ -41,6 +42,7 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.comma
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.commands.ban.CommandUnBan;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.commands.mute.CommandMute;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.commands.mute.CommandUnmute;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.stats.StatMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.zone.ZoneMechanics;
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.api.registry.RegistryLoader;
@@ -113,7 +115,7 @@ public class Main extends JavaPlugin {
 			RegistryLoader.load().manageLoad();
 		} catch (LoaderNotHandledException e) {
 			e.printStackTrace();
-		}
+	}
 		Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 		DatabaseAPI.loadDatabaseAPI();
 		BossbarUtils.setHPAboveHead();
@@ -212,6 +214,8 @@ public class Main extends JavaPlugin {
 		registerMechanic(new BungeeChannelListener());
 		registerMechanic(new ItemMechanics());
 		registerMechanic(new NotorietyMechanics());
+		registerMechanic(new StatMechanics());
+		registerMechanic(new DamageMechanics());
 		MechanicManager.loadMechanics();
 		
 	}
@@ -301,4 +305,5 @@ public class Main extends JavaPlugin {
 	{
 		return playerRegistry;
 	}
+
 }

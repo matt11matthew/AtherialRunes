@@ -96,7 +96,7 @@ public class PlayerData implements Data {
 				player.setShard("?");
 				player.setSkillPoints(0);
 				player.setChatChannel(1);
-				player.setEXP(0);
+				player.setEXP(0.0D);
 				player.setLevel(1);
 				player.setVanished(false);
 				player.setNewPlayer(true);
@@ -112,7 +112,7 @@ public class PlayerData implements Data {
 				String shard = rs.getString("shard");
 				int channel = rs.getInt("channel");
 				int combatTime = rs.getInt("combat");
-				long exp = rs.getLong("exp");
+				double exp = rs.getDouble("exp");
 				int level = rs.getInt("level");
 				int skillpoints = rs.getInt("skillpoints");
 				int gold = rs.getInt("gold");

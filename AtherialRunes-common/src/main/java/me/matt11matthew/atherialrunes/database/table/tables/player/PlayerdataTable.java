@@ -22,7 +22,7 @@ public class PlayerdataTable extends Table {
 				+ " `combat` INT,"
 				+ " `level` INT,"
 				+ "`vanish` varchar(20) NOT NULL,"
-				+ " `exp` BIGINT,"
+				+ " `exp` DOUBLE,"
 				+ " `skillpoints` INT,"
 				+ " `gold` INT,"
 				+ " `silver` INT,"

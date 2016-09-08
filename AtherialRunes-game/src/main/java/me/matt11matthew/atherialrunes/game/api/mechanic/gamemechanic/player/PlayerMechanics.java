@@ -3,6 +3,7 @@ package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.player;
 import me.matt11matthew.atherialrunes.Constants;
 import me.matt11matthew.atherialrunes.database.DatabaseAPI;
 import me.matt11matthew.atherialrunes.database.data.player.Ban;
+import me.matt11matthew.atherialrunes.database.data.player.LocalData;
 import me.matt11matthew.atherialrunes.database.data.player.Mute;
 import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
 import me.matt11matthew.atherialrunes.game.Main;
@@ -66,6 +67,9 @@ public class PlayerMechanics extends ListenerMechanic {
 		GamePlayer.players.put(e.getUniqueId().toString(), gp);
 		if (Rank.isStaff(gp.getName())) {
 			Main.staff.add(gp.getName());
+		}
+		if (gp.isInAdminMode()) {
+			gp.setNick(gp.getName());
 		}
 	}
 	
@@ -212,7 +216,7 @@ public class PlayerMechanics extends ListenerMechanic {
 		if (gp.isInAdminMode()) {
 			return;
 		}
-		//new LocalData().save(player);
+		new LocalData().save(player);
 	}
 	
 	@EventHandler

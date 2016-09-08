@@ -13,12 +13,10 @@ public class PlayerDamagePlayerEvent extends Event implements Cancellable {
 	private GamePlayer attacker;
 	private GamePlayer gamePlayer;
 	private boolean cancel = false;
-	private double damage;
 	
-	public PlayerDamagePlayerEvent(GamePlayer gamePlayer, GamePlayer attacker, double damage) {
+	public PlayerDamagePlayerEvent(GamePlayer gamePlayer, GamePlayer attacker) {
 		this.gamePlayer = gamePlayer;
 		this.attacker = attacker;
-		this.damage = damage;
 	}
 	
 	@Override
@@ -47,13 +45,4 @@ public class PlayerDamagePlayerEvent extends Event implements Cancellable {
 	public GamePlayer getAttacker() {
 		return attacker;
 	}
-
-	public double getDamage() {
-		return damage;
-	}
-
-	public void setDamage(double damage) {
-		this.damage = damage;
-	}
-
 }

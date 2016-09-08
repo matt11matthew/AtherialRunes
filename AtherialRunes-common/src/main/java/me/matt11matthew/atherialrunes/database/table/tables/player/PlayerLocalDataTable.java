@@ -14,7 +14,7 @@ public class PlayerLocalDataTable extends Table {
 
 	@Override
 	public void createTable() {
-		create("CREATE TABLE IF NOT EXISTS `" + getName() + "` (`uuid` VARCHAR(100) NOT NULL, `ign` varchar(20) NOT NULL, `level` INT, `food` INT, `location` varchar(200) NOT NULL, `hp` INT, `maxhp` INT, `armor` varchar(20000) NOT NULL, `inventory` varchar(20000) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+		create("CREATE TABLE IF NOT EXISTS `" + getName() + "` (`uuid` VARCHAR(100) NOT NULL, `ign` varchar(20) NOT NULL, `level` INT, `food` INT, `location` varchar(200) NOT NULL, `hp` INT, `maxhp` INT, `inventory` varchar(20000) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 	}
 	
 	public void save(Player player) {

@@ -3,23 +3,28 @@ package me.matt11matthew.atherialrunes.game.api.player;
 import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
 import me.matt11matthew.atherialrunes.database.data.player.UUIDData;
 import me.matt11matthew.atherialrunes.game.GameConstants;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item.gear.weapon.Weapon;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.ChatChannel;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.stats.item.ItemStat;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.zone.Zone;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
 import me.matt11matthew.atherialrunes.game.utils.RegionUtils;
 import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.sound.AtherialSound;
+import me.matt11matthew.atherialrunes.sound.EnumSound;
 import me.matt11matthew.atherialrunes.utils.BanUtils;
 import me.matt11matthew.atherialrunes.utils.MuteUtils;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
+import org.bukkit.EntityEffect;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 import java.util.HashMap;
@@ -35,7 +40,7 @@ public class GamePlayer {
 	private ChatChannel chatChannel;
 	private boolean vanished;
 	private int level;
-	private long exp;
+	private double exp;
 	private String expBarMessage;
 	private int skillPoints;
 	private int gold;
@@ -45,6 +50,7 @@ public class GamePlayer {
 	private boolean adminMode;
 	private int notoriety;
 	private String nameColor = "&7";
+	private Player player = null;
 
 	public GamePlayer(String name) {
 		this.name = name;
@@ -119,15 +125,18 @@ public class GamePlayer {
 	}
 	
 	public Player getPlayer() {
-		try {
-			if ((Bukkit.getPlayerExact(name) != null) && (Bukkit.getPlayerExact(name).isOnline())) {
-				Player player = Bukkit.getPlayerExact(name);
-				return player;
+		if (player == null) {
+			try {
+				if ((Bukkit.getPlayerExact(name) != null) && (Bukkit.getPlayerExact(name).isOnline())) {
+					Player player = Bukkit.getPlayerExact(name);
+					this.player = player;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			return null;
 		}
-		return null;
+		return player;
 	}
 
 	public void msg(MessageType type, String msg) {
@@ -167,11 +176,11 @@ public class GamePlayer {
 		return level;
 	}
 
-	public long getEXP() {
+	public double getEXP() {
 		return exp;
 	}
 
-	public void setEXP(long exp) {
+	public void setEXP(double exp) {
 		this.exp = exp;
 	}
 
@@ -284,5 +293,33 @@ public class GamePlayer {
 			this.notoriety = (this.notoriety - GameConstants.NOTORIETY_LOSS_IN_MORNING);
 		}
 		msg(MessageType.CHAT, "&7A new day comes, and you feel more enlightened. &c&o-" + GameConstants.NOTORIETY_LOSS_IN_MORNING + " Notoriety");
+	}
+
+	public Weapon getWeapon() {
+		return Weapon.getWeapon(getPlayer().getEquipment().getItemInMainHand());
+	}
+
+	public ItemStack getWeaponItem() {
+		return getPlayer().getEquipment().getItemInMainHand();
+	}
+
+	public double getWeaponDamage() {
+		return (ItemStat.DAMAGE.has(getWeaponItem())) ? ItemStat.DAMAGE.getInt(getWeaponItem()) : 0.0D;
+	}
+
+	public void damageByPlayer(GamePlayer damager, double damage) {
+		getPlayer().setVelocity(damager.getPlayer().getLocation().getDirection().multiply(0.4));
+		sound(new AtherialSound(EnumSound.HURT, 1.0F, 1.0F));
+		if (damage >= getPlayer().getHealth()) {
+			kill();
+			return;
+		}
+		getPlayer().setHealth((getPlayer().getHealth() - damage));
+		getPlayer().playEffect(EntityEffect.HURT);
+	}
+
+	private void kill() {
+		getPlayer().setHealth(0.0D);
+		getPlayer().spigot().respawn();
 	}
 }

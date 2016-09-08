@@ -18,10 +18,9 @@ public class LocalData implements Data {
 	public void save(Player player) {
 		AtherialPlayer a = PlayerData.getAtherialPlayer(player.getName());
 		String inventory = ItemSerialization.toString(player.getInventory());
-		String saveArmor = "";
 		if (a.isNewPlayer()) {
 			new PlayerLocalDataTable().insert("INSERT INTO " + new PlayerLocalDataTable().getName()
-					+ "(uuid, ign, level, food, location, hp, maxhp, armor, inventory) "
+					+ "(uuid, ign, level, food, location, hp, maxhp, inventory) "
 					+ "VALUES("
 					+ "'" + a.getUUID()
 					+ "', '" + a.getName()
@@ -30,7 +29,6 @@ public class LocalData implements Data {
 					+ "', '"+ parseLocation(player.getLocation())
 					+ "', '"+ (int) player.getHealth()
 					+ "', '"+ (int) player.getMaxHealth()
-					+ "', '"+ saveArmor
 					+ "', '" + inventory + "') "
 					+ "ON DUPLICATE KEY UPDATE "
 					+ "uuid='" + a.getUUID()
@@ -40,7 +38,6 @@ public class LocalData implements Data {
 					+ "', location='" + parseLocation(player.getLocation())
 					+ "', hp='" + (int) player.getHealth()
 					+ "', maxhp='" + (int) player.getMaxHealth()
-					+ "', armor='" + saveArmor
 					+ "', inventory='" + inventory + "'");
 		} else {
 			String name = player.getName();
@@ -50,7 +47,6 @@ public class LocalData implements Data {
 			new PlayerLocalDataTable().updateValue("UPDATE `" + new PlayerLocalDataTable().getName() + "` SET `hp`='" + (int) player.getHealth() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerLocalDataTable().updateValue("UPDATE `" + new PlayerLocalDataTable().getName() + "` SET `maxhp`='" + (int) player.getMaxHealth() + "' WHERE `uuid`='" + getUUID(name) + "';");
 			new PlayerLocalDataTable().updateValue("UPDATE `" + new PlayerLocalDataTable().getName() + "` SET `inventory`='" + inventory + "' WHERE `uuid`='" + getUUID(name) + "';");
-			new PlayerLocalDataTable().updateValue("UPDATE `" + new PlayerLocalDataTable().getName() + "` SET `armor`='" + saveArmor + "' WHERE `uuid`='" + getUUID(name) + "';");
 		}
 		
 	}
@@ -77,7 +73,6 @@ public class LocalData implements Data {
 				l.setHP((int) player.getHealth());
 				l.setMaxHP((int) player.getMaxHealth());
 				l.setInventory("null");
-				l.setArmor(null);
 				l.setLocation(parseLocation(player.getLocation()));
 				newPlayer = true;
 			} else {
@@ -87,7 +82,6 @@ public class LocalData implements Data {
 				l.setMaxHP(rs.getInt("maxhp"));
 				l.setInventory(rs.getString("inventory"));
 				l.setLocation(rs.getString("location"));
-				l.setArmor(null);
 				newPlayer = false;
 			}
 			l.load(player, newPlayer);

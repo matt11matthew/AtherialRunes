@@ -42,6 +42,9 @@ public class CommandKick extends AtherialCommand {
 				}
 				gp.kick(sender.getName(), reasonString);
 				return true;
+			} else {
+				sender.sendMessage(Utils.colorCodes("&c/kick <player> <time>"));
+				return true;
 			}
 		}
 		if (sender instanceof Player) {
@@ -62,6 +65,9 @@ public class CommandKick extends AtherialCommand {
 					reasonString = "You have been kicked";
 				}
 				gp.kick(player.getName(), reasonString);
+				return true;
+			} else {
+				sender.sendMessage(Utils.colorCodes("&c/kick <player> <time>"));
 				return true;
 			}
 		}
