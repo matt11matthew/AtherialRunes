@@ -27,6 +27,7 @@
                     <include>me.matt11matthew.atherialrunes:AtherialRunes-common</include>
                     <include>me.matt11matthew.atherialrunes:AtherialRunes-network</include>
                     <include>org.json:json</include>
+                    <include>codecrafter47.bungeetablistplus:bungeetablistplus-api-bukkit</include>
                 </includes>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
@@ -37,7 +38,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.5</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -63,6 +64,7 @@
                                     <include>com.esotericsoftware:minlog</include>
                                     <include>com.esotericsoftware.reflectasm:reflectasm</include>
                                     <include>org.objenesis:objenesis</include>
+                                    <include>codecrafter47.bungeetablistplus:bungeetablistplus-api-bukkit</include>
                                 </includes>
 
                             </artifactSet>
@@ -124,6 +126,12 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20090211</version>
+        </dependency>
+        <dependency>
+            <groupId>codecrafter47.bungeetablistplus</groupId>
+            <artifactId>bungeetablistplus-api-bukkit</artifactId>
+            <version>2.4.3</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

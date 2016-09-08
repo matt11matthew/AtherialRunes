@@ -112,7 +112,7 @@ public class PlayerData implements Data {
 				String shard = rs.getString("shard");
 				int channel = rs.getInt("channel");
 				int combatTime = rs.getInt("combat");
-				int exp = rs.getInt("exp");
+				long exp = rs.getLong("exp");
 				int level = rs.getInt("level");
 				int skillpoints = rs.getInt("skillpoints");
 				int gold = rs.getInt("gold");

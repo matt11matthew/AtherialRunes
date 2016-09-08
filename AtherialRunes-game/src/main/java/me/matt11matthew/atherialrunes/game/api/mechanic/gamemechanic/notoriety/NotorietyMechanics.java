@@ -86,7 +86,7 @@ public class NotorietyMechanics extends ListenerMechanic {
                     canCheck = true;
                 }
             }
-        }, (60L * 20L), (60L * 20L));
+        }, 20L, 20L);
     }
 
     @EventHandler

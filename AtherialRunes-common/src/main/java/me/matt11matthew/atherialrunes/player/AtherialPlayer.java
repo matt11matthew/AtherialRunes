@@ -15,7 +15,7 @@ public class AtherialPlayer {
 	private boolean newPlayer;
 	private int combatTime;
 	private int level;
-	private int exp;
+	private long exp;
 	private int skillPoints;
 	private boolean vanished;
 	private int gold;
@@ -115,11 +115,11 @@ public class AtherialPlayer {
 		this.level = level;
 	}
 
-	public int getEXP() {
+	public long getEXP() {
 		return exp;
 	}
 
-	public void setEXP(int exp) {
+	public void setEXP(long exp) {
 		this.exp = exp;
 	}
 

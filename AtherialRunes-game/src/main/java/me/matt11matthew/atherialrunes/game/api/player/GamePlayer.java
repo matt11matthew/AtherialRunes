@@ -35,7 +35,7 @@ public class GamePlayer {
 	private ChatChannel chatChannel;
 	private boolean vanished;
 	private int level;
-	private int exp;
+	private long exp;
 	private String expBarMessage;
 	private int skillPoints;
 	private int gold;
@@ -167,11 +167,11 @@ public class GamePlayer {
 		return level;
 	}
 
-	public int getEXP() {
+	public long getEXP() {
 		return exp;
 	}
 
-	public void setEXP(int exp) {
+	public void setEXP(long exp) {
 		this.exp = exp;
 	}
 
@@ -283,6 +283,6 @@ public class GamePlayer {
 		} else {
 			this.notoriety = (this.notoriety - GameConstants.NOTORIETY_LOSS_IN_MORNING);
 		}
-		msg(MessageType.CHAT, "&7A new day comes, and you feel more enlightened. &c-" + GameConstants.NOTORIETY_LOSS_IN_MORNING + " Notoriety”");
+		msg(MessageType.CHAT, "&7A new day comes, and you feel more enlightened. &c&o-" + GameConstants.NOTORIETY_LOSS_IN_MORNING + " Notoriety");
 	}
 }

@@ -61,8 +61,8 @@ public class PlayerMechanics extends ListenerMechanic {
 		gp.setSilver(p.getSilver());
 		gp.setCopper(p.getCopper());
 		gp.setNick(p.getNick());
-		gp.setNotoriety(p.getNotoriety());
 		gp.setAdminMode(p.isInAdminMode());
+		gp.setNotoriety(p.getNotoriety());
 		GamePlayer.players.put(e.getUniqueId().toString(), gp);
 		if (Rank.isStaff(gp.getName())) {
 			Main.staff.add(gp.getName());
@@ -185,8 +185,8 @@ public class PlayerMechanics extends ListenerMechanic {
 		ap.setSilver(gp.getSilver());
 		ap.setNick(gp.getNick());
 		ap.setAdminMode(gp.isInAdminMode());
-		ap.setCopper(gp.getCopper());
 		ap.setNotoriety(gp.getNotoriety());
+		ap.setCopper(gp.getCopper());
 //		if (gp.isInCombat()) {
 //			Location loc = player.getLocation();
 //			Zombie zombie = loc.getWorld().spawn(loc, Zombie.class);

@@ -8,7 +8,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +37,8 @@ public class CommandInvsee extends AtherialCommand {
 				Inventory inventory = Bukkit.createInventory(null, 54, pname + "'s Inventory");
 				if ((Bukkit.getPlayerExact(pname) != null) && (Bukkit.getPlayerExact(pname).isOnline())) {
 					Player t = Bukkit.getPlayerExact(pname);
-					for (ItemStack item : t.getInventory().getContents()) {
-						inventory.addItem(item);
-					}
+					player.openInventory(t.getInventory());
+					return true;
 				}
 				player.openInventory(inventory);
 				return true;

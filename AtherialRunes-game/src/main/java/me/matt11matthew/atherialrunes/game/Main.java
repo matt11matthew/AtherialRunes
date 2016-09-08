@@ -1,6 +1,7 @@
 package me.matt11matthew.atherialrunes.game;
 
 
+import codecrafter47.bungeetablistplus.api.bukkit.BungeeTabListPlusBukkitAPI;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -43,6 +44,8 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.comma
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.zone.ZoneMechanics;
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.api.registry.RegistryLoader;
+import me.matt11matthew.atherialrunes.game.api.tab.variables.NotorietyVariable;
+import me.matt11matthew.atherialrunes.game.api.tab.variables.ShardNameVariable;
 import me.matt11matthew.atherialrunes.game.commands.CommandDEV;
 import me.matt11matthew.atherialrunes.game.commands.CommandSetRank;
 import me.matt11matthew.atherialrunes.game.commands.CommandZone;
@@ -91,6 +94,8 @@ public class Main extends JavaPlugin {
 		registerMenus();
 		BungeeUtils.setPlugin(this);
 		AtherialUtils.load();
+		BungeeTabListPlusBukkitAPI.registerVariable(this, new NotorietyVariable());
+		BungeeTabListPlusBukkitAPI.registerVariable(this, new ShardNameVariable());
 		client = new GameClient();
 
         try {
@@ -246,8 +251,8 @@ public class Main extends JavaPlugin {
 		gp.setSkillPoints(p.getSkillPoints());
 		gp.setVanished(p.isVanished());
 		gp.setNick(p.getNick());
-		gp.setAdminMode(p.isInAdminMode());
 		gp.setNotoriety(p.getNotoriety());
+		gp.setAdminMode(p.isInAdminMode());
 		GamePlayer.players.put(UUIDData.getUUID(pname), gp);
 		return gp;
 	}
