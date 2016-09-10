@@ -11,7 +11,9 @@ public class HealthMechanic extends ListenerMechanic {
 
 	@Override
 	public void onEnable() {
+		print("-----------------------------------------");
 		print("[HealthMechanics] Enabling...");
+		print("-----------------------------------------");
 		registerListeners();
 		updateTask();
 	}
@@ -30,7 +32,9 @@ public class HealthMechanic extends ListenerMechanic {
 
 	@Override
 	public void onDisable() {
+		print("-----------------------------------------");
 		print("[HealthMechanics] Disabling...");
+		print("-----------------------------------------");
 		for (Player pl : Bukkit.getServer().getOnlinePlayers()) {
 			BossbarUtils.removeBar(pl);
 		}

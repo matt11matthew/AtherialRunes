@@ -12,14 +12,18 @@ public class LevelingMechanics extends ListenerMechanic {
 
 	@Override
 	public void onEnable() {
+		print("-----------------------------------------");
 		print("[LevelingMechanics] Enabling...");
+		print("-----------------------------------------");
 		registerListeners();
 		task();
 	}
 
 	@Override
 	public void onDisable() {
+		print("-----------------------------------------");
 		print("[LevelingMechanics] Disabling...");
+		print("-----------------------------------------");
 	}
 
 	@Override
@@ -35,7 +39,7 @@ public class LevelingMechanics extends ListenerMechanic {
 				Bukkit.getOnlinePlayers().forEach(player -> {
 					GamePlayer gp = Main.getGamePlayer(player.getName());
 					if (!gp.isVanished()) {
-						gp.setExpBarMessage("&c&lLevel: &a" + gp.getLevel() + " &e[" + gp.getEXP() + "/" + LevelUtils.getEXPNeeded((gp.getLevel() + 1)) + " &lEXP&e]");
+						gp.setExpBarMessage("&c&lLevel: &a" + gp.getLevel() + " &6[" + gp.getEXP() + "/" + LevelUtils.getEXPNeeded((gp.getLevel() + 1)) + " &lEXP&6]");
 						gp.msg(MessageType.ACTION, gp.getExpBarMessage());
 					}
 				});

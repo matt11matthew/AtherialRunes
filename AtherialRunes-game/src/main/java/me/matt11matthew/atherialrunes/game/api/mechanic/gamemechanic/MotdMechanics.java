@@ -11,13 +11,17 @@ public class MotdMechanics extends ListenerMechanic {
 
 	@Override
 	public void onEnable() {
+		print("-----------------------------------------");
 		print("[MOTDMechanics] Enabling...");
+		print("-----------------------------------------");
 		registerListeners();
 	}
 
 	@Override
 	public void onDisable() {
+		print("-----------------------------------------");
 		print("[MOTDMechanics] Disabling...");
+		print("-----------------------------------------");
 	}
 
 	@Override

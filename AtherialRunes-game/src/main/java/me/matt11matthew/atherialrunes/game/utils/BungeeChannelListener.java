@@ -84,7 +84,6 @@ public class BungeeChannelListener extends ListenerMechanic implements PluginMes
 
 	@Override
 	public LoadPriority getLoadPriority() {
-		// TODO Auto-generated method stub
-		return null;
+		return LoadPriority.NORMAL;
 	}
 }

@@ -20,13 +20,17 @@ public class ItemMechanics extends ListenerMechanic {
     @Override
     public void onEnable() {
         registerListeners();
+        print("-----------------------------------------");
         print("[ItemMechanics] Enabling...");
+        print("-----------------------------------------");
         loadCustomItems();
     }
 
     @Override
     public void onDisable() {
+        print("-----------------------------------------");
         print("[ItemMechanics] Disabling...");
+        print("-----------------------------------------");
     }
 
     @Override

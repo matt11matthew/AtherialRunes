@@ -17,7 +17,9 @@ public class NotorietyMechanics extends ListenerMechanic {
 
     @Override
     public void onEnable() {
+        print("-----------------------------------------");
         print("[NotorietyMechanics] Enabling...");
+        print("-----------------------------------------");
         registerListeners();
         task();
         timeTask();
@@ -26,7 +28,9 @@ public class NotorietyMechanics extends ListenerMechanic {
 
     @Override
     public void onDisable() {
+        print("-----------------------------------------");
         print("[NotorietyMechanics] Disabling...");
+        print("-----------------------------------------");
     }
 
     @Override

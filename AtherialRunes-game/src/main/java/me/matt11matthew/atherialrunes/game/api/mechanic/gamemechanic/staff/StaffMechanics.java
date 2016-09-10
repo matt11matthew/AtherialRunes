@@ -20,14 +20,18 @@ public class StaffMechanics extends ListenerMechanic {
 
 	@Override
 	public void onEnable() {
+		print("-----------------------------------------");
 		print("[StaffMechanics] Enabling...");
+		print("-----------------------------------------");
 		registerListeners();
 		task();
 	}
 
 	@Override
 	public void onDisable() {
+		print("-----------------------------------------");
 		print("[StaffMechanics] Disabling...");
+		print("-----------------------------------------");
 	}
 
 	@Override

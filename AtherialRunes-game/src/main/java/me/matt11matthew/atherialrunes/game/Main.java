@@ -1,15 +1,10 @@
 package me.matt11matthew.atherialrunes.game;
 
 
-import codecrafter47.bungeetablistplus.api.bukkit.BungeeTabListPlusBukkitAPI;
-import com.esotericsoftware.minlog.Log;
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import me.matt11matthew.atherialrunes.command.AtherialCommandManager;
 import me.matt11matthew.atherialrunes.database.DatabaseAPI;
 import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
 import me.matt11matthew.atherialrunes.database.data.player.UUIDData;
-import me.matt11matthew.atherialrunes.game.api.exception.LoaderNotHandledException;
 import me.matt11matthew.atherialrunes.game.api.mechanic.Mechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.MechanicManager;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.HealthMechanic;
@@ -46,18 +41,14 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.stats.StatM
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.zone.ZoneMechanics;
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.api.player.PlayerToggle;
-import me.matt11matthew.atherialrunes.game.api.registry.RegistryLoader;
-import me.matt11matthew.atherialrunes.game.api.tab.variables.NotorietyVariable;
-import me.matt11matthew.atherialrunes.game.api.tab.variables.ShardNameVariable;
 import me.matt11matthew.atherialrunes.game.commands.CommandDEV;
 import me.matt11matthew.atherialrunes.game.commands.CommandSetRank;
 import me.matt11matthew.atherialrunes.game.commands.CommandZone;
 import me.matt11matthew.atherialrunes.game.utils.AtherialUtils;
 import me.matt11matthew.atherialrunes.game.utils.BossbarUtils;
 import me.matt11matthew.atherialrunes.game.utils.BungeeChannelListener;
-import me.matt11matthew.atherialrunes.game.utils.NetworkClientListener;
 import me.matt11matthew.atherialrunes.menu.MenuManager;
-import me.matt11matthew.atherialrunes.network.GameClient;
+import me.matt11matthew.atherialrunes.network.NetworkUtils;
 import me.matt11matthew.atherialrunes.network.ShardInfo;
 import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
@@ -79,11 +70,11 @@ public class Main extends JavaPlugin {
 	private static Main instance;
 	
 	public static List<String> staff = new ArrayList<String>();
-	
-	private static GameClient client;
+
 	private static ShardInfo shard;
 	private String shardId;
 
+	private String port;
 	//** registries **//
 	private ItemRegistry itemRegistry;
 	private PlayerRegistry playerRegistry;
@@ -93,34 +84,16 @@ public class Main extends JavaPlugin {
 		print("Enabling game...");
 		loadShard();
 		registerCommands();
+		BungeeUtils.setPlugin(this);
 		registerMechanics();
 		registerMenus();
-		BungeeUtils.setPlugin(this);
 		AtherialUtils.load();
-		BungeeTabListPlusBukkitAPI.registerVariable(this, new NotorietyVariable());
-		BungeeTabListPlusBukkitAPI.registerVariable(this, new ShardNameVariable());
-		client = new GameClient();
-
-		try {
-			client.connect();
-			Log.set(Log.LEVEL_INFO);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		//Registries must be loaded after connection establishment.
-		//After it has been loaded into the server, it can be used.
-		try {
-			RegistryLoader.load().register(playerRegistry = new PlayerRegistry());
-			RegistryLoader.load().register(itemRegistry = new ItemRegistry());
-			RegistryLoader.load().manageLoad();
-		} catch (LoaderNotHandledException e) {
-			e.printStackTrace();
-	}
-		Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 		DatabaseAPI.loadDatabaseAPI();
 		BossbarUtils.setHPAboveHead();
-		BungeeUtils.setPlugin(this);
+		NetworkUtils.registerServer("127.0.0.1", port, Integer.parseInt(shardId));
+		NetworkUtils.registerServer("127.0.0.1", "25667", 1);
+		NetworkUtils.load();
+		NetworkUtils.sendPacketCrossServer("[online]" + shard.getPseudoName(), Integer.parseInt(shardId), true);
 	}
 	
 	public String getShardFile() {
@@ -162,6 +135,9 @@ public class Main extends JavaPlugin {
 		for (int i = 0; i < s.length; i++) {
 			if (s[i].contains("id: ")) {
 				shardId = s[i].split("id: ")[1].trim();
+			}
+			if (s[i].contains("port: ")) {
+				port = s[i].split("port: ")[1].trim();
 			}
 		}
 		shard = ShardInfo.getByShardID(shardId);
@@ -211,7 +187,6 @@ public class Main extends JavaPlugin {
 		registerMechanic(new ShardMechanics());
 		registerMechanic(new StaffMechanics());
 		registerMechanic(new SpawnerMechanics());
-		registerMechanic(new NetworkClientListener());
 		registerMechanic(new BungeeChannelListener());
 		registerMechanic(new ItemMechanics());
 		registerMechanic(new NotorietyMechanics());
@@ -220,17 +195,6 @@ public class Main extends JavaPlugin {
 		MechanicManager.loadMechanics();
 		
 	}
-	
-	 public static void sendNetworkMessage(String task, String message, String... contents) {
-	        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-	        out.writeUTF(task);
-	        out.writeUTF(message);
-
-	        for (String s : contents)
-	            out.writeUTF(s);
-
-	        getClient().sendTCP(out.toByteArray());
-	    }
 	
 	private void registerMenus() {
 		MenuManager.registerMenu(new FirstMenu());
@@ -283,14 +247,6 @@ public class Main extends JavaPlugin {
 		Main.shard = shard;
 	}
 
-	public static GameClient getClient() {
-		return client;
-	}
-
-	public static void setClient(GameClient client) {
-		Main.client = client;
-	}
-
 	public static void stop() {
 		Bukkit.getServer().broadcastMessage(Utils.colorCodes("&cStopping"));
 		Bukkit.getServer().getOnlinePlayers().forEach(player -> {
@@ -310,4 +266,11 @@ public class Main extends JavaPlugin {
 		return playerRegistry;
 	}
 
+	public String getPort() {
+		return port;
+	}
+
+	public void setPort(String port) {
+		this.port = port;
+	}
 }

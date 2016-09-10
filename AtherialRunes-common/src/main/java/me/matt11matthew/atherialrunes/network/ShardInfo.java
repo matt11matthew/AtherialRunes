@@ -7,8 +7,8 @@ public enum ShardInfo
 {
 
     // SHARD //
-    US0("us0", "US-0", new ServerAddress("localhost", 25571)),
-	US1("us1", "US-1", new ServerAddress("localhost", 25572));
+    US0("0", "US-0", new ServerAddress("localhost", 25571)),
+	US1("1", "US-1", new ServerAddress("localhost", 25572));
   
     private final String shardID;
     private final String pseudoName;

@@ -8,38 +8,36 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
 
-public class ZoneMechanics extends ListenerMechanic
-{
+public class ZoneMechanics extends ListenerMechanic {
 
     @Override
-    public void onEnable()
-    {
+    public void onEnable() {
+        print("-----------------------------------------");
         print("[ZoneMechanics] Enabling...");
+        print("-----------------------------------------");
         registerListeners();
     }
 
     @Override
-    public void onDisable()
-    {
-        print("[ZoneMechanics] Disabing...");
+    public void onDisable() {
+        print("-----------------------------------------");
+        print("[ZoneMechanics] Disabling...");
+        print("-----------------------------------------");
     }
 
     @Override
-    public LoadPriority getLoadPriority()
-    {
+    public LoadPriority getLoadPriority() {
         return LoadPriority.NORMAL;
     }
 
     @EventHandler
-    public void onMove(PlayerMoveEvent e)
-    {
+    public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         Location from = e.getFrom();
         Location to = e.getTo();
-        if ((from.getX() != to.getX()) || (from.getY() != to.getY()) || (from.getZ() != to.getZ()))
-        {
+        if ((from.getX() != to.getX()) || (from.getY() != to.getY()) || (from.getZ() != to.getZ())) {
             //e.setCancelled(true);
-           // p.teleport(from);
+            // p.teleport(from);
         }
     }
 

@@ -16,7 +16,9 @@ public class AuctionHouseMechanics extends ListenerMechanic {
 
 	@Override
 	public void onEnable() {
+		print("-----------------------------------------");
 		print("[AuctionHouseMechanics] Enabling...");
+		print("-----------------------------------------");
 		registerListeners();
 		new AuctionHouseTable().createTable();
 		loadItems();
@@ -24,7 +26,9 @@ public class AuctionHouseMechanics extends ListenerMechanic {
 
 	@Override
 	public void onDisable() {
+		print("-----------------------------------------");
 		print("[AuctionHouseMechanics] Disabling...");
+		print("-----------------------------------------");
 		saveItems();
 	}
 

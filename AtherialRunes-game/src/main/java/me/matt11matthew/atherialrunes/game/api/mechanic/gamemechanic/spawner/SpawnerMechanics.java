@@ -25,14 +25,18 @@ public class SpawnerMechanics extends ListenerMechanic {
 
 	@Override
 	public void onEnable() {
+		print("-----------------------------------------");
 		print("[SpawnerMechanics] Enabling...");
+		print("-----------------------------------------");
 		registerListeners();
 		loadSpawners();
 	}
 
 	@Override
 	public void onDisable() {
+		print("-----------------------------------------");
 		print("[SpawnerMechanics] Disabling...");
+		print("-----------------------------------------");
 		saveSpawners();
 	}
 

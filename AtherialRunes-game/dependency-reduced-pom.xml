@@ -58,7 +58,6 @@
                   <include>com.esotericsoftware:minlog</include>
                   <include>com.esotericsoftware.reflectasm:reflectasm</include>
                   <include>org.objenesis:objenesis</include>
-                  <include>codecrafter47.bungeetablistplus:bungeetablistplus-api-bukkit</include>
                 </includes>
               </artifactSet>
             </configuration>

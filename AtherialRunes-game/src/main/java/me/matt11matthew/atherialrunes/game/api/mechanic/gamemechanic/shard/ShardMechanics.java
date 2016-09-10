@@ -27,7 +27,9 @@ public class ShardMechanics extends ListenerMechanic {
 	
 	@Override
 	public void onEnable() {
+		print("-----------------------------------------");
 		print("[ShardMechanics] Enabling...");
+		print("-----------------------------------------");
 		registerListeners();
 		loadShards();
 		enableShards();
@@ -35,7 +37,9 @@ public class ShardMechanics extends ListenerMechanic {
 
 	@Override
 	public void onDisable() {
+		print("-----------------------------------------");
 		print("[ShardMechanics] Disabling...");
+		print("-----------------------------------------");
 	}
 
 	@Override

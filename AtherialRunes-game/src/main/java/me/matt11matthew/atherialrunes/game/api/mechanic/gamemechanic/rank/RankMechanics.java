@@ -24,13 +24,17 @@ public class RankMechanics extends ListenerMechanic {
 	
 	@Override
 	public void onEnable() {
+		print("-----------------------------------------");
 		print("[RankMechanics] Enabling...");
+		print("-----------------------------------------");
 		registerListeners();
 	}
 
 	@Override
 	public void onDisable() {
+		print("-----------------------------------------");
 		print("[RankMechanics] Disabling...");
+		print("-----------------------------------------");
 	}
 
 	@Override

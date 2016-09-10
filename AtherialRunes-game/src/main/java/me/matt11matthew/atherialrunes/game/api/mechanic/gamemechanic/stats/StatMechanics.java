@@ -7,13 +7,17 @@ public class StatMechanics extends ListenerMechanic {
 
     @Override
     public void onEnable() {
+        print("-----------------------------------------");
         print("[StatMechanics] Enabling...");
+        print("-----------------------------------------");
         registerListeners();
     }
 
     @Override
     public void onDisable() {
+        print("-----------------------------------------");
         print("[StatMechanics] Disabling...");
+        print("-----------------------------------------");
     }
 
     @Override

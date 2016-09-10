@@ -15,14 +15,18 @@ public class CombatMechanics extends ListenerMechanic {
 
 	@Override
 	public void onEnable() {
+		print("-----------------------------------------");
 		print("[CombatMechanics] Enabling...");
+		print("-----------------------------------------");
 		registerListeners();
 		combatTimeTask();
 	}
 
 	@Override
 	public void onDisable() {
+		print("-----------------------------------------");
 		print("[CombatMechanics] Disabling...");
+		print("-----------------------------------------");
 	}
 
 	@Override

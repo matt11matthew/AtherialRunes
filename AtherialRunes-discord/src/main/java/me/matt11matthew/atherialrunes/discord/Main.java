@@ -1,20 +1,23 @@
 package me.matt11matthew.atherialrunes.discord;
 
+import de.btobastian.javacord.DiscordAPI;
+import de.btobastian.javacord.Javacord;
+import me.matt11matthew.atherialrunes.Constants;
 import me.matt11matthew.atherialrunes.discord.command.CommandManager;
 import me.matt11matthew.atherialrunes.discord.command.commands.CommandInfo;
 import me.matt11matthew.atherialrunes.discord.command.commands.CommandStats;
-import org.json.simple.JSONObject;
 
 public class Main {
 	
 	public static void main(String args[]) {
-		JSONObject obj = new JSONObject();
-		obj.put("matthew.matt", "matthew");
-		System.out.print(obj);
-//		DiscordAPI api = Javacord.getApi(Constants.DISCORD_BOT_TOKEN, true);
-//		api.connectBlocking();
-//		api.registerListener(new CommandManager());
-//		registerCommands();
+		enableDiscord();
+	}
+
+	public static void enableDiscord() {
+		DiscordAPI api = Javacord.getApi(Constants.DISCORD_BOT_TOKEN, true);
+		api.connectBlocking();
+		api.registerListener(new CommandManager());
+		registerCommands();
 	}
 	
 	private static void registerCommands() {

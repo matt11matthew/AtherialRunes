@@ -32,13 +32,17 @@ public class PlayerMechanics extends ListenerMechanic {
 
 	@Override
 	public void onEnable() {
+		print("-----------------------------------------");
 		print("[PlayerMechanics] Enabling...");
+		print("-----------------------------------------");
 		registerListeners();
 	}
 
 	@Override
 	public void onDisable() {
+		print("-----------------------------------------");
 		print("[PlayerMechanics] Disabling...");
+		print("-----------------------------------------");
 	}
 
 	@Override
