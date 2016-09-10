@@ -15,7 +15,7 @@ public class AtherialRunnable implements org.bukkit.scheduler.BukkitScheduler {
 
 	static AtherialRunnable instance = null;
 
-	public AtherialRunnable getInstance() {
+	public static AtherialRunnable getInstance() {
 		if (instance == null) {
 			instance = new AtherialRunnable();
 		}

@@ -7,7 +7,6 @@ public class MechanicManager {
 	public static HashMap<String, Mechanic> mechanics = new HashMap<String, Mechanic>();
 
 	public static void loadMechanics() {
-		//mechanics.values().stream().forEach(Mechanic::enable);
 		mechanics.values().stream().filter(mechanic -> mechanic.getLoadPriority() == LoadPriority.MONITOR).forEach(Mechanic::enable);
 		mechanics.values().stream().filter(mechanic -> mechanic.getLoadPriority() == LoadPriority.HIGHEST).forEach(Mechanic::enable);
 		mechanics.values().stream().filter(mechanic -> mechanic.getLoadPriority() == LoadPriority.HIGH).forEach(Mechanic::enable);

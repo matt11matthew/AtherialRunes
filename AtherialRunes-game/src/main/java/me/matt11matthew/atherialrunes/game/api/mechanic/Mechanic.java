@@ -4,7 +4,6 @@ import com.esotericsoftware.kryonet.Listener;
 import me.matt11matthew.atherialrunes.game.Main;
 
 public abstract class Mechanic extends Listener {
-	
 	public abstract void onEnable();
 	
 	public abstract void onDisable();

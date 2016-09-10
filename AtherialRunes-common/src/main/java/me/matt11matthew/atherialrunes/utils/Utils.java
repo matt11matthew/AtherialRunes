@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Utils {
@@ -79,6 +80,15 @@ public class Utils {
 		return null;
 	}
 
+	public static String getRandomFromList(List<String> list) {
+		if (list.size() == 1) {
+			return list.get(0);
+		}
+		Random random = new Random();
+		int r = random.nextInt(list.size());
+		String pick = list.get(r);
+		return pick;
+	}
 	/**
 	 *
 	 * @param s input
