@@ -17,7 +17,12 @@ public class MechanicManager {
 	}
 
 	public static void disableMechanics() {
-		mechanics.values().stream().forEach(Mechanic::disable);
+		mechanics.values().stream().filter(mechanic -> mechanic.getLoadPriority() == LoadPriority.MONITOR).forEach(Mechanic::disable);
+		mechanics.values().stream().filter(mechanic -> mechanic.getLoadPriority() == LoadPriority.HIGHEST).forEach(Mechanic::disable);
+		mechanics.values().stream().filter(mechanic -> mechanic.getLoadPriority() == LoadPriority.HIGH).forEach(Mechanic::disable);
+		mechanics.values().stream().filter(mechanic -> mechanic.getLoadPriority() == LoadPriority.NORMAL).forEach(Mechanic::disable);
+		mechanics.values().stream().filter(mechanic -> mechanic.getLoadPriority() == LoadPriority.LOW).forEach(Mechanic::disable);
+		mechanics.values().stream().filter(mechanic -> mechanic.getLoadPriority() == LoadPriority.LOWEST).forEach(Mechanic::disable);
 	}
 	
 }

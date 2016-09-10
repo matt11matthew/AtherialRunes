@@ -16,6 +16,7 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialTradeChatEvent;
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.api.player.PlayerToggle;
+import me.matt11matthew.atherialrunes.game.utils.message.BanMessage;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Bukkit;
@@ -173,7 +174,13 @@ public class PlayerMechanics extends ListenerMechanic {
 				Ban.save(ban);
 				return;
 			} else {
-				e.disallow(Result.KICK_BANNED, Utils.colorCodes(ban.getReason()));
+				BanMessage message = new BanMessage();
+				message.append("");
+				message.append("&cYour account has been &nPERMANENTLY&c disabled");
+				message.append("");
+				message.append("&7For further information about this suspension, please visit");
+				message.append("                   &7&n" + Constants.WEBSITE_LINK);
+				e.disallow(Result.KICK_OTHER, message.getMessage());
 				Ban.save(ban);
 				return;
 			}

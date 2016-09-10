@@ -9,6 +9,7 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.Mechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.MechanicManager;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.HealthMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.MotdMechanics;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.ServerMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.AuctionHouseMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.menus.FirstMenu;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.combat.CombatMechanics;
@@ -42,6 +43,7 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.zone.ZoneMe
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.api.player.PlayerToggle;
 import me.matt11matthew.atherialrunes.game.commands.CommandDEV;
+import me.matt11matthew.atherialrunes.game.commands.CommandReload;
 import me.matt11matthew.atherialrunes.game.commands.CommandSetRank;
 import me.matt11matthew.atherialrunes.game.commands.CommandZone;
 import me.matt11matthew.atherialrunes.game.utils.AtherialUtils;
@@ -53,7 +55,6 @@ import me.matt11matthew.atherialrunes.network.ShardInfo;
 import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.utils.Utils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -173,9 +174,11 @@ public class Main extends JavaPlugin {
 		cm.registerCommand(new CommandGiveCustomItem("givecustomitem", "/givecustomitem <item>", "Gives yourself a custom item.", Arrays.asList("addcustomitem")));
 		cm.registerCommand(new CommandAdminMode("adminmode", "/adminmode <nick>", "Go into adminmode", Arrays.asList("globaladminmode")));
 		cm.registerCommand(new CommandAddEXP("addexp", "/addexp <player> <exp>", "Gives yourself exp", Arrays.asList("giveexp")));
+		cm.registerCommand(new CommandReload("gamereload", "/gamereload", "Reloads game stuff", Arrays.asList("reloadgame")));
 	}
 	
 	private void registerMechanics() {
+		registerMechanic(new ServerMechanics());
 		registerMechanic(new LevelingMechanics());
 		registerMechanic(new HealthMechanic());
 		registerMechanic(new RankMechanics());
@@ -247,13 +250,7 @@ public class Main extends JavaPlugin {
 		Main.shard = shard;
 	}
 
-	public static void stop() {
-		Bukkit.getServer().broadcastMessage(Utils.colorCodes("&cStopping"));
-		Bukkit.getServer().getOnlinePlayers().forEach(player -> {
-			player.kickPlayer(Utils.colorCodes("&c&lServer rebooting"));
-		});
-		Bukkit.getServer().spigot().restart();
-	}
+	public static void stop() {}
 
 	//get registries
 	public ItemRegistry getItemRegistry()

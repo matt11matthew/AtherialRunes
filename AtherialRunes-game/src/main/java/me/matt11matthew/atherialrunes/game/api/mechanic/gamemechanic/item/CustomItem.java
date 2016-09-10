@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CustomItem {
 
@@ -44,14 +45,23 @@ public class CustomItem {
         try {
             String type = (String) obj.get(id + ".material");
             String name = (String) obj.get(id + ".name");
-            List<String> lore = (JSONArray) obj.get(id + ".lore");
+            List<String> loreList = (JSONArray) obj.get(id + ".lore");
             this.type = Material.getMaterial(type.toUpperCase());
             setName(name);
-            setLore(lore);
+            setLore(loreList);
             this.amount = 1;
         } catch (Exception e) {
             return;
         }
+    }
+
+    private int random(int low, int high) {
+        Random r = new Random();
+        int num = r.nextInt((high - low + 1)) + low;
+        if (num < 1) {
+            num = 1;
+        }
+        return num;
     }
 
     /**
@@ -150,11 +160,22 @@ public class CustomItem {
         ItemStack item = new ItemStack(type);
         ItemMeta im = item.getItemMeta();
         if (!item_lore.isEmpty()) {
-            List<String> lore = new ArrayList<>();
-            for (String allLore : item_lore) {
-                lore.add(Utils.colorCodes(allLore));
+            List<String> loreList = item_lore;
+            List<String> newLore = new ArrayList<>();
+            for (String lore : loreList) {
+                if (lore.contains("(")) {
+                    String value = lore.split("\\)")[0].split("\\(")[1].trim();
+                    int low = Integer.parseInt(value.split("~")[0]);
+                    int high = Integer.parseInt(value.split("~")[1]);
+                    int val = random(low, high);
+                    lore = lore.replaceAll("(" + low + "~" + high + ")", val + "");
+                }
+                newLore.add(Utils.colorCodes(lore));
             }
-            im.setLore(lore);
+            for (String allLore : newLore) {
+                newLore.add(Utils.colorCodes(allLore));
+            }
+            im.setLore(newLore);
         }
         if (name != null) {
             im.setDisplayName(Utils.colorCodes(name));

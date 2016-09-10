@@ -1,5 +1,8 @@
 package me.matt11matthew.atherialrunes.game;
 
+import me.matt11matthew.atherialrunes.Constants;
+import me.matt11matthew.atherialrunes.game.utils.message.KickMessage;
+
 public class GameConstants {
 
 	public static final int COMBAT_TIME = 10;
@@ -14,4 +17,6 @@ public class GameConstants {
 	public static final long MORNING_AT_TIME = 0L;
 
 	public static final String WORLD_NAME = "AtherialRunes";
+
+	public static final String SERVER_REBOOTING_KICK_MESSAGE = new KickMessage().append("&aThe Server is Rebooting").append("&7&n" + Constants.WEBSITE_LINK).getMessage();
 }

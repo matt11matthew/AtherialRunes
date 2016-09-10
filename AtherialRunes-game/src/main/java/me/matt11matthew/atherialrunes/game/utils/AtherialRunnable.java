@@ -13,10 +13,22 @@ import java.util.concurrent.Future;
 
 public class AtherialRunnable implements org.bukkit.scheduler.BukkitScheduler {
 
-	public static AtherialRunnable getInstance() {
-		return new AtherialRunnable();
+	static AtherialRunnable instance = null;
+
+	public AtherialRunnable getInstance() {
+		if (instance == null) {
+			instance = new AtherialRunnable();
+		}
+		return instance;
 	}
-	
+	public int runRepeatingTask(Runnable runnable, long l, long l2) {
+		return scheduleSyncRepeatingTask(Main.getInstance(), runnable, l, l2);
+	}
+
+	public int runAsyncRepeatingTask(Runnable runnable, long l, long l2) {
+		return scheduleAsyncRepeatingTask(Main.getInstance(), runnable, l, l2);
+	}
+
 	@Override
 	public <T> Future<T> callSyncMethod(Plugin arg0, Callable<T> arg1) {
 		return Bukkit.getScheduler().callSyncMethod(arg0, arg1);
@@ -25,23 +37,19 @@ public class AtherialRunnable implements org.bukkit.scheduler.BukkitScheduler {
 	@Override
 	public void cancelAllTasks() {
 		Bukkit.getScheduler().cancelAllTasks();
-		
+
 	}
 
 	@Override
 	public void cancelTask(int arg0) {
 		Bukkit.getScheduler().cancelTask(arg0);
-		
+
 	}
 
 	@Override
 	public void cancelTasks(Plugin arg0) {
 		Bukkit.getScheduler().cancelTasks(arg0);
-		
-	}
-	
-	public int runRepeatingTask(Runnable runnable, long l, long l2) {
-		return scheduleSyncRepeatingTask(Main.getInstance(), runnable, l, l2);
+
 	}
 
 	@Override
@@ -180,4 +188,7 @@ public class AtherialRunnable implements org.bukkit.scheduler.BukkitScheduler {
 	public int scheduleSyncRepeatingTask(Plugin arg0, BukkitRunnable arg1, long arg2, long arg3) {
 		return Bukkit.getScheduler().scheduleSyncRepeatingTask(arg0, arg1, arg2, arg3);
 	}
+
 }
+
+

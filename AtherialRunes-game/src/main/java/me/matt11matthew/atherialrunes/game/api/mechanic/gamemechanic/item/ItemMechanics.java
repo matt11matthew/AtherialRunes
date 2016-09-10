@@ -5,6 +5,7 @@ import me.matt11matthew.atherialrunes.exceptions.NotJsonFileException;
 import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.commands.ReloadException;
 import me.matt11matthew.atherialrunes.game.utils.json.JSONUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -41,7 +42,7 @@ public class ItemMechanics extends ListenerMechanic {
     /**
      * loads custom items
      */
-    public void loadCustomItems() {
+    private static void loadCustomItems() {
         File itemFile = new File(Main.getInstance().getDataFolder() + "/custom_items/", "items.json");
 
         JSONObject obj = null;
@@ -55,6 +56,15 @@ public class ItemMechanics extends ListenerMechanic {
             Main.print(item);
             CustomItem customItem = new CustomItem(item, obj);
             customItems.put(item, customItem);
+        }
+    }
+
+    public static void reload() throws ReloadException {
+        customItems.clear();
+        try {
+            loadCustomItems();
+        } catch (Exception e) {
+            throw new ReloadException("ItemMechanics");
         }
     }
 }
