@@ -1,4 +1,4 @@
-package me.matt11matthew.atherialrunes.network;
+package me.matt11matthew.atherialrunes.game.network;
 
 import org.apache.commons.lang.StringUtils;
 

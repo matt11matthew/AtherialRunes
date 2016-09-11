@@ -24,8 +24,6 @@
           <include>net.lingala.zip4j:zip4j</include>
           <include>me.matt11matthew.atherialrunes:AtherialRunes-common</include>
           <include>me.matt11matthew.atherialrunes:AtherialRunes-network</include>
-          <include>org.json:json</include>
-          <include>codecrafter47.bungeetablistplus:bungeetablistplus-api-bukkit</include>
         </includes>
       </resource>
     </resources>

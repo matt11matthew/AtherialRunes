@@ -28,6 +28,7 @@
         <module name="AtherialRunes-lobby" />
         <module name="AtherialRunes-network" />
         <module name="AtherialRunes-proxy" />
+        <module name="AtherialRunes-tools" />
         <module name="DungeonRealms-bootstrap" />
       </profile>
     </annotationProcessing>
@@ -39,6 +40,7 @@
       <module name="AtherialRunes-lobby" target="1.8" />
       <module name="AtherialRunes-network" target="1.8" />
       <module name="AtherialRunes-proxy" target="1.8" />
+      <module name="AtherialRunes-tools" target="1.8" />
       <module name="DungeonRealms-bootstrap" target="1.8" />
     </bytecodeTargetLevel>
   </component>

@@ -14,6 +14,7 @@
         <module>AtherialRunes-discord</module>
         <module>AtherialRunes-game</module>
         <module>AtherialRunes-network</module>
+		<module>AtherialRunes-tools</module>
     </modules>
 
     <build>

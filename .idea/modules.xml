@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/AtherialRunes-lobby/AtherialRunes-lobby.iml" filepath="$PROJECT_DIR$/AtherialRunes-lobby/AtherialRunes-lobby.iml" />
       <module fileurl="file://$PROJECT_DIR$/AtherialRunes-network/AtherialRunes-network.iml" filepath="$PROJECT_DIR$/AtherialRunes-network/AtherialRunes-network.iml" />
       <module fileurl="file://$PROJECT_DIR$/AtherialRunes-proxy/AtherialRunes-proxy.iml" filepath="$PROJECT_DIR$/AtherialRunes-proxy/AtherialRunes-proxy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AtherialRunes-tools/AtherialRunes-tools.iml" filepath="$PROJECT_DIR$/AtherialRunes-tools/AtherialRunes-tools.iml" />
       <module fileurl="file://$PROJECT_DIR$/AtherialRunes-bootstrap/DungeonRealms-bootstrap.iml" filepath="$PROJECT_DIR$/AtherialRunes-bootstrap/DungeonRealms-bootstrap.iml" />
     </modules>
   </component>

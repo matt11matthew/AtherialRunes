@@ -3,9 +3,6 @@ package me.matt11matthew.atherialrunes;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class Constants {
@@ -17,7 +14,6 @@ public class Constants {
 	public static final String[] GLOBAL_ADMINS = {"Jackychen1999", "Kav_"};
 
 	public static final String DEFAULT_TOGGLES_STRING = "debug,pvp,";
-	public static final List<String> DEFAULT_TOGGLES = new ArrayList<>(Arrays.asList("debug", "pvp"));
 
 	/**
 	 *

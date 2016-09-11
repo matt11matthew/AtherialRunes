@@ -9,9 +9,7 @@ import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class PlayerData implements Data {
 	
@@ -113,7 +111,7 @@ public class PlayerData implements Data {
 				player.setSilver(0);
 				player.setNick(player.getName());
 				player.setAdminMode(false);
-				player.setToggles(Constants.DEFAULT_TOGGLES);
+				player.setToggles(Constants.DEFAULT_TOGGLES_STRING);
 			} else {
 				player.setNewPlayer(false);
 				String rank = rs.getString("rank");
@@ -140,10 +138,7 @@ public class PlayerData implements Data {
 				player.setCombatTime(combatTime);
 				player.setNick(rs.getString("nick"));
 				player.setAdminMode(Boolean.parseBoolean(rs.getString("admin")));
-				List<String> toggles = new ArrayList<>();
-				for (String toggle : rs.getString("toggles").split(",")) {
-					toggles.add(toggle);
-				}
+				player.setToggles(rs.getString("toggles"));
 			}
 			players.put(uuid, player);	
 		} catch (SQLException e) {

@@ -1,18 +1,15 @@
 package me.matt11matthew.atherialrunes.game.api.player;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PlayerToggle {
 
-    public List<String> toggles = new ArrayList<>();
+    public String toggles;
     private GamePlayer gamePlayer;
 
     public PlayerToggle(GamePlayer gamePlayer) {
         this.gamePlayer = gamePlayer;
     }
 
-    public List<String> getToggles() {
+    public String getToggles() {
         return toggles;
     }
 
@@ -24,7 +21,7 @@ public class PlayerToggle {
         return (toggles.contains("debug"));
     }
 
-    public void addToggles(List<String> toggles) {
-        this.toggles.addAll(toggles);
+    public void addToggles(String toggles) {
+        this.toggles = toggles;
     }
 }
