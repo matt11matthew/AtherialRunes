@@ -1,10 +1,11 @@
 package me.matt11matthew.atherialrunes.tools;
 
+import com.mysql.jdbc.PreparedStatement;
 import me.matt11matthew.atherialrunes.tools.sql.ConnectionPool;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 
 public class Utils {
 

@@ -21,6 +21,12 @@ public class MainMenu extends JFrame {
     private void OnLogin(ActionEvent e) {
         String username = textField1.getText();
         String password = textField2.getText();
+        if ((username.isEmpty()) || (password.isEmpty())) {
+            label3.setVisible(true);
+            textField1.setText("");
+            textField2.setText("");
+            return;
+        }
         User user = User.login(username, password);
         if (user == null) {
             label3.setVisible(true);
@@ -28,6 +34,11 @@ public class MainMenu extends JFrame {
             textField2.setText("");
             return;
         }
+        ToolsMenu toolsMenu = new ToolsMenu(user);
+        toolsMenu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        toolsMenu.setVisible(true);
+        MainMenu.dispose();
+
     }
 
     private void initComponents() {
