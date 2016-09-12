@@ -13,4 +13,8 @@ public interface IHologram {
     String getMessage();
 
     Location getLocation();
+
+    int getTime();
+
+    void setTime(int time);
 }

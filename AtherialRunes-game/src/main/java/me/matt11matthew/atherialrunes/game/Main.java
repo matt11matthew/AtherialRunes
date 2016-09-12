@@ -20,6 +20,8 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item.comman
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.LevelingMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.commands.CommandAddEXP;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.commands.CommandSetLevel;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.commands.CommandSell;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.commands.CommandView;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.notoriety.NotorietyMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.player.PlayerMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.ChatChannel;
@@ -176,6 +178,8 @@ public class Main extends JavaPlugin {
 		cm.registerCommand(new CommandAddEXP("addexp", "/addexp <player> <exp>", "Gives yourself exp", Arrays.asList("giveexp")));
 		cm.registerCommand(new CommandReload("gamereload", "/gamereload", "Reloads game stuff", Arrays.asList("reloadgame")));
 		cm.registerCommand(new CommandChannel("channel", "/channel", "Changes your chat channel", Arrays.asList("ch", "chatchannel")));
+		cm.registerCommand(new CommandSell("selltest", "/selltest", "Test"));
+		cm.registerCommand(new CommandView("ahtest", "/ahtest", "Test"));
 	}
 	
 	private void registerMechanics() {

@@ -22,6 +22,7 @@ public class Hologram implements IHologram {
         stand.setAI(false);
         stand.setGliding(false);
         stand.setVisible(false);
+        stand.setCollidable(false);
     }
 
     @Override
@@ -49,10 +50,12 @@ public class Hologram implements IHologram {
         return location;
     }
 
+    @Override
     public int getTime() {
         return time;
     }
 
+    @Override
     public void setTime(int time) {
         this.time = time;
     }

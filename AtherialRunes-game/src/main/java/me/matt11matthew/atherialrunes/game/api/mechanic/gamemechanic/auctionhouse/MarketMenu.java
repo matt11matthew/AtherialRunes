@@ -1,10 +1,11 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse;
 
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemFlag;
-
+import me.matt11matthew.atherialrunes.game.GameConstants;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.MarketPage;
 import me.matt11matthew.atherialrunes.item.AtherialItem;
 import me.matt11matthew.atherialrunes.menu.Menu;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemFlag;
 
 public class MarketMenu extends Menu {
 
@@ -48,14 +49,14 @@ public class MarketMenu extends Menu {
 		setItem(51, divider.build());
 		setItem(52, divider.build());
 		setItem(53, divider.build());
-		Page page = MarketManager.getPage(pg);
+		MarketPage page = MarketPage.get(pg);
 		int i = 10;
 		try {
-			while ((i < page.getItemList().size())) {
-				if (i > 39) {
+			while ((i < page.items.size())) {
+				if (i > GameConstants.MAX_MARKET_ITEMS_PER_PAGE) {
 					break;
 				}
-				setItem(i, page.getItem(i).buildItem());
+				setItem(i, page.items.get(i).buildItem());
 				i++;
 			}
 		} catch (Exception e) {

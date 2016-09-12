@@ -20,8 +20,8 @@ public class AuctionHouseMechanics extends ListenerMechanic {
 		print("[AuctionHouseMechanics] Enabling...");
 		print("-----------------------------------------");
 		registerListeners();
-		new AuctionHouseTable().createTable();
-		loadItems();
+		//new AuctionHouseTable().createTable();
+		//loadItems();
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class AuctionHouseMechanics extends ListenerMechanic {
 		print("-----------------------------------------");
 		print("[AuctionHouseMechanics] Disabling...");
 		print("-----------------------------------------");
-		saveItems();
+		//saveItems();
 	}
 
 	@Override
