@@ -5,8 +5,8 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
-import me.matt11matthew.atherialrunes.network.ShardInfo;
-import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
+import me.matt11matthew.atherialrunes.game.network.ShardInfo;
+import me.matt11matthew.atherialrunes.game.network.bungeecord.BungeeUtils;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -77,7 +77,7 @@ public class ShardMechanics extends ListenerMechanic {
 						player.sendMessage(Utils.colorCodes("&c" + shard + " is &lOFFLINE"));
 						player.closeInventory();
 						break;
-					case ShardMenu.GREEN:
+					case 0:
 						player.closeInventory();
 						shard(player, shard);
 						break;
@@ -92,7 +92,7 @@ public class ShardMechanics extends ListenerMechanic {
 
 	public void shard(Player player, String shard) {
 		GamePlayer gp = Main.getGamePlayer(player.getName());
-		gp.msg(MessageType.TITLE_SUB_TITLE, "&aLoading...SUB:&7Please wait! (Don't move)");
+		gp.msg(MessageType.CHAT, "&aLoading...SUB:&7Please wait! (Don't move)");
 		sharding.put(player, shard);
 		BungeeUtils.sendToServer(player.getName(), shard);
 	}

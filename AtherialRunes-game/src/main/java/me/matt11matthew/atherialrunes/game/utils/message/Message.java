@@ -17,7 +17,7 @@ public abstract class Message {
 
     public Message append(String text) {
         if (message == null) {
-            message += text;
+            message = text;
         }
         message += text + ",";
         return this;
@@ -29,6 +29,7 @@ public abstract class Message {
         String msg = message;
         msg = Utils.colorCodes(msg);
         msg = msg.replaceAll(",", System.lineSeparator());
+        msg = msg.replaceAll("%comma%", ",");
         return msg;
     }
 

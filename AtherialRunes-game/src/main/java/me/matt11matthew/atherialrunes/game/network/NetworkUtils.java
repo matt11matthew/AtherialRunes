@@ -41,6 +41,15 @@ public class NetworkUtils {
         message_listener.start();
     }
 
+    public static void stop(int server_num) {
+        try {
+            sock_list.get(server_num).close();
+            sock_list.remove(server_num);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void sendPacketCrossServer(String packet_data, int server_num, boolean all_servers) {
         Socket kkSocket = null;
         PrintWriter out = null;
@@ -48,8 +57,7 @@ public class NetworkUtils {
         if (all_servers) {
             for (int sn : server_list.keySet()) {
                 String ipAndPort = server_list.get(sn);
-                String ipNoPort = ipAndPort.contains(":") ? server_list.get(sn).split(":")[0]
-                        : ipAndPort;
+                String ipNoPort = ipAndPort.contains(":") ? server_list.get(sn).split(":")[0] : ipAndPort;
                 int port = ipAndPort.contains(":") && StringUtils.isNumeric(ipAndPort.split(":")[1]) ? Integer.parseInt(ipAndPort.split(":")[1]) : 3306;
                 if (sn == getServerNum()) {
                     continue;

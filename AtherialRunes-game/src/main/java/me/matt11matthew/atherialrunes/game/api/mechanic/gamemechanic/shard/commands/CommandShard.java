@@ -32,7 +32,7 @@ public class CommandShard extends AtherialCommand {
 				gp.msg(MessageType.CHAT, "&7You can shard in &c" + gp.getCombatTime() + "&ls");
 				return true;
 			}
-			new ShardMenu().open(player);
+			new ShardMenu(gp).open(player);
 			return true;
 		}
 		return false;

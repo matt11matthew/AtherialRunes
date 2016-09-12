@@ -10,11 +10,8 @@
 
     <modules>
         <module>AtherialRunes-common</module>
-        <module>AtherialRunes-bootstrap</module>
-        <module>AtherialRunes-discord</module>
         <module>AtherialRunes-game</module>
-        <module>AtherialRunes-network</module>
-		<module>AtherialRunes-tools</module>
+        <module>AtherialRunes-proxy</module>
     </modules>
 
     <build>

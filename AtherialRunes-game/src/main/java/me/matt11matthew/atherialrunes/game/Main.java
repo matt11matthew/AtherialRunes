@@ -25,8 +25,8 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.player.Play
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.ChatChannel;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.RankMechanics;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.commands.CommandChannel;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.shard.ShardMechanics;
-import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.shard.ShardMenu;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.shard.commands.CommandShard;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.spawner.SpawnerMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.StaffMechanics;
@@ -47,12 +47,12 @@ import me.matt11matthew.atherialrunes.game.commands.CommandReload;
 import me.matt11matthew.atherialrunes.game.commands.CommandSetRank;
 import me.matt11matthew.atherialrunes.game.commands.CommandZone;
 import me.matt11matthew.atherialrunes.game.network.NetworkUtils;
+import me.matt11matthew.atherialrunes.game.network.ShardInfo;
+import me.matt11matthew.atherialrunes.game.network.bungeecord.BungeeUtils;
 import me.matt11matthew.atherialrunes.game.utils.AtherialUtils;
 import me.matt11matthew.atherialrunes.game.utils.BossbarUtils;
 import me.matt11matthew.atherialrunes.game.utils.BungeeChannelListener;
 import me.matt11matthew.atherialrunes.menu.MenuManager;
-import me.matt11matthew.atherialrunes.network.ShardInfo;
-import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.entity.Player;
@@ -91,7 +91,7 @@ public class Main extends JavaPlugin {
 		AtherialUtils.load();
 		DatabaseAPI.loadDatabaseAPI();
 		BossbarUtils.setHPAboveHead();
-		NetworkUtils.registerServer("127.0.0.1", port, Integer.parseInt(shardId));
+		NetworkUtils.registerServer("127.0.0.1", "25666", 0);
 		NetworkUtils.registerServer("127.0.0.1", "25667", 1);
 		NetworkUtils.load();
 		NetworkUtils.sendPacketCrossServer("[online]" + shard.getPseudoName(), Integer.parseInt(shardId), true);
@@ -175,6 +175,7 @@ public class Main extends JavaPlugin {
 		cm.registerCommand(new CommandAdminMode("adminmode", "/adminmode <nick>", "Go into adminmode", Arrays.asList("globaladminmode")));
 		cm.registerCommand(new CommandAddEXP("addexp", "/addexp <player> <exp>", "Gives yourself exp", Arrays.asList("giveexp")));
 		cm.registerCommand(new CommandReload("gamereload", "/gamereload", "Reloads game stuff", Arrays.asList("reloadgame")));
+		cm.registerCommand(new CommandChannel("channel", "/channel", "Changes your chat channel", Arrays.asList("ch", "chatchannel")));
 	}
 	
 	private void registerMechanics() {
@@ -201,7 +202,7 @@ public class Main extends JavaPlugin {
 	
 	private void registerMenus() {
 		MenuManager.registerMenu(new FirstMenu());
-		MenuManager.registerMenu(new ShardMenu());
+
 	}
 	
 	public static void registerMechanic(Mechanic mechanic) {

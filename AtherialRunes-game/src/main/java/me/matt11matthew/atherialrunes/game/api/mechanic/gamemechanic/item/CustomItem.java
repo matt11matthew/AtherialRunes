@@ -164,11 +164,23 @@ public class CustomItem {
             List<String> newLore = new ArrayList<>();
             for (String lore : loreList) {
                 if (lore.contains("(")) {
-                    String value = lore.split("\\)")[0].split("\\(")[1].trim();
-                    int low = Integer.parseInt(value.split("~")[0]);
-                    int high = Integer.parseInt(value.split("~")[1]);
-                    int val = random(low, high);
-                    lore = lore.replaceAll("(" + low + "~" + high + ")", val + "");
+                    String line_copy = lore;
+                    for (String s : line_copy.split("\\(")) {
+                        if (!(s.contains("~"))) {
+                            continue;
+                        }
+                        int lower = Integer.parseInt(s.substring(0, s.indexOf("~")));
+                        int upper = Integer.parseInt(s.substring(s.indexOf("~") + 1, s.indexOf(")")));
+
+                        int val = new Random().nextInt((upper - lower)) + lower;
+                        if (lore.contains("+") || lore.contains("-")) {
+                            lore = lore.replace("(" + lower + "~" + upper + ")", String.valueOf(val));
+                        } else {
+                            if (!lore.contains("-")) {
+                                lore = lore.replace("(" + lower + "~" + upper + ")", "+" + String.valueOf(val));
+                            }
+                        }
+                    }
                 }
                 newLore.add(Utils.colorCodes(lore));
             }

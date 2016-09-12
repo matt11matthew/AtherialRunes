@@ -1,26 +1,28 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.shard;
 
+import me.matt11matthew.atherialrunes.game.network.bungeecord.BungeeServerTracker;
+
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
 @Deprecated
-public enum Shard {
+public class Shard {
 
-	US_0("us0", "localhost", 25571, ServerType.DEVELOPER, 200);
+	private String name;
+	private String ip;
+	private int port;
+	private ServerType type;
+	private int maxPlayerCount;
+	private String bungeeName;
 	
-	String name;
-	String ip;
-	int port;
-	ServerType type;
-	int maxPlayerCount;
-	
-	Shard(String name, String ip, int port, ServerType type, int maxPlayerCount) {
+	public Shard(String name, String ip, int port, ServerType type, int maxPlayerCount, String bungeeName) {
 		this.name = name;
 		this.ip = ip;
 		this.port = port;
 		this.type = type;
 		this.maxPlayerCount = maxPlayerCount;
+		this.bungeeName = bungeeName;
 	}
 
 	public String getInfo() {
@@ -28,16 +30,15 @@ public enum Shard {
 	}
 
 	public boolean isOnline() {
-		boolean online = false;
-	    try {
-	       Socket s = new Socket(ip, port);
-	        s.close();
-	        online = true;
-	     } catch (UnknownHostException e) {
-	    	 
-	     } catch (IOException e) {
-	    	 
-	     }
+		boolean online = true;
+		try {
+			Socket s = new Socket(ip, port);
+			s.close();
+		} catch (UnknownHostException e) {
+			online = false;
+		} catch (IOException e) {
+			online = false;
+		}
 		return online;
 	}
 
@@ -46,4 +47,15 @@ public enum Shard {
 	}
 
 
+	public int getOnlinePlayers() {
+		return BungeeServerTracker.getPlayersOnline(bungeeName);
+	}
+
+	public String getBungeeName() {
+		return bungeeName;
+	}
+
+	public int getMaxPlayerCount() {
+		return maxPlayerCount;
+	}
 }

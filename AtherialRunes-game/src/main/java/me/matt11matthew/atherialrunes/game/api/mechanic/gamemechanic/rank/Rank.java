@@ -12,7 +12,6 @@ import java.util.List;
 public enum Rank {
 	
 	LEAD_DEVELOPER(1, "&6&lLEAD DEV &7", ":&f ", "Lead Developer"),
-	LEAD(2, "&a&lLEAD &7", ":&f ", "Lead"),
 	DEVELOPER(3, "&c&lDEV &7", ":&f ", "Developer"),
 	GA(4, "&e&lGA &7", ":&f ", "Global Admin"),
 	DEFAULT(5, "&7", ": ", "Default"),
@@ -71,12 +70,12 @@ public enum Rank {
 	
 	public static boolean isGM(String name) {
 		Rank rank = GamePlayer.players.get(UUIDData.getUUID(name)).getRank();
-		return ((rank == DEVELOPER) || (rank == GA) || (rank == LEAD_DEVELOPER) || (rank == LEAD));
+		return ((rank == DEVELOPER) || (rank == GA) || (rank == LEAD_DEVELOPER));
 	}
 	
 	public static boolean isStaff(String name) {
 		Rank rank = GamePlayer.players.get(UUIDData.getUUID(name)).getRank();
-		return ((rank == DEVELOPER) || (rank == GA) || (rank == MOD) || (rank == BUILDER) || (rank == Rank.LEAD_DEVELOPER) || (rank == LEAD));
+		return ((rank == DEVELOPER) || (rank == GA) || (rank == MOD) || (rank == BUILDER) || (rank == Rank.LEAD_DEVELOPER));
 	}
 	
 	public static List<String> getRanks() {

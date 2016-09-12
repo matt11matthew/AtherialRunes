@@ -7,7 +7,6 @@ import me.matt11matthew.atherialrunes.sound.EnumSound;
 
 public class LevelUtils {
 
-
 	public static void addEXP(GamePlayer gp, int exp) {
 		long needed = getEXPNeeded((gp.getLevel() + 1));
 		gp.setEXP((gp.getEXP() + exp));

@@ -1,6 +1,8 @@
 package me.matt11matthew.atherialrunes.game.network;
 
+import me.matt11matthew.atherialrunes.utils.Utils;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -57,6 +59,10 @@ public class ConnectProtocol implements Runnable {
                 if (inputLine.startsWith("[online]")) {
                     String id = inputLine.split("[online]")[1];
                     print(id + " is ONLINE");
+                }
+                if (inputLine.startsWith("[sayall]")) {
+                    String text = inputLine.split("[sayall]")[1];
+                    Bukkit.getServer().broadcastMessage(Utils.colorCodes(text));
                 }
             }
         } catch (Exception e) {

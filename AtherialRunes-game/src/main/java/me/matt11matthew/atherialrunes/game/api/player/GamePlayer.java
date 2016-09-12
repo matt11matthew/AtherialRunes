@@ -9,8 +9,8 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.stats.item.ItemStat;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.zone.Zone;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
+import me.matt11matthew.atherialrunes.game.network.bungeecord.BungeeUtils;
 import me.matt11matthew.atherialrunes.game.utils.RegionUtils;
-import me.matt11matthew.atherialrunes.network.bungeecord.BungeeUtils;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.sound.AtherialSound;
 import me.matt11matthew.atherialrunes.sound.EnumSound;
@@ -276,6 +276,10 @@ public class GamePlayer {
 			this.notoriety = 100;
 			return;
 		}
+		if (notoriety < 1) {
+			this.notoriety = 0;
+			return;
+		}
 		this.notoriety = notoriety;
 	}
 
@@ -333,5 +337,9 @@ public class GamePlayer {
 
 	public PlayerToggle getPlayerToggle() {
 		return playerToggle;
+	}
+
+	public String getShard() {
+		return Bukkit.getMotd();
 	}
 }

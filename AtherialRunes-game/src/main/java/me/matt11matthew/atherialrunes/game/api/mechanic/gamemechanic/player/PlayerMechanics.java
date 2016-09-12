@@ -11,20 +11,25 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.ChatChannel;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.commands.CommandChannel;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialGlobalChatEvent;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialLocalChatEvent;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialTradeChatEvent;
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.api.player.PlayerToggle;
+import me.matt11matthew.atherialrunes.game.enums.MessageType;
 import me.matt11matthew.atherialrunes.game.utils.message.BanMessage;
 import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.*;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -175,12 +180,12 @@ public class PlayerMechanics extends ListenerMechanic {
 				return;
 			} else {
 				BanMessage message = new BanMessage();
+				message.append(",");
+				message.append("&cYour account has been &nPERMANENTLY&c disabled.");
 				message.append("");
-				message.append("&cYour account has been &nPERMANENTLY&c disabled");
-				message.append("");
-				message.append("&7For further information about this suspension, please visit");
-				message.append("                   &7&n" + Constants.WEBSITE_LINK);
-				e.disallow(Result.KICK_OTHER, message.getMessage());
+				message.append("&7For further information about this suspension%comma% please visit");
+				message.append("        &7&n" + Constants.WEBSITE_LINK);
+				e.disallow(Result.KICK_BANNED, message.getMessage());
 				Ban.save(ban);
 				return;
 			}
@@ -243,5 +248,51 @@ public class PlayerMechanics extends ListenerMechanic {
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		e.setCancelled(Constants.DISABLE);
+	}
+
+	@EventHandler
+	public void onInventoyClick(InventoryClickEvent e) {
+		if (e.getSlotType() == InventoryType.SlotType.OUTSIDE) {
+			return;
+		}
+		Player player = (Player) e.getWhoClicked();
+		if (e.getClickedInventory().getTitle().equals(CommandChannel.ChannelMenu.CHAT_CHANNEL_MENU_NAME)) {
+			e.setCancelled(true);
+			GamePlayer gp = Main.getGamePlayer(player);
+			switch (e.getSlot()) {
+				case 1:
+					gp.setChatChannel(ChatChannel.LOCAL);
+					gp.getPlayer().playSound(gp.getPlayer().getLocation(), Sound.BLOCK_NOTE_PLING, 1.0F, 1.0F);
+					gp.msg(MessageType.CHAT, "&3You are now speaking in " + gp.getChatChannel().getPrefix());
+					menuUpdate(gp);
+					break;
+				case 3:
+					gp.setChatChannel(ChatChannel.GLOBAL);
+					gp.getPlayer().playSound(gp.getPlayer().getLocation(), Sound.BLOCK_NOTE_PLING, 1.0F, 1.0F);
+					gp.msg(MessageType.CHAT, "&3You are now speaking in " + gp.getChatChannel().getPrefix());
+					menuUpdate(gp);
+					break;
+				case 5:
+					gp.setChatChannel(ChatChannel.TRADE);
+					gp.getPlayer().playSound(gp.getPlayer().getLocation(), Sound.BLOCK_NOTE_PLING, 1.0F, 1.0F);
+					gp.msg(MessageType.CHAT, "&3You are now speaking in " + gp.getChatChannel().getPrefix());
+					menuUpdate(gp);
+					break;
+				case 7:
+					gp.setChatChannel(ChatChannel.LOCAL);
+					gp.getPlayer().playSound(gp.getPlayer().getLocation(), Sound.BLOCK_NOTE_PLING, 1.0F, 1.0F);
+					gp.msg(MessageType.CHAT, "&3You are now speaking in " + gp.getChatChannel().getPrefix());
+					menuUpdate(gp);
+					break;
+				default:
+					break;
+			}
+		}
+	} // 1 3 5 7
+
+	private void menuUpdate(GamePlayer gp) {
+		gp.getPlayer().closeInventory();
+		gp.getPlayer().performCommand("channel");
+		return;
 	}
 }

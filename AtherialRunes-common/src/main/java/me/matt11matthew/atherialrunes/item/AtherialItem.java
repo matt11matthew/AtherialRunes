@@ -1,14 +1,14 @@
 package me.matt11matthew.atherialrunes.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import me.matt11matthew.atherialrunes.utils.Utils;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AtherialItem {
 
@@ -84,5 +84,13 @@ public class AtherialItem {
 	
 	public ItemStack build() {
 		return itemStack;
+	}
+
+	public void setDurability(int i) {
+		itemStack.setDurability((short) i);
+	}
+
+	public void addGlow() {
+		itemStack.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
 	}
 }

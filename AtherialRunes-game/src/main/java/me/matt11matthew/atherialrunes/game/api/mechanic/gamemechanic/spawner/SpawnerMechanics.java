@@ -130,8 +130,11 @@ public class SpawnerMechanics extends ListenerMechanic {
 					int cooldown = Integer.parseInt(msg.split("Cooldown:")[1].split(",")[0].trim());
 					int range = Integer.parseInt(msg.split("Range:")[1].split("=")[0].trim());
 					Spawner spawner = new Spawner(placing.get(gp).getLocation(), cooldown, range, elite, mob, tier);
+					spawners.put(spawner.getLocation(), spawner);
 				} catch (Exception ee) {
 					gp.msg(MessageType.CHAT, "&cError");
+				} finally {
+					placing.remove(gp);
 					return;
 				}
 			}
