@@ -24,9 +24,9 @@ public class CommandStats implements Command {
 								"IGN: " + name + "," +
 								"Rank: " + rank + "," +
 								"Chat Channel: " + chatChannel + "," +
-								"Gold: " + 6 + "," +
-								"Silver: " + 87 + "," +
-								"Copper: " + 43 + "," +
+								"Gold: " + gold + "," +
+								"Silver: " + silver + "," +
+								"Copper: " + copper + "," +
 								"Level: " + 43 + "," +
 								"Experience: [" + 543 + "/" + LevelUtils.getEXPNeeded(44) + "]" + "," +
 								"Skill Points: " + 60 + "," +

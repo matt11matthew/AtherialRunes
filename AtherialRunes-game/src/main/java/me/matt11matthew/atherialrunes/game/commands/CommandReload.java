@@ -29,7 +29,7 @@ public class CommandReload extends AtherialCommand {
                 itemInfo = "Success";
                 itemColor = "&a";
             } catch (ReloadException e) {
-                itemInfo = "Fail";
+                itemInfo = "Failed";
                 itemColor = "&c";
             }
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class CommandReload extends AtherialCommand {
             sender.sendMessage(Utils.colorCodes("&cReload completed!"));
             String info =
                     "&a-------------------------------," +
-                    "&f&lItemMechanics: " + itemColor + itemInfo + "," +
+                    "&bItemMechanics: &n" + itemColor + itemInfo + "," +
                     "&a-------------------------------";
             info = info.replaceAll(",", System.lineSeparator());
             sender.sendMessage(Utils.colorCodes(info));

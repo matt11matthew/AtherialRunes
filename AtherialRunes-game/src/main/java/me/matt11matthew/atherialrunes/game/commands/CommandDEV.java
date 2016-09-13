@@ -4,7 +4,8 @@ import me.matt11matthew.atherialrunes.Constants;
 import me.matt11matthew.atherialrunes.command.AtherialCommand;
 import me.matt11matthew.atherialrunes.database.ConnectionPool;
 import me.matt11matthew.atherialrunes.game.Main;
-import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.MarketManager;
+import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
+import me.matt11matthew.atherialrunes.game.utils.hologram.HologramManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -35,15 +36,19 @@ public class CommandDEV extends AtherialCommand {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
 			if (Constants.DEBUG) {
-				test(player, Integer.parseInt(args[0]));
+				try {
+					test(Main.getGamePlayer(player), args[0], Integer.parseInt(args[1]));
+				} catch (Exception e) {
+					return true;
+				}
 				return true;
 			}
 		}
 		return true;
 	}
 	
-	public void test(Player player, int price) {
-		MarketManager.sellItem(player.getItemInHand(), price, Main.getGamePlayer(player));
+	public void test(GamePlayer gp, String message, int time) {
+		HologramManager.getInstance().spawn(message, gp.getPlayer().getLocation(), time);
 	}
 
 	@Override
