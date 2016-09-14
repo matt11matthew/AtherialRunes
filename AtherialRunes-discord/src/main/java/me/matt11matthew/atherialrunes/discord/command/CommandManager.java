@@ -1,7 +1,5 @@
 package me.matt11matthew.atherialrunes.discord.command;
 
-import java.util.HashMap;
-
 import de.btobastian.javacord.DiscordAPI;
 import de.btobastian.javacord.entities.Server;
 import de.btobastian.javacord.entities.User;
@@ -9,6 +7,8 @@ import de.btobastian.javacord.entities.message.Message;
 import de.btobastian.javacord.entities.permissions.Role;
 import de.btobastian.javacord.listener.message.MessageCreateListener;
 import me.matt11matthew.atherialrunes.Constants;
+
+import java.util.HashMap;
 
 public class CommandManager implements MessageCreateListener {
 	

@@ -23,7 +23,7 @@ public class CommandInfo implements Command {
     }
 
     private String getDevelopers() {
-        return "[matt11matthew/ Vawke]";
+        return "[matt11matthew]";
     }
 
     private String getLeads() {

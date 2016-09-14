@@ -1,11 +1,16 @@
 package me.matt11matthew.atherialrunes.game.utils;
 
-import me.matt11matthew.atherialrunes.game.Main;
+import me.matt11matthew.atherialrunes.database.ConnectionPool;
+import me.matt11matthew.atherialrunes.database.table.tables.player.PlayerdataTable;
+import me.matt11matthew.atherialrunes.player.AtherialPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class AtherialUtils {
 
@@ -14,11 +19,14 @@ public class AtherialUtils {
 	 * @return if they are a player or not
 	 */
 	public static boolean isPlayer(String name) {
+		PreparedStatement pst = null;
 		try {
-			Main.getGamePlayer(name);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
+			AtherialPlayer player = new AtherialPlayer(name);
+			pst =  ConnectionPool.getConnection().prepareStatement("SELECT * FROM `" + new PlayerdataTable().getName() + "` WHERE `uuid` ='" + player.getUUID() + "'");
+			pst.execute();
+			ResultSet rs = pst.getResultSet();
+			return rs.next();
+		} catch (SQLException e) {
 			return false;
 		}
 	}

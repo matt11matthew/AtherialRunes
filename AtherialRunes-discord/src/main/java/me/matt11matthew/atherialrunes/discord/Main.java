@@ -5,6 +5,7 @@ import de.btobastian.javacord.Javacord;
 import me.matt11matthew.atherialrunes.Constants;
 import me.matt11matthew.atherialrunes.discord.command.CommandManager;
 import me.matt11matthew.atherialrunes.discord.command.commands.CommandInfo;
+import me.matt11matthew.atherialrunes.discord.command.commands.CommandSpam;
 import me.matt11matthew.atherialrunes.discord.command.commands.CommandStats;
 
 public class Main {
@@ -25,6 +26,7 @@ public class Main {
 		cm.registerCommand("stats", new CommandStats());
 		cm.registerCommand("serverhelp", new CommandInfo());
 		cm.registerCommand("info", new CommandInfo());
+		cm.registerCommand("spam", new CommandSpam());
 	}
 
 	public static void print(String msg) {

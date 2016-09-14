@@ -37,18 +37,7 @@
             </goals>
             <configuration>
               <artifactSet>
-                <includes>
-                  <include>org.ini4j:ini4j</include>
-                  <include>commons-net:commons-net</include>
-                  <include>net.lingala.zip4j:zip4j</include>
-                  <include>ch.qos.logback:logback-classic</include>
-                  <include>de.btobastian.javacord:javacord</include>
-                  <include>com.mashape.unirest:unirest-java</include>
-                  <include>junit:junit</include>
-                  <include>org.apache.commands:commons-lang3</include>
-                  <include>org.apache.commands:commons-compress</include>
-                  <include>org.apache.httpcomponents:httpclient</include>
-                </includes>
+                <includes />
               </artifactSet>
             </configuration>
           </execution>
@@ -72,43 +61,5 @@
       <url>http://nexus.codecrafter47.dyndns.eu/content/repositories/public/</url>
     </repository>
   </repositories>
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.4</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-compress</artifactId>
-      <version>1.12</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>me.matt11matthew.atherialrunes</groupId>
-      <artifactId>AtherialRunes-network</artifactId>
-      <version>default</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>me.matt11matthew.atherialrunes</groupId>
-      <artifactId>AtherialRunes-game</artifactId>
-      <version>default</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>me.matt11matthew.atherialrunes</groupId>
-      <artifactId>AtherialRunes-common</artifactId>
-      <version>1.0.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.inventivetalent.nicknamer</groupId>
-      <artifactId>api</artifactId>
-      <version>3.12.3</version>
-      <scope>compile</scope>
-    </dependency>
-  </dependencies>
 </project>
 

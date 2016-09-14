@@ -145,9 +145,9 @@ public class Constants {
 	public static final String FTP_PASSWORD = "ggfx1";
 	public static final int FTP_PORT = 22;
 
-	public static final String SQL_URL = "jdbc:mysql://localhost:3306/atherialrunes";
-	public static final String SQL_USER = "matt11matthew";
-	public static final String SQL_PASSWORD = "pass";
+	public static final String SQL_URL = "jdbc:mysql://192.99.37.67:3306/atherialrunes";//"jdbc:mysql://localhost:3306/atherialrunes";
+	public static final String SQL_USER = "discord";//"matt11matthew";
+	public static final String SQL_PASSWORD = "discord";
 
 	public static final String REMOTE_SQL_URL = "jdbc:mysql://192.99.37.67:3306/atherialrunes";
 	public static final String REMOTE_SQL_USER = "mattremote";

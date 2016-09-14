@@ -7,12 +7,14 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialLocalChatEvent;
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
+import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import java.io.*;
@@ -153,6 +155,20 @@ public class SpawnerMechanics extends ListenerMechanic {
 					gp.msg(MessageType.CHAT, "Type =Mob:troll,Tier:1,Elite:false,Cooldown:60,Range:16=");
 					placing.put(gp, e.getBlock());
 					return;
+				}
+			}
+		}
+	}
+
+	@EventHandler
+	public void onBreak(BlockBreakEvent e) {
+		if (e.getPlayer().isOp()) {
+			if (e.getBlock().getType() == Material.MOB_SPAWNER) {
+				if (spawners.containsKey(e.getBlock().getLocation())) {
+					e.setCancelled(true);
+					e.getBlock().setType(Material.AIR);
+					spawners.remove(e.getBlock().getLocation());
+					e.getPlayer().sendMessage(Utils.colorCodes("&aYou've broken a spawner!"));
 				}
 			}
 		}
