@@ -73,6 +73,10 @@ public class ShardMechanics extends ListenerMechanic {
 				String shard = ChatColor.stripColor(cur.getItemMeta().getLore().get(0));
 				short dura = cur.getDurability();
 				switch (dura) {
+					case ShardMenu.GREEN:
+						player.sendMessage(Utils.colorCodes("&aYour already on &l" + shard));
+						player.closeInventory();
+						break;
 					case ShardMenu.RED:
 						player.sendMessage(Utils.colorCodes("&c" + shard + " is &lOFFLINE"));
 						player.closeInventory();
@@ -92,7 +96,7 @@ public class ShardMechanics extends ListenerMechanic {
 
 	public void shard(Player player, String shard) {
 		GamePlayer gp = Main.getGamePlayer(player.getName());
-		gp.msg(MessageType.CHAT, "&aLoading...SUB:&7Please wait! (Don't move)");
+		gp.msg(MessageType.CHAT, "&aLoading... &7Please wait! (Don't move)");
 		sharding.put(player, shard);
 		BungeeUtils.sendToServer(player.getName(), shard);
 	}

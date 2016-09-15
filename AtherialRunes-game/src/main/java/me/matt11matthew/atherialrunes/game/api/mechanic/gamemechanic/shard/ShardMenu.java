@@ -15,17 +15,19 @@ public class ShardMenu extends Menu {
 	
 	public ShardMenu(GamePlayer gp) {
 		super(NAME, SLOTS);
-		
+
+		AtherialItem divider = new AtherialItem(Material.THIN_GLASS);
+		divider.setName(" ");
+
 		ShardMechanics.shards.values().forEach(shard -> {
 			Shard info = new Shard(shard.getPseudoName(), shard.getAddress().getAddress(), shard.getAddress().getPort(), shard.getType(), shard.getMaxPlayers(), shard.getBungeeName());
-
 
 			short dura = (short) ((info.isOnline()) ? 0 : RED);
 			if (gp.getShard().equals(shard.getPseudoName())) {
 				dura = GREEN;
 			}
 			AtherialItem item = new AtherialItem(Material.WOOL, dura);
-			item.setName("&f&l" + shard.getPseudoName() + " &c(" + info.getOnlinePlayers() + "/" + shard.getMaxPlayers() + ")");
+			item.setName("&c&l" + shard.getPseudoName() + " &7(" + info.getOnlinePlayers() + "/" + shard.getMaxPlayers() + ")");
 			item.addLore("&7" + shard.getBungeeName());
 			addItem(item.build());
 		});

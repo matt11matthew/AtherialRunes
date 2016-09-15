@@ -58,4 +58,8 @@ public class Shard {
 	public int getMaxPlayerCount() {
 		return maxPlayerCount;
 	}
+
+	public ServerType getServerType() {
+		return type;
+	}
 }

@@ -4,7 +4,7 @@ import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
-import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialLocalChatEvent;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialChatEvent;
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
 import me.matt11matthew.atherialrunes.utils.Utils;
@@ -94,17 +94,18 @@ public class SpawnerMechanics extends ListenerMechanic {
 	}
 	
 	public void saveSpawners() {
+		File file = new File(Main.getInstance().getDataFolder() + "/Spawners/");
+		if (!file.exists()) {
+			file.mkdirs();
+		}
 		spawners.values().forEach(spawner -> {
-			File file = new File(Main.getInstance().getDataFolder() + "/Spawners/");
-			if (!file.exists()) {
-				file.mkdirs();
-			}
-			file = new File(Main.getInstance().getDataFolder() + "/Spawners/mobdata.spawners");
-			file.delete();
-			if (!file.exists()) {
+
+			File spawnerFile = new File(Main.getInstance().getDataFolder() + "/Spawners/mobdata.spawners");
+			spawnerFile.delete();
+			if (!spawnerFile.exists()) {
 				try {
-					file.createNewFile();
-					FileWriter fileWriter = new FileWriter(file);
+					spawnerFile.createNewFile();
+					FileWriter fileWriter = new FileWriter(spawnerFile);
 					Location l = spawner.getLocation();
 					String loc = ("world:" + l.getWorld().getName() + "," + "x:" + (int) l.getX() + ",y:" + (int) l.getY() + ",z:" + (int) l.getZ() + ",");
 					String s = loc + "=Mob:" + spawner.getMob() + ",Cooldown:" + spawner.getCooldown() + ",Range:" + spawner.getRange() + ",Tier:" + spawner.getTier() + ",Elite:" + spawner.isElite() + ",";
@@ -118,7 +119,7 @@ public class SpawnerMechanics extends ListenerMechanic {
 	}
 
 	@EventHandler
-	public void onChat(AtherialLocalChatEvent e) {
+	public void onChat(AtherialChatEvent e) {
 		GamePlayer gp = e.getGamePlayer();
 		if (gp.isInAdminMode()) {
 			if (placing.containsKey(gp)) {
@@ -133,6 +134,7 @@ public class SpawnerMechanics extends ListenerMechanic {
 					int range = Integer.parseInt(msg.split("Range:")[1].split("=")[0].trim());
 					Spawner spawner = new Spawner(placing.get(gp).getLocation(), cooldown, range, elite, mob, tier);
 					spawners.put(spawner.getLocation(), spawner);
+					gp.msg(MessageType.CHAT, "&aYou've placed a spawner!");
 				} catch (Exception ee) {
 					gp.msg(MessageType.CHAT, "&cError");
 				} finally {

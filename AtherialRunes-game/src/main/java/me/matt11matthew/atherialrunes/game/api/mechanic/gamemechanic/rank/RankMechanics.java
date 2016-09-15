@@ -3,6 +3,7 @@ package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank;
 import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialChatEvent;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialGlobalChatEvent;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialLocalChatEvent;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialTradeChatEvent;
@@ -47,6 +48,11 @@ public class RankMechanics extends ListenerMechanic {
 		Player player = e.getPlayer();
 		e.setCancelled(true);
 		GamePlayer gp = Main.getGamePlayer(player.getName());
+		AtherialChatEvent chatEvent = new AtherialChatEvent(gp, ChatColor.stripColor(e.getMessage()));
+		Bukkit.getServer().getPluginManager().callEvent(chatEvent);
+		if (chatEvent.isCancelled()) {
+			return;
+		}
 		switch (gp.getChatChannel()) {
 			case LOCAL:
 				AtherialLocalChatEvent atherialLocalChatEvent = new AtherialLocalChatEvent(Main.getGamePlayer(player.getName()), ChatColor.stripColor(e.getMessage()));

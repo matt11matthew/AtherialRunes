@@ -2,9 +2,10 @@ package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank;
 
 public enum ChatChannel {
 	
-	LOCAL(1, "&7&l<LOCAL>", "Local"),
-	GLOBAL(2, "&b<&lG&b>", "Global"),
-	TRADE(3, "&a<&lT&a>", "Trade");
+	LOCAL(1, "&7<Local>", "Local"),
+	GLOBAL(2, "&7<&bGlobal&7>", "Global"),
+	TRADE(3, "&7<&aTrade&7>", "Trade"),
+	GUILD(4, "&7<&3Guild&7>", "Guild");
 	
 	int id;
 	String prefix;
