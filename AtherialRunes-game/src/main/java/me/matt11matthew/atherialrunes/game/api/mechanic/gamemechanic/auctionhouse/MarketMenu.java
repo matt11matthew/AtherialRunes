@@ -1,6 +1,7 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse;
 
 import me.matt11matthew.atherialrunes.game.GameConstants;
+import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.MarketPage;
 import me.matt11matthew.atherialrunes.item.AtherialItem;
 import me.matt11matthew.atherialrunes.menu.Menu;
@@ -50,13 +51,15 @@ public class MarketMenu extends Menu {
 		setItem(52, divider.build());
 		setItem(53, divider.build());
 		MarketPage page = MarketPage.get(pg);
-		int i = 10;
+		int i = 0;
+		Main.print(page.getPageNumber() + "");
+		Main.print(page.items.size() + "");
 		try {
 			while ((i < page.items.size())) {
 				if (i > GameConstants.MAX_MARKET_ITEMS_PER_PAGE) {
 					break;
 				}
-				setItem(i, page.items.get(i).buildItem());
+				setItem((i + 9), page.items.get(i).buildItem());
 				i++;
 			}
 		} catch (Exception e) {

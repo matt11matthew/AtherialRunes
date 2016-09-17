@@ -59,7 +59,7 @@ public class DamageMechanics extends ListenerMechanic {
                 damage += player.getWeaponDamage();
                 break;
         }
-        if (damage > 0) {
+        if (damage > 0.0D) {
             l.damageByPlayer(player, damage);
         }
     }

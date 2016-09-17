@@ -30,7 +30,14 @@ public enum Tier {
 	public String getColor() {
 		return color;
 	}
-	
+
+	public static Tier getTier(int tierNumber) {
+		for (Tier tier : values()) {
+			return (tier.getTier() == tierNumber) ? tier : null;
+		}
+		return null;
+	}
+
 	public static Tier getTier(MarketItem item) {
 		if (item.getName().contains("&f")) {
 			return Tier.TIER_1;

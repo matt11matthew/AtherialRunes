@@ -30,7 +30,6 @@ public class StatUtils {
 
     private static String getStringFromLore(ItemStack item, String value, int line) {
         String returnVal = "";
-        line = (line - 1);
         ItemMeta meta = item.getItemMeta();
         value = ChatColor.stripColor(value);
         try {
@@ -57,7 +56,7 @@ public class StatUtils {
         int return_int = 0;
         switch (stat) {
             case DAMAGE:
-                String lore = getStringFromLore(weapon, stat.getLore() + ":", 1);
+                String lore = getStringFromLore(weapon, ChatColor.stripColor(Utils.colorCodes(stat.getLore())) + ":", 0);
                 return_int = Integer.parseInt(lore.trim().replaceAll(" ", ""));
                 break;
         }

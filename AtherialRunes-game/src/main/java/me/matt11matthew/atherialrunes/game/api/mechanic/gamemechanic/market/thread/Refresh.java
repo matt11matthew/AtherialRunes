@@ -4,20 +4,21 @@ import me.matt11matthew.atherialrunes.database.ConnectionPool;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.AuctionItem;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.MarketMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.MarketPage;
+import me.matt11matthew.atherialrunes.game.utils.AtherialRunnable;
 import me.matt11matthew.atherialrunes.item.ItemSerialization;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RefreshThread extends Thread {
+public class Refresh {
 
-    @Override
-    public void run() {
-        save();
-        refresh();
+    public void load() {
+        AtherialRunnable.getInstance().runAsyncRepeatingTask(() -> {
+            save();
+            refresh();
+        }, 1L, 1L);
     }
-
     private void refresh() {
         PreparedStatement pst = null;
         try {
@@ -27,7 +28,7 @@ public class RefreshThread extends Thread {
             if (rs.next()) {
                 String id = rs.getString("id");
                 String item = rs.getString("item");
-                int cost = rs.getInt("cost");
+                int cost = rs.getInt("price");
                 String seller = rs.getString("seller");
                 long time = rs.getLong("time");
                 int page = rs.getInt("page");
@@ -50,7 +51,7 @@ public class RefreshThread extends Thread {
             pst = ConnectionPool.getConnection().prepareStatement("select * from shops where id = " + id + ";");
             pst.execute();
             ResultSet rs = pst.getResultSet();
-            if (rs.next()) {
+            if (!rs.getString("seller").isEmpty()) {
                 return true;
             }
         } catch (SQLException e) {
@@ -60,44 +61,33 @@ public class RefreshThread extends Thread {
     }
 
     private void save() {
-        try {
-            MarketMechanics.items.values().forEach(item -> {
+        MarketMechanics.pages.values().forEach(page -> {
+            page.items.forEach(item -> {
                 if (has(item.getUUID())) {
                     update(item);
                 } else {
                     insert(item);
                 }
+                page.items.remove(item);
                 MarketMechanics.items.remove(item.getUUID());
             });
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
+        });
     }
 
     private void insert(AuctionItem item) {
         PreparedStatement pst = null;
         try {
-            pst = ConnectionPool.getConnection().prepareStatement("insert into shops (id, item, seller, price, time, page) values (?, ?, ?, ?, ?, ?);");
-            pst.setString(1, item.getUUID());
-            pst.setString(2, ItemSerialization.itemStackToBase64(item.buildRawItem()));
-            pst.setString(3, item.getSeller());
-            pst.setInt(4, item.getPrice());
-            pst.setLong(5, item.getTime());
-            pst.setInt(6, item.getPage().getPageNumber());
+            pst = ConnectionPool.getConnection().prepareStatement("insert into shops (id, item, seller, price, time, page) values ('" + item.getUUID() + "', '" + ItemSerialization.itemStackToBase64(item.buildRawItem()) + "', '" + item.getSeller() + "', '" + item.getPrice() + "', '" + item.getTime() + "', '" + item.getPage().getPageNumber() + "');");
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return;
-
     }
 
     private void update(AuctionItem item) {
         PreparedStatement pst = null;
         try {
-            pst = ConnectionPool.getConnection().prepareStatement("update shops set id=" + item.getUUID() + " where id=" + item.getUUID() + ";");
-            pst.execute();
             pst = ConnectionPool.getConnection().prepareStatement("update shops set item=" + ItemSerialization.itemStackToBase64(item.buildRawItem()) + " where id=" + item.getUUID() + ";");
             pst.execute();
             pst = ConnectionPool.getConnection().prepareStatement("update shops set seller=" + item.getSeller() + " where id=" + item.getUUID() + ";");

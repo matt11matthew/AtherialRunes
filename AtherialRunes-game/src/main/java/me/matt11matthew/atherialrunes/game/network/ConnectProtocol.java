@@ -57,11 +57,11 @@ public class ConnectProtocol implements Runnable {
 
             while ((inputLine = in.readLine()) != null) {
                 if (inputLine.startsWith("[online]")) {
-                    String id = inputLine.split("[online]")[1];
-                    print(id + " is ONLINE");
+                    String id = inputLine.split("ID:")[1];
+                    print(Utils.colorCodes("&c" + id + " is &lONLINE"));
                 }
                 if (inputLine.startsWith("[sayall]")) {
-                    String text = inputLine.split("[sayall]")[1];
+                    String text = inputLine.split("MSG:")[1];
                     Bukkit.getServer().broadcastMessage(Utils.colorCodes(text));
                 }
             }

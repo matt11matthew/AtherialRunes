@@ -2,6 +2,10 @@ package me.matt11matthew.atherialrunes.game.network;
 
 
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.shard.ServerType;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.shard.Shard;
+import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
+import me.matt11matthew.atherialrunes.item.AtherialItem;
+import org.bukkit.Material;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -10,7 +14,7 @@ public enum ShardInfo
 {
 
     // SHARD //
-    US0("0", "US-0", new ServerAddress("localhost", 25571), ServerType.LIVE, 200, "us0"),
+    US0("0", "US-0", new ServerAddress("localhost", 25571), ServerType.DEVELOPER, 200, "us0"),
 	US1("1", "US-1", new ServerAddress("localhost", 25572), ServerType.LIVE, 200, "us1");
   
     private final String shardID;
@@ -78,6 +82,27 @@ public enum ShardInfo
 
     public ServerType getType() {
         return type;
+    }
+
+    public Shard getShard() {
+        return new Shard(getPseudoName(), getAddress().getAddress(), getAddress().getPort(), getType(), getMaxPlayers(), getBungeeName());
+    }
+
+    public static final int GREEN = 5;
+    public static final int RED = 14;
+
+    public AtherialItem getShardItem(GamePlayer gp) {
+        Shard info = getShard();
+
+        short dura = (short) ((info.isOnline()) ? 0 : RED);
+        if (gp.getShard().equals(getPseudoName())) {
+            dura = GREEN;
+        }
+        AtherialItem item = new AtherialItem(Material.WOOL, dura);
+        item.setName("&a" + getPseudoName() + " &7(" + info.getOnlinePlayers() + "/" + getMaxPlayers() + ")");
+        item.addLore(getType().getPrefix());
+        item.addLore("&7" + getShardID());
+        return item;
     }
 
     public String getBungeeName() {

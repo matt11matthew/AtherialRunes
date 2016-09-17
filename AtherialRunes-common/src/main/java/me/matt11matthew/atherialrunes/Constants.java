@@ -38,6 +38,7 @@ public class Constants {
 	public static final boolean MAINTENANCE = false;
 	public static final boolean DEV_SERVER = false;
 	public static final boolean DISABLE = false;
+	public static final boolean LOCALHOST = false;
 
 	public static final int MASTER_SERVER_PORT = 45678;
 	public static final String MASTER_SERVER_IP = "localhost";
@@ -145,11 +146,15 @@ public class Constants {
 	public static final String FTP_PASSWORD = "ggfx1";
 	public static final int FTP_PORT = 22;
 
-	public static final String SQL_URL = "jdbc:mysql://192.99.37.67:3306/atherialrunes";//"jdbc:mysql://localhost:3306/atherialrunes";
-	public static final String SQL_USER = "discord";//"matt11matthew";
-	public static final String SQL_PASSWORD = "discord";
+	public static final String SQL_URL = "jdbc:mysql://localhost:3306/atherialrunes";
+	public static final String SQL_USER = "matt11matthew";
+	public static final String SQL_PASSWORD = "pass";
 
 	public static final String REMOTE_SQL_URL = "jdbc:mysql://192.99.37.67:3306/atherialrunes";
 	public static final String REMOTE_SQL_USER = "mattremote";
 	public static final String REMOTE_SQL_PASSWORD = "pass";
+
+	public static final String LOCALHOST_SQL_URL = "jdbc:mysql://192.99.37.67:3306/atherialrunes";
+	public static final String LOCALHOST_SQL_USER = "mattremote";
+	public static final String LOCALHOST_SQL_PASSWORD = "pass";
 }

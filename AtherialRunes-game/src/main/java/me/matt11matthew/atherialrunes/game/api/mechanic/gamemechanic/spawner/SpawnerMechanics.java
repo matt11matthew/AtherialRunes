@@ -3,10 +3,12 @@ package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.spawner;
 import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.mob.MobMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.events.AtherialChatEvent;
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
+import me.matt11matthew.atherialrunes.game.utils.AtherialRunnable;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -32,6 +34,7 @@ public class SpawnerMechanics extends ListenerMechanic {
 		print("-----------------------------------------");
 		registerListeners();
 		loadSpawners();
+		spawnerTask();
 	}
 
 	@Override
@@ -85,8 +88,9 @@ public class SpawnerMechanics extends ListenerMechanic {
 				int cooldown = Integer.parseInt(m.split("Cooldown:")[1].split(",")[0].trim());
 				int range = Integer.parseInt(m.split("Range:")[1].split(",")[0].trim());
 				int tier = Integer.parseInt(m.split("Tier:")[1].split(",")[0].trim());
+				int amount = Integer.parseInt(m.split("Amount:")[1].split(",")[0].trim());
 				boolean elite = Boolean.parseBoolean(m.split("Elite:")[1].split(",")[0].trim());
-				Spawner spawn = new Spawner(location, cooldown, range, elite, mob, tier);
+				Spawner spawn = new Spawner(location, cooldown, range, elite, mob, tier, amount);
 				spawners.put(location, spawn);
 			}
 		}
@@ -131,8 +135,9 @@ public class SpawnerMechanics extends ListenerMechanic {
 					int tier = Integer.parseInt(msg.split("Tier:")[1].split(",")[0].trim());
 					boolean elite = Boolean.parseBoolean(msg.split("Elite:")[1].split(",")[0].trim());
 					int cooldown = Integer.parseInt(msg.split("Cooldown:")[1].split(",")[0].trim());
+					int amount = Integer.parseInt(msg.split("Amount:")[1].split(",")[0].trim());
 					int range = Integer.parseInt(msg.split("Range:")[1].split("=")[0].trim());
-					Spawner spawner = new Spawner(placing.get(gp).getLocation(), cooldown, range, elite, mob, tier);
+					Spawner spawner = new Spawner(placing.get(gp).getLocation(), cooldown, range, elite, mob, tier, amount);
 					spawners.put(spawner.getLocation(), spawner);
 					gp.msg(MessageType.CHAT, "&aYou've placed a spawner!");
 				} catch (Exception ee) {
@@ -154,7 +159,7 @@ public class SpawnerMechanics extends ListenerMechanic {
 				if (e.getBlock().getType() == Material.MOB_SPAWNER) {
 					e.setCancelled(true);
 					gp.msg(MessageType.CHAT, "Please type mob info");
-					gp.msg(MessageType.CHAT, "Type =Mob:troll,Tier:1,Elite:false,Cooldown:60,Range:16=");
+					gp.msg(MessageType.CHAT, "Type =Mob:t4custom,Tier:1,Elite:false,Cooldown:60,Amount:1,Range:16=");
 					placing.put(gp, e.getBlock());
 					return;
 				}
@@ -174,6 +179,43 @@ public class SpawnerMechanics extends ListenerMechanic {
 				}
 			}
 		}
+	}
+
+	public void spawnerTask() {
+		AtherialRunnable.getInstance().runRepeatingTask(() -> {
+			spawners.values().forEach(spawner -> {
+				int timeTask = 0;
+				if (!spawner.isActive()) {
+					if (spawner.getCurrentCooldown() > 0) {
+						timeTask = AtherialRunnable.getInstance().runRepeatingTask( () -> {
+							spawner.setCurrentCooldown((spawner.getCurrentCooldown() - 1));
+						}, (spawner.getCurrentCooldown() * 20L), (spawner.getCurrentCooldown() * 20L));
+					}
+				}
+				if (spawner.getCurrentCooldown() == 0) {
+					spawner.setActive(true);
+				}
+				if (spawner.isActive()) {
+					spawner.setCurrentCooldown(spawner.getCooldown());
+					spawner.setActive(false);
+					spawnMob(spawner, spawner.getAmountSpawn());
+					return;
+				}
+			});
+        }, 1L, 1L);
+	}
+
+	public void spawnMob(Spawner spawner, int amount) {
+		int i = 0;
+		while (i < amount) {
+			MobMechanics.spawn(spawner.getLocation(), MobMechanics.mobs.get(spawner.getMob()), spawner);
+			i++;
+		}
+	}
+
+	public Location findLocation(Spawner spawner) {
+		return spawner.getLocation();
+		//TODO create a method with a random location
 	}
 }
 

@@ -3,6 +3,14 @@ package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.mob;
 import me.matt11matthew.atherialrunes.game.GameConstants;
 import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item.tier.Tier;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.mob.monster.Monster;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.mob.monster.mobarmor.Boot;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.mob.monster.mobarmor.Chestplate;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.mob.monster.mobarmor.Helmet;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.mob.monster.mobarmor.Leggings;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.spawner.Spawner;
+import me.matt11matthew.atherialrunes.game.utils.RandomUtils;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -15,7 +23,9 @@ import java.util.HashMap;
 
 public class MobMechanics extends ListenerMechanic {
 	
-	public HashMap<String, Mob> mobs = new HashMap<>();
+	public static HashMap<String, Mob> mobs = new HashMap<>();
+
+	public static HashMap<LivingEntity, Monster> monsters = new HashMap<>();
 
 	@Override
 	public void onEnable() {
@@ -34,10 +44,10 @@ public class MobMechanics extends ListenerMechanic {
 
 	@Override
 	public LoadPriority getLoadPriority() {
-		return LoadPriority.LOWEST;
+		return LoadPriority.NORMAL;
 	}
 
-	public static void spawn(Location location, Mob mob) {
+	public static void spawn(Location location, Mob mob, Spawner spawner) {
 		LivingEntity l = (LivingEntity) Bukkit.getWorld(GameConstants.WORLD_NAME).spawnEntity(location, mob.getMobType().getEntityType());
 		String helmet = Utils.getRandomFromList(mob.getHelmets());
 		String chestplate = Utils.getRandomFromList(mob.getChestplates());
@@ -60,8 +70,30 @@ public class MobMechanics extends ListenerMechanic {
 		}
 		l.setCustomName(Utils.colorCodes(name));
 		l.setCustomNameVisible(true);
-
-
+		double health = RandomUtils.random((int) mob.getMinHealth(), (int) mob.getMaxHealth());
+		Monster monster = new Monster();
+		monster.setMob(mob);
+		monster.setHealth(health);
+		monster.setDisplayName(Utils.colorCodes(name));
+		monster.setLivingEntity(l);
+		monster.setSpawner(spawner);
+		if (!boot.equalsIgnoreCase("air")) {
+			monster.setBoots(new Boot(Integer.parseInt(boot.trim())));
+			l.getEquipment().setBoots(monster.getBoots().get(Tier.getTier(monster.getBoots().getTier())));
+		}
+		if ((!helmet.equalsIgnoreCase("air")) && (!helmet.contains("skull:"))) {
+			monster.setHelmet(new Helmet(Integer.parseInt(boot.trim())));
+			l.getEquipment().setHelmet(monster.getHelmet().get(Tier.getTier(monster.getHelmet().getTier())));
+		}
+		if (!chestplate.equalsIgnoreCase("air")) {
+			monster.setChestplate(new Chestplate(Integer.parseInt(chestplate.trim())));
+			l.getEquipment().setChestplate(monster.getChestplate().get(Tier.getTier(monster.getChestplate().getTier())));
+		}
+		if (!legging.equalsIgnoreCase("air")) {
+			monster.setLeggings(new Leggings(Integer.parseInt(legging.trim())));
+			l.getEquipment().setLeggings(monster.getLeggings().get(Tier.getTier(monster.getLeggings().getTier())));
+		}
+		monsters.put(l, monster);
 	}
 }
 

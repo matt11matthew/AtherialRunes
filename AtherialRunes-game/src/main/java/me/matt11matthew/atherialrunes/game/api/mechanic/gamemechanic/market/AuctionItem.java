@@ -39,10 +39,6 @@ public class AuctionItem {
                 setName(im.getDisplayName());
             }
         }
-        removeLoreLine();
-        removeLoreLine();
-        removeLoreLine();
-        removeLoreLine();
     }
 
     public void removeLoreLine() {
@@ -203,19 +199,19 @@ public class AuctionItem {
      * @return the raw itemstack
      */
     public ItemStack buildRawItem() {
-//        ItemStack item = new ItemStack(type);
-//        ItemMeta im = item.getItemMeta();
-//        if (!item_lore.isEmpty()) {
-//            im.setLore(item_lore);
-//        }
-//        if (name != null) {
-//            im.setDisplayName(Utils.colorCodes(name));
-//        }
-//        item.setItemMeta(im);
-//        item.setAmount(amount);
-//        item.setDurability(durability);
-//        return item;
-        return buildItem();
+        ItemStack item = new ItemStack(type);
+        ItemMeta im = item.getItemMeta();
+        if (!item_lore.isEmpty()) {
+            im.setLore(item_lore);
+        }
+        if (name != null) {
+            im.setDisplayName(Utils.colorCodes(name));
+        }
+        item.setItemMeta(im);
+        item.setAmount(amount);
+        item.setDurability(durability);
+        return item;
+
     }
 
     /**

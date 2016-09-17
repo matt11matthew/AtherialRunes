@@ -11,8 +11,10 @@ public class Spawner {
 	private String mob;
 	private boolean elite;
 	private int tier;
+	private int currentCooldown;
+	private int amountSpawn;
 	
-	public Spawner(Location location, int cooldown, int range, boolean elite, String mob, int tier) {
+	public Spawner(Location location, int cooldown, int range, boolean elite, String mob, int tier, int amount) {
 		this.location = location;
 		this.cooldown = cooldown;
 		this.range = range;
@@ -20,6 +22,8 @@ public class Spawner {
 		this.mob = mob;
 		this.tier = tier;
 		this.elite = elite;
+		this.amountSpawn = amount;
+		this.currentCooldown = cooldown;
 	}
 
 	public Location getLocation() {
@@ -76,5 +80,21 @@ public class Spawner {
 
 	public void setTier(int tier) {
 		this.tier = tier;
+	}
+
+	public int getCurrentCooldown() {
+		return currentCooldown;
+	}
+
+	public void setCurrentCooldown(int currentCooldown) {
+		this.currentCooldown = currentCooldown;
+	}
+
+	public int getAmountSpawn() {
+		return amountSpawn;
+	}
+
+	public void setAmountSpawn(int amountSpawn) {
+		this.amountSpawn = amountSpawn;
 	}
 }

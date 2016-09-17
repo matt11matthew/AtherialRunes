@@ -1,6 +1,6 @@
 package me.matt11matthew.atherialrunes.game;
 
-
+import me.matt11matthew.atherialrunes.Constants;
 import me.matt11matthew.atherialrunes.command.AtherialCommandManager;
 import me.matt11matthew.atherialrunes.database.DatabaseAPI;
 import me.matt11matthew.atherialrunes.database.data.player.PlayerData;
@@ -20,6 +20,7 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item.comman
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.LevelingMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.commands.CommandAddEXP;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.commands.CommandSetLevel;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.MarketMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.commands.CommandSell;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.commands.CommandView;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.notoriety.NotorietyMechanics;
@@ -69,9 +70,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main extends JavaPlugin {
-	
+
+
 	private static Main instance;
-	
+
 	public static List<String> staff = new ArrayList<String>();
 
 	private static ShardInfo shard;
@@ -96,9 +98,9 @@ public class Main extends JavaPlugin {
 		NetworkUtils.registerServer("127.0.0.1", "25666", 0);
 		NetworkUtils.registerServer("127.0.0.1", "25667", 1);
 		NetworkUtils.load();
-		NetworkUtils.sendPacketCrossServer("[online]" + shard.getPseudoName(), Integer.parseInt(shardId), true);
+		NetworkUtils.sendPacketCrossServer("[online]ID:" + shard.getPseudoName(), Integer.parseInt(shardId), true);
 	}
-	
+
 	public String getShardFile() {
 		File file = new File("shardconfig.shard");
 		String text = null;
@@ -131,7 +133,7 @@ public class Main extends JavaPlugin {
 		}
 		return text;
 	}
-	
+
 	private void loadShard() {
 		String ss = getShardFile();
 		String[] s = ss.split("\n");
@@ -145,19 +147,19 @@ public class Main extends JavaPlugin {
 		}
 		shard = ShardInfo.getByShardID(shardId);
 	}
-	
+
 	public void onDisable() {
 		MechanicManager.disableMechanics();
 	}
-	
+
 	public static Main getInstance() {
 		return instance;
 	}
-	
+
 	public static void print(String s) {
 		System.out.println(s);
 	}
-	
+
 	private void registerCommands() {
 		AtherialCommandManager cm = new AtherialCommandManager();
 		cm.registerCommand(new CommandSetRank("setrank", "/setrank <player> <rank>", "Sets the rank of a player.", Arrays.asList("setgroup")));
@@ -181,7 +183,7 @@ public class Main extends JavaPlugin {
 		cm.registerCommand(new CommandSell("selltest", "/selltest", "Test"));
 		cm.registerCommand(new CommandView("ahtest", "/ahtest", "Test"));
 	}
-	
+
 	private void registerMechanics() {
 		registerMechanic(new ServerMechanics());
 		registerMechanic(new LevelingMechanics());
@@ -195,20 +197,23 @@ public class Main extends JavaPlugin {
 		registerMechanic(new ShardMechanics());
 		registerMechanic(new StaffMechanics());
 		registerMechanic(new SpawnerMechanics());
-		registerMechanic(new BungeeChannelListener());
+		if (!Constants.LOCALHOST) {
+			registerMechanic(new BungeeChannelListener());
+		}
 		registerMechanic(new ItemMechanics());
 		registerMechanic(new NotorietyMechanics());
 		registerMechanic(new StatMechanics());
 		registerMechanic(new DamageMechanics());
+		registerMechanic(new MarketMechanics());
 		MechanicManager.loadMechanics();
-		
+
 	}
-	
+
 	private void registerMenus() {
 		MenuManager.registerMenu(new FirstMenu());
 
 	}
-	
+
 	public static void registerMechanic(Mechanic mechanic) {
 		MechanicManager.mechanics.put(mechanic.getClass().getSimpleName(), mechanic);
 	}
@@ -240,7 +245,7 @@ public class Main extends JavaPlugin {
 	public static GamePlayer getGamePlayer(Player player) {
 		return getGamePlayer(player.getName());
 	}
-	
+
 	public static void sendMessageToStaff(String msg) {
 		for (String staffName : staff) {
 			BungeeUtils.sendPlayerMessage(staffName, Utils.colorCodes(msg));
@@ -255,16 +260,15 @@ public class Main extends JavaPlugin {
 		Main.shard = shard;
 	}
 
-	public static void stop() {}
+	public static void stop() {
+	}
 
 	//get registries
-	public ItemRegistry getItemRegistry()
-	{
+	public ItemRegistry getItemRegistry() {
 		return itemRegistry;
 	}
 
-	public PlayerRegistry getPlayerRegistry()
-	{
+	public PlayerRegistry getPlayerRegistry() {
 		return playerRegistry;
 	}
 

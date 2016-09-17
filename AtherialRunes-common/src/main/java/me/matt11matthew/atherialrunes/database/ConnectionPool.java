@@ -1,10 +1,9 @@
 package me.matt11matthew.atherialrunes.database;
 
+import me.matt11matthew.atherialrunes.Constants;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-
-
-import me.matt11matthew.atherialrunes.Constants;
 
 
 public class ConnectionPool {
@@ -20,7 +19,11 @@ public class ConnectionPool {
 				if (con != null) {
 					con.close();
 				}
-				con = DriverManager.getConnection(Constants.SQL_URL, Constants.SQL_USER, Constants.SQL_PASSWORD);
+				if (Constants.LOCALHOST) {
+					con = DriverManager.getConnection(Constants.LOCALHOST_SQL_URL, Constants.LOCALHOST_SQL_USER, Constants.LOCALHOST_SQL_PASSWORD);
+				} else {
+					con = DriverManager.getConnection(Constants.SQL_URL, Constants.SQL_USER, Constants.SQL_PASSWORD);
+				}
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

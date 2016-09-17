@@ -3,6 +3,7 @@ package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.shard;
 import me.matt11matthew.atherialrunes.game.Main;
 import me.matt11matthew.atherialrunes.game.api.mechanic.ListenerMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.LoadPriority;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
 import me.matt11matthew.atherialrunes.game.api.player.GamePlayer;
 import me.matt11matthew.atherialrunes.game.enums.MessageType;
 import me.matt11matthew.atherialrunes.game.network.ShardInfo;
@@ -22,8 +23,8 @@ import java.util.HashMap;
 
 public class ShardMechanics extends ListenerMechanic {
 	
-	public static HashMap<String, ShardInfo> shards = new HashMap<String, ShardInfo>();
-	public static HashMap<Player, String> sharding = new HashMap<Player, String>();
+	public static HashMap<String, ShardInfo> shards = new HashMap<>();
+	public static HashMap<Player, String> sharding = new HashMap<>();
 	
 	@Override
 	public void onEnable() {
@@ -69,16 +70,17 @@ public class ShardMechanics extends ListenerMechanic {
 		if (e.getInventory().getTitle().equals(ShardMenu.NAME)) {
 			e.setCancelled(true);
 			ItemStack cur = e.getCurrentItem();
-			if (cur.getType() != Material.AIR) {
-				String shard = ChatColor.stripColor(cur.getItemMeta().getLore().get(0));
-				short dura = cur.getDurability();
-				switch (dura) {
+			if ((cur.getType() != Material.AIR) || (cur != null) || (cur.getType() != Material.THIN_GLASS)) {
+				String shardId = ChatColor.stripColor(cur.getItemMeta().getLore().get(1));
+				ShardInfo shard = ShardMechanics.shards.get(shardId);
+				short durability = cur.getDurability();
+				switch (durability) {
 					case ShardMenu.GREEN:
-						player.sendMessage(Utils.colorCodes("&aYour already on &l" + shard));
+						player.sendMessage(Utils.colorCodes("&aYour already on &l" + shard.getPseudoName()));
 						player.closeInventory();
 						break;
 					case ShardMenu.RED:
-						player.sendMessage(Utils.colorCodes("&c" + shard + " is &lOFFLINE"));
+						player.sendMessage(Utils.colorCodes("&c" + shard.getPseudoName() + " is &lOFFLINE"));
 						player.closeInventory();
 						break;
 					case 0:
@@ -94,13 +96,36 @@ public class ShardMechanics extends ListenerMechanic {
 		}
 	}
 
-	public void shard(Player player, String shard) {
+	public void shard(Player player, ShardInfo shard) {
 		GamePlayer gp = Main.getGamePlayer(player.getName());
-		gp.msg(MessageType.CHAT, "&aLoading... &7Please wait! (Don't move)");
-		sharding.put(player, shard);
-		BungeeUtils.sendToServer(player.getName(), shard);
+		switch (shard.getType()) {
+			case DEVELOPER:
+				if (!Rank.isDeveloper(gp.getName())) {
+					gp.msg(MessageType.CHAT, "&cYou are &lNOT &cauthorized to login to the development server.");
+					return;
+				}
+				break;
+			case YOUTUBE:
+				if (!canJoinYoutubeServer(gp)) {
+					gp.msg(MessageType.CHAT, "&cYou are &lNOT &cauthorized to login to the youtube server.");
+					return;
+				}
+				break;
+			case LIVE:
+				break;
+		}
+		gp.msg(MessageType.CHAT, "");
+		gp.msg(MessageType.CHAT, "&e                       Loading Shard - &l" + shard.getPseudoName() + "&e ... ");
+		gp.msg(MessageType.CHAT, "&7&oYour current game session has been paused while your data is transferred.");
+		gp.msg(MessageType.CHAT, "");
+		sharding.put(player, shard.getBungeeName());
+		BungeeUtils.sendToServer(player.getName(), shard.getBungeeName());
 	}
-	
+
+	public boolean canJoinYoutubeServer(GamePlayer gp) {
+		return ((gp.getRank() == Rank.YOUTUBER) || (Rank.isStaff(gp.getName())));
+	}
+
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		Player player = e.getPlayer();

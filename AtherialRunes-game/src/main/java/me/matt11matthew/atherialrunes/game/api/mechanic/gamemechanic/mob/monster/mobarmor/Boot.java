@@ -14,6 +14,13 @@ import org.json.simple.JSONObject;
 import java.io.File;
 
 public class Boot implements MobArmor {
+
+    private int tier;
+
+    public Boot(int tier) {
+        this.tier = tier;
+    }
+
     @Override
     public ItemStack get(Tier tier) {
         Material type = null;
@@ -60,5 +67,13 @@ public class Boot implements MobArmor {
         item.addLore("&fHealth: &c" + health);
         item.addLore(rarity.getLore());
         return item.build();
+    }
+
+    public int getTier() {
+        return tier;
+    }
+
+    public void setTier(int tier) {
+        this.tier = tier;
     }
 }

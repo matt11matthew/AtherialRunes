@@ -11,7 +11,7 @@ public class GameConstants {
 
 	public static final String CURRENTLY_HIDDEN_MESSAGE = "&cYou're currently &lHIDDEN";
 
-	public static final int MAX_MARKET_ITEMS_PER_PAGE = 30;
+	public static final int MAX_MARKET_ITEMS_PER_PAGE = 35;
 
 	public static final int NOTORIETY_LOSS_IN_MORNING = 3;
 	public static final long MORNING_AT_TIME = 0L;
