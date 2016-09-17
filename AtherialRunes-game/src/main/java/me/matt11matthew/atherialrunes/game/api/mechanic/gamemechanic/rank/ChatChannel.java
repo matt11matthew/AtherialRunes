@@ -5,7 +5,8 @@ public enum ChatChannel {
 	LOCAL(1, "&7<Local>", "Local"),
 	GLOBAL(2, "&7<&bGlobal&7>", "Global"),
 	TRADE(3, "&7<&aTrade&7>", "Trade"),
-	GUILD(4, "&7<&3Guild&7>", "Guild");
+	STAFF(4, "&7<&6Staff&7>", "Staff"),
+	GUILD(5, "&7<&3Guild&7>", "Guild");
 	
 	int id;
 	String prefix;

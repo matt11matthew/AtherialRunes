@@ -217,5 +217,34 @@ public class SpawnerMechanics extends ListenerMechanic {
 		return spawner.getLocation();
 		//TODO create a method with a random location
 	}
+
+	/*
+	{
+  "type": "skeleton",
+  "health": "100-100",
+  "damage": "100-500",
+  "names": [
+    "&cEpic Skeleton",
+    "&bT4 Skeleton"
+  ],
+  "helmets": [
+    "skull:matt11matthew",
+    "4"
+  ],
+  "chestplates": [
+    "4"
+  ],
+  "leggings": [
+    "4"
+  ],
+  "boots": [
+    "4"
+  ],
+  "weapons": [
+    "axe:4",
+    "sword:4"
+  ]
+}
+	 */
 }
 

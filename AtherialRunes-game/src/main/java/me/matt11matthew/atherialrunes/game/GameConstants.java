@@ -18,5 +18,5 @@ public class GameConstants {
 
 	public static final String WORLD_NAME = "AtherialRunes";
 
-	public static final String SERVER_REBOOTING_KICK_MESSAGE = new KickMessage().append("&aThe Server is Rebooting").append("&7&n" + Constants.WEBSITE_LINK).getMessage();
+	public static final String SERVER_REBOOTING_KICK_MESSAGE = new KickMessage("&aThe Server is Rebooting").append("&7&n" + Constants.WEBSITE_LINK).getMessage();
 }

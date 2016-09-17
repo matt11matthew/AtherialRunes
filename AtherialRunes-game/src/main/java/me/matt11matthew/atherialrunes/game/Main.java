@@ -9,7 +9,6 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.Mechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.MechanicManager;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.HealthMechanic;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.MotdMechanics;
-import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.ServerMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.AuctionHouseMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.auctionhouse.menus.FirstMenu;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.combat.CombatMechanics;
@@ -20,7 +19,6 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item.comman
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.LevelingMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.commands.CommandAddEXP;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.commands.CommandSetLevel;
-import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.MarketMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.commands.CommandSell;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.commands.CommandView;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.notoriety.NotorietyMechanics;
@@ -29,9 +27,14 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.ChatCh
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.RankMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.commands.CommandChannel;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.server.ServerMechanics;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.server.commands.CommandForceReboot;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.server.commands.CommandReboot;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.shard.ShardMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.shard.commands.CommandShard;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.spawner.SpawnerMechanics;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.spawner.commands.CommandHideMs;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.spawner.commands.CommandShowMs;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.StaffMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.commands.CommandAdminMode;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.staff.commands.CommandInvsee;
@@ -182,6 +185,10 @@ public class Main extends JavaPlugin {
 		cm.registerCommand(new CommandChannel("channel", "/channel", "Changes your chat channel", Arrays.asList("ch", "chatchannel")));
 		cm.registerCommand(new CommandSell("selltest", "/selltest", "Test"));
 		cm.registerCommand(new CommandView("ahtest", "/ahtest", "Test"));
+		cm.registerCommand(new CommandReboot("reboot", "/reboot", "Views reboot time"));
+		cm.registerCommand(new CommandForceReboot("forcereboot", "/forcereboot", "Force starts a reboot."));
+		cm.registerCommand(new CommandShowMs("showms", "/showms", "Shows spawners", Arrays.asList("showmobs", "showspawners", "showmobspawners")));
+		cm.registerCommand(new CommandHideMs("hidems", "/hidems", "Hides spawners", Arrays.asList("hidemobs", "hidespawners", "hidemobspawners")));
 	}
 
 	private void registerMechanics() {
@@ -204,7 +211,7 @@ public class Main extends JavaPlugin {
 		registerMechanic(new NotorietyMechanics());
 		registerMechanic(new StatMechanics());
 		registerMechanic(new DamageMechanics());
-		registerMechanic(new MarketMechanics());
+		//registerMechanic(new MarketMechanics());
 		MechanicManager.loadMechanics();
 
 	}
