@@ -11,6 +11,8 @@
     <modules>
         <module>AtherialRunes-common</module>
         <module>AtherialRunes-game</module>
+        <module>AtherialRunes-lobby</module>
+        <module>AtherialRunes-proxy</module>
     </modules>
 
     <build>

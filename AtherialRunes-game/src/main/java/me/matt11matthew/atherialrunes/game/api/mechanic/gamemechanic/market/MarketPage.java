@@ -1,14 +1,20 @@
 package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market;
 
+import me.matt11matthew.atherialrunes.database.ConnectionPool;
 import me.matt11matthew.atherialrunes.game.GameConstants;
+import me.matt11matthew.atherialrunes.game.Main;
+import me.matt11matthew.atherialrunes.game.utils.AtherialRunnable;
+import me.matt11matthew.atherialrunes.item.ItemSerialization;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MarketPage {
 
     private int pageNumber;
-    public List<AuctionItem> items = new ArrayList<>();
 
     public MarketPage(int newPageAmount) {
         this.pageNumber = newPageAmount;
@@ -37,20 +43,18 @@ public class MarketPage {
         if (page.getItemSize() >= GameConstants.MAX_MARKET_ITEMS_PER_PAGE) {
             MarketPage.createPage();
             MarketPage newPage = MarketPage.get(newPageAmount);
-            newPage.items.add(auctionItem);
+            newPage.addItem(auctionItem);
             return newPage;
         }
         return page;
     }
 
     public  int getItemSize() {
-        int size = 0;
         try {
-            size = items.size();
+            return getItems().size();
         } catch (Exception e) {
-            size = 0;
+            return 0;
         }
-        return size;
     }
 
     public static void createPage() {
@@ -60,12 +64,62 @@ public class MarketPage {
         MarketMechanics.pages.put(newPageAmount, marketPage);
     }
 
-    public void addItem(AuctionItem auctionItem) {
-        if (items.contains(auctionItem)) {
-            items.remove(auctionItem);
-            items.add(auctionItem);
+    public void addItem(AuctionItem item) {
+        AtherialRunnable.getInstance().runTaskAsynchronously(Main.getInstance(), () -> {
+            PreparedStatement pst = null;
+            try {
+                pst = ConnectionPool.getConnection().prepareStatement("insert into shops (id, item, seller, price, time, page) values ('" + item.getUUID() + "', '" + ItemSerialization.itemStackToBase64(item.buildRawItem()) + "', '" + item.getSeller() + "', '" + item.getPrice() + "', '" + item.getTime() + "', '" + item.getPage().getPageNumber() + "');");
+                pst.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             return;
-        }
-        items.add(auctionItem);
+        });
+    }
+
+    public void removeItem(AuctionItem item) {
+        AtherialRunnable.getInstance().runTaskAsynchronously(Main.getInstance(), () -> {
+            PreparedStatement pst = null;
+            try {
+                pst = ConnectionPool.getConnection().prepareStatement("delete * from shops where id = " + item.getUUID());
+                pst.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return;
+        });
+    }
+
+    public List<AuctionItem> getItems() {
+        List<AuctionItem> itemList = new ArrayList<>();
+        AtherialRunnable.getInstance().runTaskAsynchronously(Main.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                PreparedStatement pst = null;
+                try {
+                    pst = ConnectionPool.getConnection().prepareStatement("select * from shops");
+                    pst.execute();
+                    ResultSet rs = pst.getResultSet();
+                    if (rs.next()) {
+                        String id = rs.getString("id");
+                        String item = rs.getString("item");
+                        int cost = rs.getInt("price");
+                        String seller = rs.getString("seller");
+                        long time = rs.getLong("time");
+                        int page = rs.getInt("page");
+                        AuctionItem auctionItem = new AuctionItem(item);
+                        auctionItem.setUUID(id);
+                        auctionItem.setPrice(cost);
+                        auctionItem.setPage(MarketPage.get(page));
+                        auctionItem.setSeller(seller);
+                        auctionItem.setTime(time);
+                        itemList.add(auctionItem);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return itemList;
     }
 }

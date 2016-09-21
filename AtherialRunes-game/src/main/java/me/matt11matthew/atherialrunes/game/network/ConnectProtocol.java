@@ -88,7 +88,7 @@ public class ConnectProtocol implements Runnable {
                 if (inputLine.startsWith("[reboot]")) {
                     String shard = inputLine.split("shard:")[1].split(",")[0].trim();
                     if (NetworkUtils.getServerNum() == Integer.parseInt(shard.split("-")[1].trim())) {
-                        ServerMechanics.getInstance().setRebootTime(0, 0, 30);
+                        ServerMechanics.getInstance().rebootSoon();
                     }
                 }
             }

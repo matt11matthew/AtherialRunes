@@ -2,7 +2,7 @@ package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.server.com
 
 import me.matt11matthew.atherialrunes.command.AtherialCommand;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
-import me.matt11matthew.atherialrunes.game.network.NetworkUtils;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.server.ServerMechanics;
 import me.matt11matthew.atherialrunes.game.network.ShardInfo;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.command.Command;
@@ -28,7 +28,8 @@ public class CommandForceReboot extends AtherialCommand {
                 sender.sendMessage(Utils.colorCodes("&c/forcereboot <shard>"));
                 return true;
             }
-            NetworkUtils.sendPacketCrossServer("[reboot]shard:" + shard.getPseudoName() + ",who:" + sender.getName(), Integer.parseInt(shard.getShardID()), true);
+            ServerMechanics.rebootSoon();
+          //  NetworkUtils.sendPacketCrossServer("[reboot]shard:" + shard.getPseudoName() + ",who:" + sender.getName(), Integer.parseInt(shard.getShardID()), true);
             sender.sendMessage(Utils.colorCodes("&aRebooting " + shard.getPseudoName()));
             return true;
         } else {

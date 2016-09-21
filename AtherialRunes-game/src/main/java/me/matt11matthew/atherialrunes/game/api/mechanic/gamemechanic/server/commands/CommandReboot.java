@@ -13,7 +13,7 @@ public class CommandReboot extends AtherialCommand {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        sender.sendMessage(Utils.colorCodes("&cNext reboot in " + ServerMechanics.getInstance().parseRebootTime()));
+        sender.sendMessage(Utils.colorCodes("&cNext reboot in " + ServerMechanics.parseRebootTime()));
         return true;
     }
 }

@@ -2,6 +2,7 @@ package me.matt11matthew.atherialrunes.game.commands;
 
 import me.matt11matthew.atherialrunes.command.AtherialCommand;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.item.ItemMechanics;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.spawner.SpawnerMechanics;
 import me.matt11matthew.atherialrunes.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -22,22 +23,27 @@ public class CommandReload extends AtherialCommand {
             }
         }
         String itemInfo = "";
-        String itemColor = "";
+        String spawnerInfo = "";
         try {
             try {
                 ItemMechanics.reload();
-                itemInfo = "Success";
-                itemColor = "&a";
+                itemInfo = "&aSuccess";
             } catch (ReloadException e) {
-                itemInfo = "Failed";
-                itemColor = "&c";
+                itemInfo = "&cFailed";
+            }
+            try {
+                SpawnerMechanics.reload();
+                spawnerInfo = "&aSuccess";
+            } catch (ReloadException e) {
+                spawnerInfo = "&cFailed";
             }
         } catch (Exception e) {
         } finally {
             sender.sendMessage(Utils.colorCodes("&cReload completed!"));
             String info =
                     "&a-------------------------------," +
-                    "&bItemMechanics: &n" + itemColor + itemInfo + "," +
+                    "&bItemMechanics: " + itemInfo + "," +
+                    "&bSpawnerMechanics: " + spawnerInfo + "," +
                     "&a-------------------------------";
             info = info.replaceAll(",", System.lineSeparator());
             sender.sendMessage(Utils.colorCodes(info));

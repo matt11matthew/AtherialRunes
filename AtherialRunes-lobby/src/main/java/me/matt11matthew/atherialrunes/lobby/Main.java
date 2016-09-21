@@ -1,13 +1,9 @@
 package me.matt11matthew.atherialrunes.lobby;
 
+import me.matt11matthew.atherialrunes.Constants;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import me.matt11matthew.atherialrunes.Constants;
-import me.matt11matthew.atherialrunes.lobby.commands.CommandShard;
-import me.matt11matthew.atherialrunes.lobby.shard.ShardLoader;
 
 public class Main extends JavaPlugin {
 	
@@ -16,22 +12,8 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 		print("Starting Lobby...");
-		print("Version " + Constants.SERVER_VERSION);
-		print("Build #" + Constants.BUILD);
-		print("Loading shards...");
-		ShardLoader.loadShards();
-		print("");
-		print("");
-		print("Registering commands...");
-		print("");
-		registerCommands();
-		print("");
-		print("");
-		print("Registering Listeners...");
-		print("");
 		registerListeners();
-		
-	
+		registerCommands();
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 	}
 	
@@ -41,16 +23,11 @@ public class Main extends JavaPlugin {
 	}	
 	
 	private void registerCommands() {
-		getCommand("shard").setExecutor(new CommandShard());
-		print("Registered command -> /shard");
-		print("Commands registered!");
+
 	}
 	
 	private void registerListeners() {
-		PluginManager pm = Bukkit.getPluginManager();
-		pm.registerEvents(new PlayerListeners(), this);
-		print("Registered listener -> PlayerListeners");
-		print("Listeners registered!");
+		Bukkit.getPluginManager().registerEvents(new PlayerListeners(), this);
 	}
 
 	public static Location getLobbySpawn() {

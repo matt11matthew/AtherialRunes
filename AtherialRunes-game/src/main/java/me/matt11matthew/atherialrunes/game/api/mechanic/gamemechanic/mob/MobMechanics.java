@@ -22,8 +22,6 @@ import org.bukkit.inventory.meta.SkullMeta;
 import java.util.HashMap;
 
 public class MobMechanics extends ListenerMechanic {
-	
-	public static HashMap<String, Mob> mobs = new HashMap<>();
 
 	public static HashMap<LivingEntity, Monster> monsters = new HashMap<>();
 
@@ -94,6 +92,10 @@ public class MobMechanics extends ListenerMechanic {
 			l.getEquipment().setLeggings(monster.getLeggings().get(Tier.getTier(monster.getLeggings().getTier())));
 		}
 		monsters.put(l, monster);
+	}
+
+	public static Mob getMob(String mob) {
+		return new Mob(mob);
 	}
 }
 

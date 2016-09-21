@@ -45,14 +45,8 @@
                         <configuration>
                             <artifactSet>
                                 <includes>
-                                    <include>org.ini4j:ini4j</include>
-             
-                                    <include>commons-net:commons-net</include>
-            
-                                    <include>org.objenesis:objenesis</include>
-                                    <include>net.lingala.zip4j:zip4j</include>
                                     <include>me.matt11matthew.atherialrunes:AtherialRunes-common</include>
-                                  <include>me.matt11matthew.atherialrunes:AtherialRunes-proxy</include>
+                                    <include>me.matt11matthew.atherialrunes:AtherialRunes-game</include>
                                 </includes>
                             </artifactSet>
                         </configuration>
@@ -167,24 +161,14 @@
         </dependency>
 
         <dependency>
-            <groupId>com</groupId>
-            <artifactId>holographicdisplaysapi</artifactId>
-            <version>2.1.7</version>
-        </dependency>
-        <dependency>
-            <groupId>me.konsolas</groupId>
-            <artifactId>aac</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
         	<groupId>me.matt11matthew.atherialrunes</groupId>
         	<artifactId>AtherialRunes-common</artifactId>
-        	<version>default</version>
+        	<version>1.0.0</version>
         </dependency>
         <dependency>
-        	<groupId>me.matt11matthew.atherialrunes</groupId>
-        	<artifactId>AtherialRunes-proxy</artifactId>
-        	<version>default</version>
+            <groupId>me.matt11matthew.atherialrunes</groupId>
+            <artifactId>AtherialRunes-game</artifactId>
+            <version>default</version>
         </dependency>
     </dependencies>
 

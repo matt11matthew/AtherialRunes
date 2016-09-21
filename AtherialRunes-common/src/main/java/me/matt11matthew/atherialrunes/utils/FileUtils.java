@@ -49,4 +49,29 @@ public class FileUtils {
         }
         return text;
     }
+
+    public static String getTextOfFile(FileReader reader) {
+        String text = null;
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(reader);
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            text = sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return text;
+    }
 }

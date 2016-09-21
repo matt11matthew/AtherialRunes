@@ -35,6 +35,7 @@ public class CommandChannel extends AtherialCommand {
 
         public static final String CHAT_CHANNEL_MENU_NAME = "Chat Channel Selector";
         public static final int CHAT_CHANNEL_MENU_SLOTS = 9;
+
         public ChannelMenu(GamePlayer gp) {
             super(CHAT_CHANNEL_MENU_NAME, CHAT_CHANNEL_MENU_SLOTS);
 
@@ -59,20 +60,6 @@ public class CommandChannel extends AtherialCommand {
             div.addItemFlag(ItemFlag.HIDE_ATTRIBUTES);
             ItemStack divider = div.build();
 
-            switch (gp.getChatChannel()) {
-                case LOCAL:
-                    local.addGlow();
-                    local.addItemFlag(ItemFlag.HIDE_ENCHANTS);
-                    break;
-                case GLOBAL:
-                    global.addGlow();
-                    global.addItemFlag(ItemFlag.HIDE_ENCHANTS);
-                    break;
-                case TRADE:
-                    trade.addGlow();
-                    trade.addItemFlag(ItemFlag.HIDE_ENCHANTS);
-                    break;
-            }
             setItem(0, divider);
             setItem(1, local.build());
             setItem(2, divider);

@@ -20,5 +20,4 @@ public abstract class Mechanic  {
 	public void print(String s) {
 		Main.print(s);
 	}
-
 }

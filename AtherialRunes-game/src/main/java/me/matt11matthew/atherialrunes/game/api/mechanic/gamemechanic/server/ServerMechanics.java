@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ServerMechanics extends ListenerMechanic {
 
-    boolean deny = false;
-    private long rebootTime = 0L;
+    static boolean deny = false;
+    public static long rebootTime = 0L;
     static ServerMechanics instance = null;
 
     @Override
@@ -27,7 +27,8 @@ public class ServerMechanics extends ListenerMechanic {
         print("[ServerMechanics] Enabling...");
         print("-----------------------------------------");
         registerListeners();
-        setRebootTime(4, 0, 0);
+        this.rebootTime = ServerUtils.convertToMillis(1);
+        rebootTask();
     }
 
     public static ServerMechanics getInstance() {
@@ -46,7 +47,7 @@ public class ServerMechanics extends ListenerMechanic {
         print("-----------------------------------------");
     }
 
-    private void kick() {
+    public static void kick() {
         Bukkit.getServer().getOnlinePlayers().forEach(player -> {
             player.kickPlayer(GameConstants.SERVER_REBOOTING_KICK_MESSAGE);
         });
@@ -64,21 +65,21 @@ public class ServerMechanics extends ListenerMechanic {
         return LoadPriority.MONITOR;
     }
 
-    public long getRebootTime() {
+    public static long getRebootTime() {
         return rebootTime;
     }
 
-    public long getSecondsUntilReboot() {
-        long second = TimeUnit.MILLISECONDS.toSeconds(rebootTime) - TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
-        if (second - TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) > 0) {
-            second = second - TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
+    public static long getSecondsUntilReboot() {
+        long sec = TimeUnit.MILLISECONDS.toSeconds(rebootTime);
+        if (sec - TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) > 0) {
+            sec = sec - TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
         }
-        return second;
+        return sec;
     }
 
-    int rebootTask = 0;
+    static int rebootTask = 0;
 
-    public void rebootTask() {
+    public static void rebootTask() {
         rebootTask = AtherialRunnable.getInstance().runRepeatingTask(() -> {
             long seconds = getSecondsUntilReboot();
             String msg = null;
@@ -96,16 +97,13 @@ public class ServerMechanics extends ListenerMechanic {
                     msg = "&cServer rebooting in 1 Minute";
                     break;
                 case 1:
-                    msg = "&cServer rebooting in 1 Second";
-                    break;
-                case 0:
                     msg = "&cServer rebooting...";
                     reboot();
                     break;
                 default:
                     break;
             }
-            if ((seconds == 30) || (seconds == 10) || ((seconds <= 5) && (seconds > 1))) {
+            if ((seconds == 30) || (seconds == 10) || ((seconds <= 5))) {
                 msg = "&cServer rebooting in " + seconds + " Seconds";
             }
             if (msg != null) {
@@ -124,47 +122,18 @@ public class ServerMechanics extends ListenerMechanic {
         });
     }
 
-    private void reboot() {
+    public static void reboot() {
         deny = true;
         AtherialRunnable.getInstance().cancelTask(rebootTask);
         kick();
         Bukkit.getServer().spigot().restart();
     }
 
-    public String parseRebootTime() {
-        long seconds = getSecondsUntilReboot();
-        int hour = 0;
-        int minute = 0;
-        int second = (int) seconds;
-        while (second >= 60) {
-            second -= 60;
-            minute += 1;
-        }
-        while (minute >= 60) {
-            minute -= 60;
-            hour += 1;
-        }
-        return hour + "&a" + hour + "&lh &a" + minute + "&lm &a" + second + "&ls";
+    public static String parseRebootTime() {
+        return ServerUtils.parseMilis(rebootTime);
     }
 
-    public void setRebootTime(long rebootTime) {
-        long time = (System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(rebootTime));
-        this.rebootTime = time;
-    }
-
-    public void setRebootTime(int hours, int minutes, int seconds) {
-        int min = minutes;
-        int sec = seconds;
-        int hour = hours;
-        while (hour > 0) {
-            min += 60;
-            hour -= 1;
-        }
-        while (min > 0) {
-            sec += 60;
-            min -= 1;
-        }
-        setRebootTime(sec);
-        return;
+    public static void rebootSoon() {
+        rebootTime = ServerUtils.convertSecondsToMillis(30);
     }
 }

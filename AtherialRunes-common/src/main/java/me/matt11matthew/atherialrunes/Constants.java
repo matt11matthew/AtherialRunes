@@ -47,9 +47,9 @@ public class Constants {
 	
 	public static final String WEBSITE_LINK = "www.atherialrunes.net";
 	
-	public static final String MOTD = "&aAtherial Runes  &7Patch " + SERVER_VERSION + " \n&cBETA - &f&l" + WEBSITE_LINK;
-    public static final String MAINTENANCE_MOTD = "&aAtherial Runes &8- &cUndergoing Maintenance     \n                &8- &f&n" + WEBSITE_LINK + " &8-";
-	public static final String DEV_MOTD = "&f&lAtherial Runes &8- &6Undergoing Development     \n                &8- &f&n" + WEBSITE_LINK + " &8-";
+	public static final String MOTD = "&aAtherial Runes &8- &cDR Server Open     \n                &8- &f&n" + WEBSITE_LINK + " &8-";//"&aAtherial Runes  &7Patch " + SERVER_VERSION + " \n&cBETA - &f&l" + WEBSITE_LINK;
+    public static final String MAINTENANCE_MOTD = "&aAtherial Runes &8- &cDR Server Open     \n                &8- &f&n" + WEBSITE_LINK + " &8-";//"&aAtherial Runes &8- &cUndergoing Maintenance     \n                &8- &f&n" + WEBSITE_LINK + " &8-";
+	public static final String DEV_MOTD = "&aAtherial Runes &8- &cDR Server Open     \n                &8- &f&n" + WEBSITE_LINK + " &8-";//"&f&lAtherial Runes &8- &6Undergoing Development     \n                &8- &f&n" + WEBSITE_LINK + " &8-";
 	
 	public static final Location LOBBY_SPAWN = Bukkit.getWorld("hub").getSpawnLocation();
 

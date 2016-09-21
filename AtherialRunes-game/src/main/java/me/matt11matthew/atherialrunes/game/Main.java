@@ -22,6 +22,9 @@ import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.level.comma
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.commands.CommandSell;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.market.commands.CommandView;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.notoriety.NotorietyMechanics;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.npc.NPCMechanics;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.npc.commands.CommandAddNPC;
+import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.npc.commands.CommandRemoveNPC;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.player.PlayerMechanics;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.ChatChannel;
 import me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank.Rank;
@@ -189,6 +192,8 @@ public class Main extends JavaPlugin {
 		cm.registerCommand(new CommandForceReboot("forcereboot", "/forcereboot", "Force starts a reboot."));
 		cm.registerCommand(new CommandShowMs("showms", "/showms", "Shows spawners", Arrays.asList("showmobs", "showspawners", "showmobspawners")));
 		cm.registerCommand(new CommandHideMs("hidems", "/hidems", "Hides spawners", Arrays.asList("hidemobs", "hidespawners", "hidemobspawners")));
+		cm.registerCommand(new CommandAddNPC("addnpc", "/addnpc", "Spawns in a NPC."));
+		cm.registerCommand(new CommandRemoveNPC("removenpc", "/removenpc", "Removes a NPC."));
 	}
 
 	private void registerMechanics() {
@@ -211,6 +216,7 @@ public class Main extends JavaPlugin {
 		registerMechanic(new NotorietyMechanics());
 		registerMechanic(new StatMechanics());
 		registerMechanic(new DamageMechanics());
+		registerMechanic(new NPCMechanics());
 		//registerMechanic(new MarketMechanics());
 		MechanicManager.loadMechanics();
 

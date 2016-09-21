@@ -1,7 +1,7 @@
 package me.matt11matthew.atherialrunes.game;
 
 import me.matt11matthew.atherialrunes.Constants;
-import me.matt11matthew.atherialrunes.game.utils.message.KickMessage;
+import me.matt11matthew.atherialrunes.utils.Utils;
 
 public class GameConstants {
 
@@ -18,5 +18,5 @@ public class GameConstants {
 
 	public static final String WORLD_NAME = "AtherialRunes";
 
-	public static final String SERVER_REBOOTING_KICK_MESSAGE = new KickMessage("&aThe Server is Rebooting").append("&7&n" + Constants.WEBSITE_LINK).getMessage();
+	public static final String SERVER_REBOOTING_KICK_MESSAGE = Utils.colorCodes("&aThe Server is Rebooting \n&7&n" + Constants.WEBSITE_LINK);
 }
