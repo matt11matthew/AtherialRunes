@@ -116,7 +116,7 @@ public class ShardMechanics extends ListenerMechanic {
 		}
 		gp.msg(MessageType.CHAT, "");
 		gp.msg(MessageType.CHAT, "&e                       Loading Shard - &l" + shard.getPseudoName() + "&e ... ");
-		gp.msg(MessageType.CHAT, "&7&oYour current game session has been paused while your data is transferred.");
+		gp.msg(MessageType.CHAT, "&7&oYour data is being transfered, please wait.");
 		gp.msg(MessageType.CHAT, "");
 		sharding.put(player, shard.getBungeeName());
 		BungeeUtils.sendToServer(player.getName(), shard.getBungeeName());

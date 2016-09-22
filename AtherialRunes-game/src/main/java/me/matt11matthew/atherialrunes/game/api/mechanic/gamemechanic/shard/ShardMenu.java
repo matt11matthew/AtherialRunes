@@ -15,7 +15,7 @@ public class ShardMenu extends Menu {
 
 	public static final int GREEN = 5;
 	public static final int RED = 14;
-	public static final String NAME = "Shard Selector";
+	public static final String NAME = "Server Selector";
 	public static final int SLOTS = 9;
 
 	public ShardMenu(GamePlayer gp) {

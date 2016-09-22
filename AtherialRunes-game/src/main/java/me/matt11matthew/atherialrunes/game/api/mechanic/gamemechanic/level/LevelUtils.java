@@ -17,6 +17,7 @@ public class LevelUtils {
 			gp.msg(MessageType.CHAT, "&c--------------------------");
 			gp.msg(MessageType.CHAT, "        &c&lLevel UP        ");
 			gp.msg(MessageType.CHAT, "&c&lGained: &a1 Skill Points");
+			gp.msg(MessageType.CHAT, "&cCurrent Level:" + gp.getLevel());
 			gp.msg(MessageType.CHAT, "&c--------------------------");
 			gp.fw();
 			gp.sound(new AtherialSound(EnumSound.LEVEL_UP, 1.0F, 1.0F));

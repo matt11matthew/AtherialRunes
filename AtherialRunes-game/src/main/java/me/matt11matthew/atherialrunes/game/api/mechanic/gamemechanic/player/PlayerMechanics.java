@@ -98,7 +98,7 @@ public class PlayerMechanics extends ListenerMechanic {
 				if (mute.isMuted()) {
 					String time = Utils.parseMilis(mute.getTime());
 					String reason = mute.getReason();
-					player.sendMessage(Utils.colorCodes("&cYour currently &lMUTED"));
+					player.sendMessage(Utils.colorCodes("&cYou're currently &lMUTED"));
 					player.sendMessage(Utils.colorCodes("&f&lTime: &c" + time));
 					player.sendMessage(Utils.colorCodes("&f&lReason: &c" + reason));
 					return;
@@ -117,7 +117,7 @@ public class PlayerMechanics extends ListenerMechanic {
 		if (mute.isMuted()) {
 			String time = Utils.parseMilis(mute.getTime());
 			String reason = mute.getReason();
-			player.sendMessage(Utils.colorCodes("&cYour currently &lMUTED"));
+			player.sendMessage(Utils.colorCodes("&cYou're currently &lMUTED"));
 			player.sendMessage(Utils.colorCodes("&f&lTime: &c" + time));
 			player.sendMessage(Utils.colorCodes("&f&lReason: &c" + reason));
 			e.setCancelled(true);
@@ -131,7 +131,7 @@ public class PlayerMechanics extends ListenerMechanic {
 		if (mute.isMuted()) {
 			String time = Utils.parseMilis(mute.getTime());
 			String reason = mute.getReason();
-			player.sendMessage(Utils.colorCodes("&cYour currently &lMUTED"));
+			player.sendMessage(Utils.colorCodes("&cYou're currently &lMUTED"));
 			player.sendMessage(Utils.colorCodes("&f&lTime: &c" + time));
 			player.sendMessage(Utils.colorCodes("&f&lReason: &c" + reason));
 			e.setCancelled(true);
@@ -145,7 +145,7 @@ public class PlayerMechanics extends ListenerMechanic {
 		if (mute.isMuted()) {
 			String time = Utils.parseMilis(mute.getTime());
 			String reason = mute.getReason();
-			player.sendMessage(Utils.colorCodes("&cYour currently &lMUTED"));
+			player.sendMessage(Utils.colorCodes("&cYou're currently &lMUTED"));
 			player.sendMessage(Utils.colorCodes("&f&lTime: &c" + time));
 			player.sendMessage(Utils.colorCodes("&f&lReason: &c" + reason));
 			e.setCancelled(true);
@@ -181,7 +181,7 @@ public class PlayerMechanics extends ListenerMechanic {
 			} else {
 				BanMessage message = new BanMessage();
 				message.append(",");
-				message.append("&cYour account has been &nPERMANENTLY&c disabled.");
+				message.append("&cYour account has been &nPERMANENTLY&c suspended.");
 				message.append("");
 				message.append("&7For further information about this suspension%comma% please visit");
 				message.append("        &7&n" + Constants.WEBSITE_LINK);
@@ -263,25 +263,25 @@ public class PlayerMechanics extends ListenerMechanic {
 				case 1:
 					gp.setChatChannel(ChatChannel.LOCAL);
 					gp.getPlayer().playSound(gp.getPlayer().getLocation(), Sound.BLOCK_NOTE_PLING, 1.0F, 1.0F);
-					gp.msg(MessageType.CHAT, "&3You are now speaking in " + gp.getChatChannel().getPrefix());
+					gp.msg(MessageType.CHAT, "&3You're now speaking in " + gp.getChatChannel().getPrefix());
 					menuUpdate(gp);
 					break;
 				case 3:
 					gp.setChatChannel(ChatChannel.GLOBAL);
 					gp.getPlayer().playSound(gp.getPlayer().getLocation(), Sound.BLOCK_NOTE_PLING, 1.0F, 1.0F);
-					gp.msg(MessageType.CHAT, "&3You are now speaking in " + gp.getChatChannel().getPrefix());
+					gp.msg(MessageType.CHAT, "&3You're now speaking in " + gp.getChatChannel().getPrefix());
 					menuUpdate(gp);
 					break;
 				case 5:
 					gp.setChatChannel(ChatChannel.TRADE);
 					gp.getPlayer().playSound(gp.getPlayer().getLocation(), Sound.BLOCK_NOTE_PLING, 1.0F, 1.0F);
-					gp.msg(MessageType.CHAT, "&3You are now speaking in " + gp.getChatChannel().getPrefix());
+					gp.msg(MessageType.CHAT, "&3You're now speaking in " + gp.getChatChannel().getPrefix());
 					menuUpdate(gp);
 					break;
 				case 7:
 					gp.setChatChannel(ChatChannel.LOCAL);
 					gp.getPlayer().playSound(gp.getPlayer().getLocation(), Sound.BLOCK_NOTE_PLING, 1.0F, 1.0F);
-					gp.msg(MessageType.CHAT, "&3You are now speaking in " + gp.getChatChannel().getPrefix());
+					gp.msg(MessageType.CHAT, "&3You're now speaking in " + gp.getChatChannel().getPrefix());
 					menuUpdate(gp);
 					break;
 				default:

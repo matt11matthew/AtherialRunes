@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Rank {
-	
-	LEAD_DEVELOPER(1, "&6&lLEAD DEV &7", ":&f ", "Lead Developer"),
-	DEVELOPER(3, "&c&lDEV &7", ":&f ", "Developer"),
+
+    LEAD_DEVELOPER(1, "&6&lDEV &7", ":&f ", "Lead Developer"),
+    DEVELOPER(3, "&c&lDEV &7", ":&f ", "Developer"),
 	GA(4, "&e&lGA &7", ":&f ", "Global Admin"),
 	DEFAULT(5, "&7", ": ", "Default"),
 	APPRENTICE(6, "&a&lA &7", ":&f ", "Apprentice"),

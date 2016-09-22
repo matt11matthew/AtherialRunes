@@ -35,8 +35,8 @@ public class LevelingMechanics extends ListenerMechanic {
 		AtherialRunnable.getInstance().runRepeatingTask(() -> Bukkit.getOnlinePlayers().forEach(player -> {
             GamePlayer gp = Main.getGamePlayer(player.getName());
             if (!gp.isVanished()) {
-                gp.setExpBarMessage("&c&lLevel: &a" + gp.getLevel() + " &6[" + (long) gp.getEXP() + "/" + LevelUtils.getEXPNeeded((gp.getLevel() + 1)) + " &lEXP&6]");
-                gp.msg(MessageType.ACTION, gp.getExpBarMessage());
+				gp.setExpBarMessage("&cLevel: &b" + gp.getLevel() + " &3[" + (long) gp.getEXP() + "/" + LevelUtils.getEXPNeeded((gp.getLevel() + 1)) + " &lEXP&3]");
+				gp.msg(MessageType.ACTION, gp.getExpBarMessage());
             }
         }), 5L, 5L);
 	}

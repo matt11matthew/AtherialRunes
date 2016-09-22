@@ -3,8 +3,8 @@ package me.matt11matthew.atherialrunes.game.api.mechanic.gamemechanic.rank;
 public enum ChatChannel {
 	
 	LOCAL(1, "&7<Local>", "Local"),
-	GLOBAL(2, "&7<&bGlobal&7>", "Global"),
-	TRADE(3, "&7<&aTrade&7>", "Trade"),
+    GLOBAL(2, "&7<&eGlobal&7>", "Global"),
+    TRADE(3, "&7<&aTrade&7>", "Trade"),
 	STAFF(4, "&7<&6Staff&7>", "Staff"),
 	GUILD(5, "&7<&3Guild&7>", "Guild");
 	

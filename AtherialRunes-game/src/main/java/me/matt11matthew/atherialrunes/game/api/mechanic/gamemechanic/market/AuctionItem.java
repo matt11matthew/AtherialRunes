@@ -222,10 +222,10 @@ public class AuctionItem {
         ItemStack item = new ItemStack(type);
         ItemMeta im = item.getItemMeta();
         if (price > 0.0D) {
-            addLore("&bPrice: &f" + (int) price);
+            addLore("&bPrice: &c" + price);
         }
         if (seller != null) {
-            addLore("&bSeller: &f" + getSeller());
+            addLore("&bSeller: &c" + getSeller());
         }
         if (uuid != null) {
             addLore("&7" + uuid);
